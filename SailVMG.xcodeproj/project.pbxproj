@@ -3,11 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D1024F9D0F5EABB6C4A78B5 /* Pods_SailVMG_SailVMGUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EB19DD7CF695CA7D213DE1 /* Pods_SailVMG_SailVMGUITests.framework */; };
 		3111AECA2568B18400DAEF90 /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AEC92568B18400DAEF90 /* RecordingState.swift */; };
+		3111AED32568D49E00DAEF90 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED22568D49E00DAEF90 /* Track.swift */; };
+		3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED72568D5D400DAEF90 /* Trackpoint.swift */; };
+		3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */; };
+		3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AF352568DEA200DAEF90 /* TrackRepository.swift */; };
 		318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */; };
 		318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEE255F400600EFF7E2 /* MainScreen.swift */; };
 		318ABBF1255F400800EFF7E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF0255F400800EFF7E2 /* Assets.xcassets */; };
@@ -16,6 +21,8 @@
 		318ABC0F255F400900EFF7E2 /* SailVMGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */; };
 		31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C747502568A85700A454B7 /* LocationViewModel.swift */; };
 		31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C7475C2568ABC400A454B7 /* RecordingView.swift */; };
+		D5EEA8ED4119C672AE84DA74 /* Pods_SailVMGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E658FE9ACB897DF5AD438B1 /* Pods_SailVMGTests.framework */; };
+		F6E863B667DBE0A281AD4CC3 /* Pods_SailVMG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24715C83D67C6CEB8057E414 /* Pods_SailVMG.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1877C52E68D748608492B5D6 /* Pods-SailVMG-SailVMGUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMG-SailVMGUITests.release.xcconfig"; path = "Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests.release.xcconfig"; sourceTree = "<group>"; };
+		196256F91682DAEBB042DE2B /* Pods-SailVMGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMGTests.release.xcconfig"; path = "Target Support Files/Pods-SailVMGTests/Pods-SailVMGTests.release.xcconfig"; sourceTree = "<group>"; };
+		24715C83D67C6CEB8057E414 /* Pods_SailVMG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3111AEC92568B18400DAEF90 /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
+		3111AED22568D49E00DAEF90 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		3111AED72568D5D400DAEF90 /* Trackpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackpoint.swift; sourceTree = "<group>"; };
+		3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3111AF352568DEA200DAEF90 /* TrackRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepository.swift; sourceTree = "<group>"; };
 		318ABBE9255F400600EFF7E2 /* SailVMG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SailVMG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGApp.swift; sourceTree = "<group>"; };
 		318ABBEE255F400600EFF7E2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
@@ -51,6 +65,12 @@
 		318ABC10255F400900EFF7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31C747502568A85700A454B7 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		31C7475C2568ABC400A454B7 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		3E658FE9ACB897DF5AD438B1 /* Pods_SailVMGTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMGTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		76EB19DD7CF695CA7D213DE1 /* Pods_SailVMG_SailVMGUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMG_SailVMGUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BDB21FDAB24133AE1519219 /* Pods-SailVMG-SailVMGUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMG-SailVMGUITests.debug.xcconfig"; path = "Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D490D86E7C2F74D2114C7794 /* Pods-SailVMG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMG.debug.xcconfig"; path = "Target Support Files/Pods-SailVMG/Pods-SailVMG.debug.xcconfig"; sourceTree = "<group>"; };
+		E4B9F55ADA0BD72198C7C09C /* Pods-SailVMGTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMGTests.debug.xcconfig"; path = "Target Support Files/Pods-SailVMGTests/Pods-SailVMGTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F91DD7A5E1F4455B47227BF8 /* Pods-SailVMG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMG.release.xcconfig"; path = "Target Support Files/Pods-SailVMG/Pods-SailVMG.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E863B667DBE0A281AD4CC3 /* Pods_SailVMG.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5EEA8ED4119C672AE84DA74 /* Pods_SailVMGTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +94,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D1024F9D0F5EABB6C4A78B5 /* Pods_SailVMG_SailVMGUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		150943D2133FBC79CC751FB5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D490D86E7C2F74D2114C7794 /* Pods-SailVMG.debug.xcconfig */,
+				F91DD7A5E1F4455B47227BF8 /* Pods-SailVMG.release.xcconfig */,
+				9BDB21FDAB24133AE1519219 /* Pods-SailVMG-SailVMGUITests.debug.xcconfig */,
+				1877C52E68D748608492B5D6 /* Pods-SailVMG-SailVMGUITests.release.xcconfig */,
+				E4B9F55ADA0BD72198C7C09C /* Pods-SailVMGTests.debug.xcconfig */,
+				196256F91682DAEBB042DE2B /* Pods-SailVMGTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3111AED12568D48D00DAEF90 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3111AED22568D49E00DAEF90 /* Track.swift */,
+				3111AED72568D5D400DAEF90 /* Trackpoint.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3111AF2E2568DE8900DAEF90 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				3111AF352568DEA200DAEF90 /* TrackRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		318ABBE0255F400600EFF7E2 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +138,8 @@
 				318ABC02255F400900EFF7E2 /* SailVMGTests */,
 				318ABC0D255F400900EFF7E2 /* SailVMGUITests */,
 				318ABBEA255F400600EFF7E2 /* Products */,
+				150943D2133FBC79CC751FB5 /* Pods */,
+				EB7B52AF11B2E4393EEB7FEC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,10 +157,13 @@
 			isa = PBXGroup;
 			children = (
 				318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */,
+				3111AF2E2568DE8900DAEF90 /* Repositories */,
+				3111AED12568D48D00DAEF90 /* Models */,
 				31C747582568AA9F00A454B7 /* Views */,
 				31C7474F2568A84300A454B7 /* ViewModels */,
 				318ABBF0255F400800EFF7E2 /* Assets.xcassets */,
 				318ABBFA255F400800EFF7E2 /* Info.plist */,
+				3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */,
 				318ABBF2255F400800EFF7E2 /* Preview Content */,
 			);
 			path = SailVMG;
@@ -155,6 +213,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		EB7B52AF11B2E4393EEB7FEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24715C83D67C6CEB8057E414 /* Pods_SailVMG.framework */,
+				76EB19DD7CF695CA7D213DE1 /* Pods_SailVMG_SailVMGUITests.framework */,
+				3E658FE9ACB897DF5AD438B1 /* Pods_SailVMGTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -162,9 +230,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 318ABC13255F400900EFF7E2 /* Build configuration list for PBXNativeTarget "SailVMG" */;
 			buildPhases = (
+				EEA431E59895B8E2114A3298 /* [CP] Check Pods Manifest.lock */,
 				318ABBE5255F400600EFF7E2 /* Sources */,
 				318ABBE6255F400600EFF7E2 /* Frameworks */,
 				318ABBE7255F400600EFF7E2 /* Resources */,
+				9842C25F85DEA7BCE98600F3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -179,6 +249,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 318ABC16255F400900EFF7E2 /* Build configuration list for PBXNativeTarget "SailVMGTests" */;
 			buildPhases = (
+				CBDAEB7E09AB3FF725524CCA /* [CP] Check Pods Manifest.lock */,
 				318ABBFB255F400900EFF7E2 /* Sources */,
 				318ABBFC255F400900EFF7E2 /* Frameworks */,
 				318ABBFD255F400900EFF7E2 /* Resources */,
@@ -197,9 +268,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 318ABC19255F400900EFF7E2 /* Build configuration list for PBXNativeTarget "SailVMGUITests" */;
 			buildPhases = (
+				2E846644F4EEB477FF265399 /* [CP] Check Pods Manifest.lock */,
 				318ABC06255F400900EFF7E2 /* Sources */,
 				318ABC07255F400900EFF7E2 /* Frameworks */,
 				318ABC08255F400900EFF7E2 /* Resources */,
+				29DB32225EFEA63AB9034BA9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				318ABBF4255F400800EFF7E2 /* Preview Assets.xcassets in Resources */,
+				3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */,
 				318ABBF1255F400800EFF7E2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +353,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29DB32225EFEA63AB9034BA9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E846644F4EEB477FF265399 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SailVMG-SailVMGUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9842C25F85DEA7BCE98600F3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SailVMG/Pods-SailVMG-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SailVMG/Pods-SailVMG-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SailVMG/Pods-SailVMG-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBDAEB7E09AB3FF725524CCA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SailVMGTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEA431E59895B8E2114A3298 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SailVMG-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		318ABBE5255F400600EFF7E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -289,6 +466,9 @@
 				31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */,
 				31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */,
 				318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */,
+				3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */,
+				3111AED32568D49E00DAEF90 /* Track.swift in Sources */,
+				3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +622,7 @@
 		};
 		318ABC14255F400900EFF7E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D490D86E7C2F74D2114C7794 /* Pods-SailVMG.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -464,6 +645,7 @@
 		};
 		318ABC15255F400900EFF7E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F91DD7A5E1F4455B47227BF8 /* Pods-SailVMG.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -486,6 +668,7 @@
 		};
 		318ABC17255F400900EFF7E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4B9F55ADA0BD72198C7C09C /* Pods-SailVMGTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +691,7 @@
 		};
 		318ABC18255F400900EFF7E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 196256F91682DAEBB042DE2B /* Pods-SailVMGTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -530,6 +714,7 @@
 		};
 		318ABC1A255F400900EFF7E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BDB21FDAB24133AE1519219 /* Pods-SailVMG-SailVMGUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -550,6 +735,7 @@
 		};
 		318ABC1B255F400900EFF7E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1877C52E68D748608492B5D6 /* Pods-SailVMG-SailVMGUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
