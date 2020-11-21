@@ -11,8 +11,6 @@
 		318ABBEF255F400600EFF7E2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEE255F400600EFF7E2 /* ContentView.swift */; };
 		318ABBF1255F400800EFF7E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF0255F400800EFF7E2 /* Assets.xcassets */; };
 		318ABBF4255F400800EFF7E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF3255F400800EFF7E2 /* Preview Assets.xcassets */; };
-		318ABBF6255F400800EFF7E2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBF5255F400800EFF7E2 /* Persistence.swift */; };
-		318ABBF9255F400800EFF7E2 /* SailVMG.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBF7255F400800EFF7E2 /* SailVMG.xcdatamodeld */; };
 		318ABC04255F400900EFF7E2 /* SailVMGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC03255F400900EFF7E2 /* SailVMGTests.swift */; };
 		318ABC0F255F400900EFF7E2 /* SailVMGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */; };
 /* End PBXBuildFile section */
@@ -40,8 +38,6 @@
 		318ABBEE255F400600EFF7E2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		318ABBF0255F400800EFF7E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		318ABBF3255F400800EFF7E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		318ABBF5255F400800EFF7E2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		318ABBF8255F400800EFF7E2 /* SailVMG.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SailVMG.xcdatamodel; sourceTree = "<group>"; };
 		318ABBFA255F400800EFF7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		318ABBFF255F400900EFF7E2 /* SailVMGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SailVMGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		318ABC03255F400900EFF7E2 /* SailVMGTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGTests.swift; sourceTree = "<group>"; };
@@ -102,9 +98,7 @@
 				318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */,
 				318ABBEE255F400600EFF7E2 /* ContentView.swift */,
 				318ABBF0255F400800EFF7E2 /* Assets.xcassets */,
-				318ABBF5255F400800EFF7E2 /* Persistence.swift */,
 				318ABBFA255F400800EFF7E2 /* Info.plist */,
-				318ABBF7255F400800EFF7E2 /* SailVMG.xcdatamodeld */,
 				318ABBF2255F400800EFF7E2 /* Preview Content */,
 			);
 			path = SailVMG;
@@ -265,10 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				318ABBF6255F400800EFF7E2 /* Persistence.swift in Sources */,
 				318ABBEF255F400600EFF7E2 /* ContentView.swift in Sources */,
 				318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */,
-				318ABBF9255F400800EFF7E2 /* SailVMG.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,19 +580,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		318ABBF7255F400800EFF7E2 /* SailVMG.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				318ABBF8255F400800EFF7E2 /* SailVMG.xcdatamodel */,
-			);
-			currentVersion = 318ABBF8255F400800EFF7E2 /* SailVMG.xcdatamodel */;
-			path = SailVMG.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 318ABBE1255F400600EFF7E2 /* Project object */;
 }
