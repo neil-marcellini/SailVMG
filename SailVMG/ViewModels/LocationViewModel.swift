@@ -14,13 +14,19 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var speed: Double = 0
     @Published var course: Double = 0
     
-    private let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     
     override init() {
         super.init()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
+//        self.locationManager.startUpdatingLocation()
+    }
+    func pause() {
+        self.locationManager.stopUpdatingLocation()
+    }
+    func resume() {
         self.locationManager.startUpdatingLocation()
     }
 }
