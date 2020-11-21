@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3111AECA2568B18400DAEF90 /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AEC92568B18400DAEF90 /* RecordingState.swift */; };
 		318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */; };
-		318ABBEF255F400600EFF7E2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEE255F400600EFF7E2 /* ContentView.swift */; };
+		318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEE255F400600EFF7E2 /* MainScreen.swift */; };
 		318ABBF1255F400800EFF7E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF0255F400800EFF7E2 /* Assets.xcassets */; };
 		318ABBF4255F400800EFF7E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF3255F400800EFF7E2 /* Preview Assets.xcassets */; };
 		318ABC04255F400900EFF7E2 /* SailVMGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC03255F400900EFF7E2 /* SailVMGTests.swift */; };
 		318ABC0F255F400900EFF7E2 /* SailVMGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */; };
+		31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C747502568A85700A454B7 /* LocationViewModel.swift */; };
+		31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C7475C2568ABC400A454B7 /* RecordingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3111AEC92568B18400DAEF90 /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
 		318ABBE9255F400600EFF7E2 /* SailVMG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SailVMG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGApp.swift; sourceTree = "<group>"; };
-		318ABBEE255F400600EFF7E2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		318ABBEE255F400600EFF7E2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		318ABBF0255F400800EFF7E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		318ABBF3255F400800EFF7E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		318ABBFA255F400800EFF7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 		318ABC0A255F400900EFF7E2 /* SailVMGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SailVMGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGUITests.swift; sourceTree = "<group>"; };
 		318ABC10255F400900EFF7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31C747502568A85700A454B7 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		31C7475C2568ABC400A454B7 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */,
-				318ABBEE255F400600EFF7E2 /* ContentView.swift */,
+				31C747582568AA9F00A454B7 /* Views */,
+				31C7474F2568A84300A454B7 /* ViewModels */,
 				318ABBF0255F400800EFF7E2 /* Assets.xcassets */,
 				318ABBFA255F400800EFF7E2 /* Info.plist */,
 				318ABBF2255F400800EFF7E2 /* Preview Content */,
@@ -128,6 +135,24 @@
 				318ABC10255F400900EFF7E2 /* Info.plist */,
 			);
 			path = SailVMGUITests;
+			sourceTree = "<group>";
+		};
+		31C7474F2568A84300A454B7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				31C747502568A85700A454B7 /* LocationViewModel.swift */,
+				3111AEC92568B18400DAEF90 /* RecordingState.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		31C747582568AA9F00A454B7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				318ABBEE255F400600EFF7E2 /* MainScreen.swift */,
+				31C7475C2568ABC400A454B7 /* RecordingView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +284,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				318ABBEF255F400600EFF7E2 /* ContentView.swift in Sources */,
+				3111AECA2568B18400DAEF90 /* RecordingState.swift in Sources */,
+				318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */,
+				31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */,
+				31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */,
 				318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
