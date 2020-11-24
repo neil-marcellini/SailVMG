@@ -18,7 +18,7 @@ struct MainScreen: View {
                 Spacer()
                 Button(action: {
                     recordingState.isRecording.toggle()
-                    locationViewModel.resume()
+                    locationViewModel.startRecording()
                 }){
                     Image(systemName: "play.circle").font(.system(size: 100))
                 }

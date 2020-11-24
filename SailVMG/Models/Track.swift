@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-struct Track {
-    var trackpoints: [Trackpoint]
+struct Track: Codable, Identifiable {
+    @DocumentID var id: String?
+    var trackpoints: [Trackpoint]?
     var start_time: Date
-    var end_time: Date
+    var end_time: Date?
     
 }

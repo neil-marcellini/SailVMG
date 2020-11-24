@@ -13,16 +13,24 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var longitude: Double = 0
     @Published var speed: Double = 0
     @Published var course: Double = 0
+    var track: Track? = nil
     
     let locationManager = CLLocationManager()
+    let trackRepository = TrackRespository()
     
     override init() {
         super.init()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
-//        self.locationManager.startUpdatingLocation()
     }
+    
+    func startRecording() {
+        track = Track(id: nil, trackpoints: [], start_time: Date(), end_time: nil)
+        trackRepository.createTrack(track!)
+        resume()
+    }
+    
     func pause() {
         self.locationManager.stopUpdatingLocation()
     }

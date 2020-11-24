@@ -6,7 +6,10 @@
 //
 
 import Foundation
-struct Trackpoint {
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+struct Trackpoint: Codable, Identifiable {
+    let id: UUID
     let time: Date
     let latitude: Double
     let longitude: Double
