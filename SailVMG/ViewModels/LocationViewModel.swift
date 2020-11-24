@@ -27,7 +27,8 @@ class LocationViewModel: NSObject, ObservableObject {
     
     func startRecording() {
         track = Track(id: nil, trackpoints: [], start_time: Date(), end_time: nil)
-        trackRepository.createTrack(track!)
+        let track_id = trackRepository.createTrack(track!)
+        track!.id = track_id
         resume()
     }
     
@@ -36,6 +37,14 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     func resume() {
         self.locationManager.startUpdatingLocation()
+    }
+    
+    func discardTrack() {
+        guard let curr_track = track else {
+            print("No track exists to delete")
+            return
+        }
+        trackRepository.discardTrack(curr_track)
     }
 }
 extension LocationViewModel: CLLocationManagerDelegate {

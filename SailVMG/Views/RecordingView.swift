@@ -33,7 +33,10 @@ struct RecordingView: View {
                         .default(Text("Save Track")){
                             recordingState.isRecording.toggle()
                         },
-                        .destructive(Text("Discard Track")){},
+                        .destructive(Text("Discard Track")){
+                            recordingState.isRecording.toggle()
+                            locationViewModel.discardTrack()
+                        },
                         .cancel(Text("Resume Tracking")){
                             recordingState.isPaused = false
                             locationViewModel.resume()
