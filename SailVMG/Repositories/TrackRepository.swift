@@ -36,4 +36,20 @@ class TrackRespository: ObservableObject {
         }
     }
     
+    func setEndTime(track: Track, end_time: Date) {
+        guard let track_id = track.id else {
+            print("Error track has no id discardTrack")
+            return
+        }
+        db.collection("Tracks").document(track_id).updateData([
+            "time": end_time
+        ]){ err in
+            if let err = err {
+                print("Error updating track end_time: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
 }
