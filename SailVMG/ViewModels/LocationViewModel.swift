@@ -40,6 +40,10 @@ class LocationViewModel: NSObject, ObservableObject {
         self.locationManager.startUpdatingLocation()
     }
     
+    func saveTrack() {
+        trackRepository.setEndTime(track: track!)
+    }
+    
     func discardTrack() {
         guard let curr_track = track else {
             print("No track exists to delete")

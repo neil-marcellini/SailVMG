@@ -32,6 +32,7 @@ struct RecordingView: View {
                     ActionSheet(title: Text("Tracking Paused"), message: nil, buttons: [
                         .default(Text("Save Track")){
                             recordingState.isRecording.toggle()
+                            locationViewModel.saveTrack()
                         },
                         .destructive(Text("Discard Track")){
                             recordingState.isRecording.toggle()
