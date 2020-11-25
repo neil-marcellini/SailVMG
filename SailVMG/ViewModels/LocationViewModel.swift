@@ -17,6 +17,7 @@ class LocationViewModel: NSObject, ObservableObject {
     
     let locationManager = CLLocationManager()
     let trackRepository = TrackRespository()
+    let trackpointRepository = TrackpointRespository()
     
     override init() {
         super.init()
@@ -26,7 +27,7 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     
     func startRecording() {
-        track = Track(id: nil, trackpoints: [], start_time: Date(), end_time: nil)
+        track = Track(id: nil, start_time: Date(), end_time: nil)
         let track_id = trackRepository.createTrack(track!)
         track!.id = track_id
         resume()
@@ -54,5 +55,7 @@ extension LocationViewModel: CLLocationManagerDelegate {
         longitude = location.coordinate.longitude
         speed = location.speed
         course = location.course
+        let trackpoint = Trackpoint(id: UUID(), track_id: track!.id!, time: Date(), latitude: latitude, longitude: longitude, speed: speed, course: course, vmg: nil, twa: nil)
+        trackpointRepository.addTrackPoint(to: track!, trackpoint: trackpoint)
     }
 }

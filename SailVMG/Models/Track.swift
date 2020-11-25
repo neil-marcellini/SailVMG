@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 
 struct Track: Codable, Identifiable {
     @DocumentID var id: String?
-    var trackpoints: [Trackpoint]?
     var start_time: Date
     var end_time: Date?
     

@@ -24,7 +24,7 @@ class TrackRespository: ObservableObject {
     }
     func discardTrack(_ track: Track) {
         guard let track_id = track.id else {
-            print("Error track has no id")
+            print("Error track has no id discardTrack")
             return
         }
         db.collection("Tracks").document(track_id).delete() { err in
@@ -35,4 +35,5 @@ class TrackRespository: ObservableObject {
             }
         }
     }
+    
 }
