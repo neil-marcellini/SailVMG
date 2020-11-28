@@ -14,10 +14,7 @@ class TrackpointRespository: ObservableObject {
     @Published var trackpoints = [Trackpoint]()
     
     func addTrackPoint(to track: Track, trackpoint: Trackpoint) {
-        guard let track_id = track.id else {
-            print("Error, track has no id in addTrackPoint")
-            return
-        }
+
         do {
             let _ = try db.collection("Trackpoints").addDocument(from: trackpoint)
         } catch {
@@ -52,4 +49,5 @@ class TrackpointRespository: ObservableObject {
             }
     }
     
+        
 }

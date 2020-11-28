@@ -17,10 +17,12 @@ class TrackViewModel {
     
     func startTime()->String {
         dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .medium
         return dateFormatter.string(from: track.start_time)
     }
     func endTime()->String {
         dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .medium
         guard let end_time = track.end_time else {
             return ""
         }

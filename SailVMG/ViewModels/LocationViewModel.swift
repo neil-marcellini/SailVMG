@@ -13,11 +13,10 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var longitude: Double = 0
     @Published var speed: Double = 0
     @Published var course: Double = 0
-    var track: Track? = nil
     
     let locationManager = CLLocationManager()
-    let trackRepository = TrackRespository()
     let trackpointRepository = TrackpointRespository()
+    var track: Track? = nil
     
     override init() {
         super.init()
@@ -26,12 +25,6 @@ class LocationViewModel: NSObject, ObservableObject {
         self.locationManager.requestWhenInUseAuthorization()
     }
     
-    func startRecording() {
-        track = Track(id: nil, start_time: Date(), end_time: nil)
-        let track_id = trackRepository.createTrack(track!)
-        track!.id = track_id
-        resume()
-    }
     
     func pause() {
         self.locationManager.stopUpdatingLocation()
@@ -40,17 +33,12 @@ class LocationViewModel: NSObject, ObservableObject {
         self.locationManager.startUpdatingLocation()
     }
     
-    func saveTrack() {
-        trackRepository.setEndTime(track: track!)
+    func setTrack(_ new_track: Track) {
+        self.track = new_track
     }
     
-    func discardTrack() {
-        guard let curr_track = track else {
-            print("No track exists to delete")
-            return
-        }
-        trackRepository.discardTrack(curr_track)
-    }
+    
+    
 }
 extension LocationViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

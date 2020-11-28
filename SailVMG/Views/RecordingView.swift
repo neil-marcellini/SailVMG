@@ -24,23 +24,19 @@ struct RecordingView: View {
                 
                 
                 Button(action: {
-                    recordingState.isPaused = true
-                    locationViewModel.pause()
+                    recordingState.pause()
                 }){
                     Image(systemName: recordingState.isPaused ? "play.circle" : "pause.circle").font(.system(size: 100))
                 }.actionSheet(isPresented: $recordingState.isPaused, content: {
                     ActionSheet(title: Text("Tracking Paused"), message: nil, buttons: [
                         .default(Text("Save Track")){
-                            recordingState.isRecording.toggle()
-                            locationViewModel.saveTrack()
+                            recordingState.saveTrack()
                         },
                         .destructive(Text("Discard Track")){
-                            recordingState.isRecording.toggle()
-                            locationViewModel.discardTrack()
+                            recordingState.discardTrack()
                         },
                         .cancel(Text("Resume Tracking")){
-                            recordingState.isPaused = false
-                            locationViewModel.resume()
+                            recordingState.resume()
                         }
                         
                         ])

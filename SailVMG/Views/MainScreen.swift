@@ -10,7 +10,6 @@ import CoreData
 
 struct MainScreen: View {
     @StateObject var recordingState = RecordingState()
-    @ObservedObject var locationViewModel = LocationViewModel()
     @ObservedObject var trackRepository = TrackRespository()
     var body: some View {
         NavigationView {
@@ -25,12 +24,11 @@ struct MainScreen: View {
                     }
                 }
                 Button(action: {
-                    recordingState.isRecording.toggle()
-                    locationViewModel.startRecording()
+                    recordingState.startRecording()
                 }){
                     Image(systemName: "play.circle").font(.system(size: 100))
                 }
-                NavigationLink(destination: RecordingView(recordingState: recordingState, locationViewModel: locationViewModel), isActive: $recordingState.isRecording) { EmptyView()}
+                NavigationLink(destination: RecordingView(recordingState: recordingState, locationViewModel: recordingState.locationViewModel), isActive: $recordingState.isRecording) { EmptyView()}
             }.navigationBarTitle("SailVMG")
         }
             
