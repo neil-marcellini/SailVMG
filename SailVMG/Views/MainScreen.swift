@@ -21,6 +21,11 @@ struct MainScreen: View {
                             TrackView(trackVM: trackVM)
                         }
                         
+                    }.onDelete { offset in
+                        offset.forEach { index in
+                            let trackVM = trackRepository.trackVMs[index]
+                            trackRepository.discardTrack(trackVM.track)
+                        }
                     }
                 }
                 Button(action: {

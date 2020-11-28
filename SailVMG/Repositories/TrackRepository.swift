@@ -56,7 +56,9 @@ class TrackRespository: ObservableObject {
     }
     
     func getTrackVMs() {
-        db.collection("Tracks").getDocuments() { (querySnapshot, err) in
+        db.collection("Tracks")
+            .order(by: "start_time", descending: true)
+            .addSnapshotListener() { (querySnapshot, err) in
             if let querySnapshot = querySnapshot {
                 self.trackVMs = querySnapshot.documents.compactMap { document in
                     do {
