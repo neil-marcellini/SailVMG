@@ -11,11 +11,19 @@ import CoreData
 struct MainScreen: View {
     @StateObject var recordingState = RecordingState()
     @ObservedObject var locationViewModel = LocationViewModel()
+    @ObservedObject var trackRepository = TrackRespository()
     var body: some View {
         NavigationView {
             VStack {
                 Text("Tracks").underline()
-                Spacer()
+                List {
+                    ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
+                        NavigationLink(destination: PlaybackView()){
+                            TrackView(trackVM: trackVM)
+                        }
+                        
+                    }
+                }
                 Button(action: {
                     recordingState.isRecording.toggle()
                     locationViewModel.startRecording()

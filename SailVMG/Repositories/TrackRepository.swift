@@ -12,7 +12,10 @@ import FirebaseFirestoreSwift
 
 class TrackRespository: ObservableObject {
     let db = Firestore.firestore()
-    @Published var tracks = [Track]()
+    @Published var trackVMs = [TrackViewModel]()
+    init() {
+        getTrackVMs()
+    }
     
     func createTrack(_ track: Track) -> String {
         do {
@@ -47,6 +50,23 @@ class TrackRespository: ObservableObject {
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
+            }
+        }
+    }
+    
+    func getTrackVMs() {
+        db.collection("Tracks").getDocuments() { (querySnapshot, err) in
+            if let querySnapshot = querySnapshot {
+                self.trackVMs = querySnapshot.documents.compactMap { document in
+                    do {
+                        guard let track = try document.data(as: Track.self) else {return nil}
+                        let trackVM = TrackViewModel(track)
+                        return trackVM
+                    } catch {
+                        print(error)
+                    }
+                    return nil
+                }
             }
         }
     }
