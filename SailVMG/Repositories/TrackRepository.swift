@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 
+
 class TrackRespository: ObservableObject {
     let db = Firestore.firestore()
     @Published var trackVMs = [TrackViewModel]()
@@ -70,5 +71,5 @@ class TrackRespository: ObservableObject {
             }
         }
     }
-    
+
 }

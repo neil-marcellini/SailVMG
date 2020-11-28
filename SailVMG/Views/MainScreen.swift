@@ -18,7 +18,7 @@ struct MainScreen: View {
                 Text("Tracks").underline()
                 List {
                     ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
-                        NavigationLink(destination: PlaybackView()){
+                        NavigationLink(destination: PlaybackView(track: trackVM.track)){
                             TrackView(trackVM: trackVM)
                         }
                         
