@@ -46,9 +46,12 @@ extension LocationViewModel: CLLocationManagerDelegate {
         guard let location = locations.last else {return}
         latitude = location.coordinate.latitude
         longitude = location.coordinate.longitude
-        speed = location.speed
+        speed = mpsToKts(location.speed)
         course = location.course
         let trackpoint = Trackpoint(id: UUID(), track_id: track!.id!, time: Date(), latitude: latitude, longitude: longitude, speed: speed, course: course, vmg: nil, twa: nil)
         trackpointRepository.addTrackPoint(to: track!, trackpoint: trackpoint)
+    }
+    func mpsToKts(_ speedMps: CLLocationSpeed) -> Double {
+        return speedMps * 1.94384
     }
 }

@@ -13,6 +13,7 @@
 		3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED72568D5D400DAEF90 /* Trackpoint.swift */; };
 		3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */; };
 		3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AF352568DEA200DAEF90 /* TrackRepository.swift */; };
+		312307FE25777AA800343C86 /* RecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312307FD25777AA800343C86 /* RecordingViewModel.swift */; };
 		3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A04F2571CF6600E885BC /* TrackViewModel.swift */; };
 		3155A0552571D0A500E885BC /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A0542571D0A500E885BC /* TrackView.swift */; };
 		3155A05A2571D3F400E885BC /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A0592571D3F400E885BC /* MapView.swift */; };
@@ -57,6 +58,7 @@
 		3111AED72568D5D400DAEF90 /* Trackpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackpoint.swift; sourceTree = "<group>"; };
 		3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3111AF352568DEA200DAEF90 /* TrackRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepository.swift; sourceTree = "<group>"; };
+		312307FD25777AA800343C86 /* RecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewModel.swift; sourceTree = "<group>"; };
 		3155A04F2571CF6600E885BC /* TrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel.swift; sourceTree = "<group>"; };
 		3155A0542571D0A500E885BC /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		3155A0592571D3F400E885BC /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				31C747502568A85700A454B7 /* LocationViewModel.swift */,
 				3111AEC92568B18400DAEF90 /* RecordingState.swift */,
 				3155A04F2571CF6600E885BC /* TrackViewModel.swift */,
+				312307FD25777AA800343C86 /* RecordingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			files = (
 				3111AECA2568B18400DAEF90 /* RecordingState.swift in Sources */,
 				3155A05A2571D3F400E885BC /* MapView.swift in Sources */,
+				312307FE25777AA800343C86 /* RecordingViewModel.swift in Sources */,
 				3155A0552571D0A500E885BC /* TrackView.swift in Sources */,
 				318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */,
 				31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */,

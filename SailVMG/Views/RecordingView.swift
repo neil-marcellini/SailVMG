@@ -10,17 +10,19 @@ import SwiftUI
 struct RecordingView: View {
     @StateObject var recordingState: RecordingState
     @ObservedObject var locationViewModel: LocationViewModel
+    let recordingViewModel = RecordingViewModel()
+
     var body: some View {
             VStack {
                 Text("SOG")
                     .font(.title)
                     .foregroundColor(.red)
-                Text("\(locationViewModel.speed)")
+                Text(recordingViewModel.getSpeed(speed: locationViewModel.speed))
                 
                 Text("COG")
                     .font(.title)
                     .foregroundColor(.red)
-                Text("\(locationViewModel.course)")
+                Text(recordingViewModel.getCourse(cog: locationViewModel.course))
                 
                 
                 Button(action: {
