@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Please enable location when is use so that we can track your sailing.</string>
+	<string>For the best sailing tracking experience, please enable location always.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>For the best sailing tracking experience, please enable location always.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
