@@ -19,6 +19,9 @@ class RecordingViewModel: ObservableObject {
     func twdDisplay(_ twd: Double) ->  String {
         return String(format: "%03.0f°", twd)
     }
+    func twaDisplay(_ twa: Int) ->  String {
+        return String(format: "%03d°", twa)
+    }
     
     func vmgDisplay(_ vmg: Double) ->  String {
         return String(format: "%.2f kts", vmg)

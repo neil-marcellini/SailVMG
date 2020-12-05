@@ -15,7 +15,7 @@ struct RecordingView: View {
              
                 Text("TWD")
                     .font(.title)
-                    .foregroundColor(.red)
+                    .foregroundColor(.black)
                 HStack {
                     Button(action: { locationViewModel.minusTwd() }){
                         Image(systemName: "minus.square.fill")
@@ -33,13 +33,28 @@ struct RecordingView: View {
              
                 Slider(value: $locationViewModel.twd, in: 0...359, step: 1)
                     .frame(width: 150)
-               
                 
+                Image(systemName: "arrow.down")
+                    .font(.system(size: 80))
+                    .foregroundColor(.black)
                 
-                Text("VMG")
-                    .font(.title)
-                    .foregroundColor(.blue)
-                Text(recordingViewModel.vmgDisplay(locationViewModel.vmg))
+                ZStack {
+                    Image(systemName: "location.north.fill")
+                        .font(.system(size: 150))
+                        .foregroundColor(.blue)
+                        .rotationEffect(.radians(locationViewModel.boatRotation()))
+                    Circle()
+                        .strokeBorder(Color.black, lineWidth: 2)
+                        
+                }
+                
+                VStack {
+                    Text("VMG")
+                        .font(.title)
+                        .foregroundColor(.blue)
+                    Text(recordingViewModel.vmgDisplay(locationViewModel.vmg))
+                }.padding()
+                
                 HStack {
                     Spacer()
                     VStack {
@@ -48,7 +63,13 @@ struct RecordingView: View {
                             .foregroundColor(.red)
                         Text(recordingViewModel.speedDisplay(locationViewModel.speed))
                     }
-                   
+                    Spacer()
+                    VStack {
+                        Text("TWA")
+                            .font(.title)
+                        Text(recordingViewModel.twaDisplay(locationViewModel.twa))
+                    }
+                    
                     Spacer()
                     VStack {
                         Text("COG")

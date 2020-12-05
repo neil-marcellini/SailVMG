@@ -15,8 +15,8 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var speed: Double = 0
     @Published var course: Double = 0
     @Published var vmg: Double = 0
-    @Published var twa: Double = 0
-    @Published var twd: Double = 0
+    @Published var twa: Int = 0
+    @Published var twd: Double = 180
  
     @Published var isRecording = false
     @Published var isPaused = false
@@ -83,6 +83,11 @@ class LocationViewModel: NSObject, ObservableObject {
         return delta
     }
     
+    func boatRotation()->Double {
+        let delta = directionSubtract(Int(round(twd)), Int(round(course)))
+        return Double(delta) * .pi / 180.0
+    }
+    
     func direction_diff(_ d1: Int, _ d2: Int) -> Int {
         // finds the smallest distance around compass between two angles
         let delta1 = directionSubtract(d1, d2)
@@ -101,7 +106,7 @@ class LocationViewModel: NSObject, ObservableObject {
     
     func calculateVMG(speed: Double, course: Double, twd: Double) -> Double {
         // Return the component of speed towards true wind angle.
-        let twa = calculateTwa(twd: twd, course: course)
+        twa = calculateTwa(twd: twd, course: course)
         let vmg = speed * cos(Double(twa) * .pi / 180)
         return vmg
     }
