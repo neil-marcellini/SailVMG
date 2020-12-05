@@ -6,15 +6,22 @@
 //
 
 import Foundation
-import SwiftUI
 class RecordingViewModel: ObservableObject {
-    
-    func getSpeed(speed: Double)->String {
+
+    func speedDisplay(_ speed: Double) ->  String {
         return String(format: "%.2f kts", speed)
     }
     
-    func getCourse(cog: Double) -> String {
-        return String(format: "%.0f°", cog)
+    func courseDisplay(_ course: Double) ->  String {
+        return String(format: "%.0f°", course)
+    }
+    
+    func twdDisplay(_ twd: Double) ->  String {
+        return String(format: "%03.0f°", twd)
+    }
+    
+    func vmgDisplay(_ vmg: Double) ->  String {
+        return String(format: "%.2f kts", vmg)
     }
     
 }

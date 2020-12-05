@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct MainScreen: View {
-    @StateObject var recordingState = RecordingState()
+    @EnvironmentObject var locationViewModel: LocationViewModel
     @ObservedObject var trackRepository = TrackRespository()
     var body: some View {
         NavigationView {
@@ -29,11 +29,11 @@ struct MainScreen: View {
                     }
                 }
                 Button(action: {
-                    recordingState.startRecording()
+                    locationViewModel.startRecording()
                 }){
                     Image(systemName: "play.circle").font(.system(size: 100))
                 }
-                NavigationLink(destination: RecordingView(recordingState: recordingState, locationViewModel: recordingState.locationViewModel), isActive: $recordingState.isRecording) { EmptyView()}
+                NavigationLink(destination: RecordingView(), isActive: $locationViewModel.isRecording) { EmptyView()}
             }.navigationBarTitle("SailVMG")
         }
             

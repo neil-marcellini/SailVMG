@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1D1024F9D0F5EABB6C4A78B5 /* Pods_SailVMG_SailVMGUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EB19DD7CF695CA7D213DE1 /* Pods_SailVMG_SailVMGUITests.framework */; };
-		3111AECA2568B18400DAEF90 /* RecordingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AEC92568B18400DAEF90 /* RecordingState.swift */; };
 		3111AED32568D49E00DAEF90 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED22568D49E00DAEF90 /* Track.swift */; };
 		3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED72568D5D400DAEF90 /* Trackpoint.swift */; };
 		3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */; };
@@ -53,7 +52,6 @@
 		1877C52E68D748608492B5D6 /* Pods-SailVMG-SailVMGUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMG-SailVMGUITests.release.xcconfig"; path = "Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests.release.xcconfig"; sourceTree = "<group>"; };
 		196256F91682DAEBB042DE2B /* Pods-SailVMGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMGTests.release.xcconfig"; path = "Target Support Files/Pods-SailVMGTests/Pods-SailVMGTests.release.xcconfig"; sourceTree = "<group>"; };
 		24715C83D67C6CEB8057E414 /* Pods_SailVMG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3111AEC92568B18400DAEF90 /* RecordingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingState.swift; sourceTree = "<group>"; };
 		3111AED22568D49E00DAEF90 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		3111AED72568D5D400DAEF90 /* Trackpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackpoint.swift; sourceTree = "<group>"; };
 		3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				31C747502568A85700A454B7 /* LocationViewModel.swift */,
-				3111AEC92568B18400DAEF90 /* RecordingState.swift */,
 				3155A04F2571CF6600E885BC /* TrackViewModel.swift */,
 				312307FD25777AA800343C86 /* RecordingViewModel.swift */,
 			);
@@ -483,7 +480,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3111AECA2568B18400DAEF90 /* RecordingState.swift in Sources */,
 				3155A05A2571D3F400E885BC /* MapView.swift in Sources */,
 				312307FE25777AA800343C86 /* RecordingViewModel.swift in Sources */,
 				3155A0552571D0A500E885BC /* TrackView.swift in Sources */,

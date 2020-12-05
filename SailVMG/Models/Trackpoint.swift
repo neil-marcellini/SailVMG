@@ -17,5 +17,5 @@ struct Trackpoint: Codable, Identifiable {
     let speed: Double
     let course: Double
     let vmg: Double?
-    let twa: Double?
+    let twd: Double?
 }

@@ -8,37 +8,74 @@
 import SwiftUI
 
 struct RecordingView: View {
-    @StateObject var recordingState: RecordingState
-    @ObservedObject var locationViewModel: LocationViewModel
-    let recordingViewModel = RecordingViewModel()
-
+    @EnvironmentObject var locationViewModel: LocationViewModel
+    @StateObject var recordingViewModel = RecordingViewModel()
     var body: some View {
             VStack {
-                Text("SOG")
+             
+                Text("TWD")
                     .font(.title)
                     .foregroundColor(.red)
-                Text(recordingViewModel.getSpeed(speed: locationViewModel.speed))
+                HStack {
+                    Button(action: { locationViewModel.minusTwd() }){
+                        Image(systemName: "minus.square.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                    }
+                    Text(recordingViewModel.twdDisplay(locationViewModel.twd))
+                        .frame(width: 50)
+                    Button(action: { locationViewModel.plusTwd() }){
+                        Image(systemName: "plus.app.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                    }
+                }
+             
+                Slider(value: $locationViewModel.twd, in: 0...359, step: 1)
+                    .frame(width: 150)
+               
                 
-                Text("COG")
+                
+                Text("VMG")
                     .font(.title)
-                    .foregroundColor(.red)
-                Text(recordingViewModel.getCourse(cog: locationViewModel.course))
+                    .foregroundColor(.blue)
+                Text(recordingViewModel.vmgDisplay(locationViewModel.vmg))
+                HStack {
+                    Spacer()
+                    VStack {
+                        Text("SOG")
+                            .font(.title)
+                            .foregroundColor(.red)
+                        Text(recordingViewModel.speedDisplay(locationViewModel.speed))
+                    }
+                   
+                    Spacer()
+                    VStack {
+                        Text("COG")
+                            .font(.title)
+                            .foregroundColor(.red)
+                        Text(recordingViewModel.courseDisplay(locationViewModel.course))
+                    }
+                    Spacer()
+                }
+                
+               
                 
                 
                 Button(action: {
-                    recordingState.pause()
+                    locationViewModel.pause()
                 }){
-                    Image(systemName: recordingState.isPaused ? "play.circle" : "pause.circle").font(.system(size: 100))
-                }.actionSheet(isPresented: $recordingState.isPaused, content: {
+                    Image(systemName: locationViewModel.isPaused ? "play.circle" : "pause.circle").font(.system(size: 100))
+                }.actionSheet(isPresented: $locationViewModel.isPaused, content: {
                     ActionSheet(title: Text("Tracking Paused"), message: nil, buttons: [
                         .default(Text("Save Track")){
-                            recordingState.saveTrack()
+                            locationViewModel.saveTrack()
                         },
                         .destructive(Text("Discard Track")){
-                            recordingState.discardTrack()
+                            locationViewModel.discardTrack()
                         },
                         .cancel(Text("Resume Tracking")){
-                            recordingState.resume()
+                            locationViewModel.resume()
                         }
                         
                         ])
@@ -50,6 +87,6 @@ struct RecordingView: View {
 
 struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordingView(recordingState: RecordingState(), locationViewModel: LocationViewModel())
+        RecordingView()
     }
 }
