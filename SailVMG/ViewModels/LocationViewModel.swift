@@ -102,7 +102,7 @@ class LocationViewModel: NSObject, ObservableObject {
     func calculateVMG(speed: Double, course: Double, twd: Double) -> Double {
         // Return the component of speed towards true wind angle.
         let twa = calculateTwa(twd: twd, course: course)
-        let vmg = speed * cos(Double(twa))
+        let vmg = speed * cos(Double(twa) * .pi / 180)
         return vmg
     }
     
