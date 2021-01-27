@@ -13,5 +13,6 @@ struct Track: Codable, Identifiable {
     @DocumentID var id: String?
     var start_time: Date
     var end_time: Date?
+    var userId: String?
     
 }

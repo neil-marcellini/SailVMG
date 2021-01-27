@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -19,8 +20,10 @@ class TrackRespository: ObservableObject {
     }
     
     func createTrack(_ track: Track) -> String {
+        var addTrack = track
+        addTrack.userId = Auth.auth().currentUser?.uid
         do {
-            let document = try db.collection("Tracks").addDocument(from: track)
+            let document = try db.collection("Tracks").addDocument(from: addTrack)
             return document.documentID
         } catch {
             fatalError("Unable to encode task \(error.localizedDescription)")
@@ -56,7 +59,9 @@ class TrackRespository: ObservableObject {
     }
     
     func getTrackVMs() {
+        let userId = Auth.auth().currentUser?.uid
         db.collection("Tracks")
+            .whereField("userId", isEqualTo: userId)
             .order(by: "start_time", descending: true)
             .addSnapshotListener() { (querySnapshot, err) in
             if let querySnapshot = querySnapshot {
