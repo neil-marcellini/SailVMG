@@ -45,10 +45,10 @@ class TrackViewModel: ObservableObject {
 
     func formatLocation(_ place: CLPlacemark?) {
         guard let place = place else {return}
-        if let locality = place.locality {
-            location = locality
+        if let city = place.locality,
+            let state = place.administrativeArea {
+            location = "\(city), \(state)"
         }
-        
     }
     
     func startTime()->String {
