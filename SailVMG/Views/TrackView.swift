@@ -11,10 +11,13 @@ struct TrackView: View {
     @ObservedObject var trackVM: TrackViewModel
     var body: some View {
         VStack(alignment: .leading) {
-            Text(trackVM.location)
             HStack {
-                Text("Start time: \(trackVM.startTime())")
-                Text("End time: \(trackVM.endTime())")
+                Text(trackVM.getDate())
+                Text(trackVM.location)
+            }
+            HStack {
+                Text("Start: \(trackVM.startTime())")
+                Text("End: \(trackVM.endTime())")
             }
             Text(trackVM.maxVMG)
             

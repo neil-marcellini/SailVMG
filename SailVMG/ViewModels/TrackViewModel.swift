@@ -10,7 +10,6 @@ import CoreLocation
 
 class TrackViewModel: ObservableObject {
     let track: Track
-    let dateFormatter = DateFormatter()
     @Published var trackpoints = [Trackpoint]()
     @Published var location = ""
     @Published var maxVMG = "Max VMG: -- / -- kts"
@@ -50,15 +49,20 @@ class TrackViewModel: ObservableObject {
             location = "\(city), \(state)"
         }
     }
+    func getDate()->String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter.string(from: track.start_time)
+    }
     
     func startTime()->String {
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .medium
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
         return dateFormatter.string(from: track.start_time)
     }
     func endTime()->String {
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .medium
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
         guard let end_time = track.end_time else {
             return ""
         }

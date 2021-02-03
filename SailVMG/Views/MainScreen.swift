@@ -14,7 +14,11 @@ struct MainScreen: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Tracks").underline()
+                HStack {
+                    Text("Tracks")
+                        .font(.headline)
+                    Spacer()
+                }.padding(.horizontal)
                 List {
                     ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
                         NavigationLink(destination: PlaybackView(track: trackVM.track)){
@@ -34,7 +38,7 @@ struct MainScreen: View {
                     Image(systemName: "play.circle").font(.system(size: 100))
                 }
                 NavigationLink(destination: RecordingView(), isActive: $locationViewModel.isRecording) { EmptyView()}
-            }.navigationBarTitle("SailVMG")
+            }.navigationTitle("SailVMG")
         }
             
         }
