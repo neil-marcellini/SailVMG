@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TrackView: View {
-    let trackVM: TrackViewModel
+    @ObservedObject var trackVM: TrackViewModel
     var body: some View {
         VStack(alignment: .leading) {
             Text("Track")
@@ -16,11 +16,13 @@ struct TrackView: View {
                 Text("Start time: \(trackVM.startTime())")
                 Text("End time: \(trackVM.endTime())")
             }
+            Text(trackVM.maxVMG)
             
         }
         
     }
 }
+
 
 struct TrackView_Previews: PreviewProvider {
     static var previews: some View {

@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 import CoreLocation
 class TrackpointRespository: ObservableObject {
     let db = Firestore.firestore()
-    @Published var trackpoints = [Trackpoint]()
     
     func addTrackPoint(to track: Track, trackpoint: Trackpoint) {
 
@@ -21,6 +20,31 @@ class TrackpointRespository: ObservableObject {
             fatalError("Unable to encode task \(error.localizedDescription)")
         }
         
+    }
+
+    func getTrackpoints(_ track: Track, completion: @escaping ([Trackpoint]) -> Void) {
+        var trackpoints = [Trackpoint]()
+        guard let track_id: String = track.id else {
+            print("error with getTrackpoints")
+            return
+        }
+        db.collection("Trackpoints")
+            .whereField("track_id", isEqualTo: track_id)
+            .order(by: "time")
+            .getDocuments() { (querySnapshot, err) in
+                if let querySnapshot = querySnapshot {
+                    trackpoints = querySnapshot.documents.compactMap { document in
+                        do {
+                            guard let trackpoint = try document.data(as: Trackpoint.self) else {return nil}
+                            return trackpoint
+                        } catch {
+                            print(error)
+                        }
+                        return nil
+                    }
+                }
+                completion(trackpoints)
+            }
     }
     
     func getCoordinates(_ track: Track, completion: @escaping ([CLLocationCoordinate2D]) -> Void) {
