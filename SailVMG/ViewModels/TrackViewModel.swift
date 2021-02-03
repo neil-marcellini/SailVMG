@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import CoreLocation
 
 class TrackViewModel: ObservableObject {
     let track: Track
     let dateFormatter = DateFormatter()
     @Published var trackpoints = [Trackpoint]()
+    @Published var location = ""
     @Published var maxVMG = "Max VMG: -- / -- kts"
     
     init (_ track: Track) {
@@ -18,8 +20,35 @@ class TrackViewModel: ObservableObject {
         let trackpointRespository = TrackpointRespository()
         trackpointRespository.getTrackpoints(track) { trackpoints in
             self.trackpoints = trackpoints
+            self.getLocation(completionHandler: self.formatLocation)
             self.getMaxVMG()
         }
+    }
+    func getLocation(completionHandler: @escaping (CLPlacemark?) -> Void ) {
+        // Use the last reported location.
+        guard trackpoints.count > 0 else {return}
+        guard let firstPoint = trackpoints.first else { return }
+        let startLocation = CLLocation(latitude: firstPoint.latitude, longitude: firstPoint.longitude)
+        let geocoder = CLGeocoder()
+        // Look up the location and pass it to the completion handler
+        geocoder.reverseGeocodeLocation(startLocation, completionHandler: { (placemarks, error) in
+            if error == nil {
+                let firstLocation = placemarks?[0]
+                completionHandler(firstLocation)
+            }
+            else {
+               // An error occurred during geocoding.
+                print(error)
+            }
+        })
+    }
+
+    func formatLocation(_ place: CLPlacemark?) {
+        guard let place = place else {return}
+        if let locality = place.locality {
+            location = locality
+        }
+        
     }
     
     func startTime()->String {
