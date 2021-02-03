@@ -11,7 +11,7 @@ class TrackViewModel: ObservableObject {
     let track: Track
     let dateFormatter = DateFormatter()
     @Published var trackpoints = [Trackpoint]()
-    @Published var maxVMG = ""
+    @Published var maxVMG = "Max VMG: -- / -- kts"
     
     init (_ track: Track) {
         self.track = track
@@ -43,7 +43,7 @@ class TrackViewModel: ObservableObject {
         if let max_upwind_vmg = max_upwind?.vmg {
             upwind_display = String(format: "%.2f", max_upwind_vmg)
         }
-        let max_downwind = trackpoints.max { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
+        let max_downwind = trackpoints.min { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
         if let max_downwind_vmg = max_downwind?.vmg {
             if max_downwind_vmg < 0 {
                 downwind_display = String(format: "%.2f", max_downwind_vmg)
