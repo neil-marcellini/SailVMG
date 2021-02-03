@@ -27,7 +27,7 @@ struct MainScreen: View {
                             trackRepository.discardTrack(trackVM.track)
                         }
                     }
-                }
+                }.listStyle(PlainListStyle())
                 Button(action: {
                     locationViewModel.startRecording()
                 }){
