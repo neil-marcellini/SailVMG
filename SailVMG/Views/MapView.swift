@@ -11,7 +11,7 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
     @Binding var route: MKPolyline?
-    let mapViewDelegate = MapViewDelegate()
+    let mapViewDelegate: MapViewDelegate
 
     func makeUIView(context: Context) -> MKMapView {
         MKMapView(frame: .zero)
@@ -37,12 +37,4 @@ private extension MapView {
     }
 }
 
-class MapViewDelegate: NSObject, MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.lineWidth = 1.0
-        renderer.fillColor = UIColor.red.withAlphaComponent(0.5)
-        renderer.strokeColor = UIColor.red.withAlphaComponent(0.8)
-        return renderer
-    }
-}
+

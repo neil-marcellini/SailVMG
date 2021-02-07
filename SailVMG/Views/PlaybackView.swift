@@ -20,11 +20,11 @@ class Coordinator: NSObject, MKMapViewDelegate {
 
 struct PlaybackView: View {
     @State var route: MKPolyline?
-    let track: Track
+    let trackVM: TrackViewModel
     let trackpointRepository = TrackpointRespository()
     
     var body: some View {
-        MapView(route: $route).onAppear() {
+        MapView(route: $route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
             addTrack()
         }
     }
@@ -33,7 +33,7 @@ struct PlaybackView: View {
 
 private extension PlaybackView {
     func addTrack() {
-        trackpointRepository.getCoordinates(track) { coordinates in
+        trackpointRepository.getCoordinates(trackVM.track) { coordinates in
             let track_line = MKPolyline(coordinates: coordinates, count: coordinates.count)
             route = track_line
         }
@@ -67,6 +67,6 @@ func getCoordinates()->[CLLocationCoordinate2D] {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaybackView(track: Track(id: nil, start_time: Date(), end_time: nil))
+        PlaybackView(trackVM: TrackViewModel(Track(id: nil, start_time: Date(), end_time: nil)))
     }
 }

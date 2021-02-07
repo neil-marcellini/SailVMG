@@ -21,7 +21,7 @@ struct MainScreen: View {
                 }.padding(.horizontal)
                 List {
                     ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
-                        NavigationLink(destination: PlaybackView(track: trackVM.track)){
+                        NavigationLink(destination: PlaybackView(trackVM: trackVM)){
                             TrackView(trackVM: trackVM)
                         }
                         
