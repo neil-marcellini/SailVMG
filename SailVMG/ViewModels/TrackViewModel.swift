@@ -92,7 +92,7 @@ class TrackViewModel: ObservableObject {
                     downwind_display = String(format: "%.2f", max_downwind_vmg)
             }
         }
-        self.maxVMG = "Max VMG: \(upwind_display) / \(downwind_display) kts"
+        self.maxVMG = "Max VMG: \(downwind_display) / \(upwind_display) kts"
     }
 
     func getColors()->[UIColor] {

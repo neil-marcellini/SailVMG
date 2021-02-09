@@ -26,10 +26,7 @@ struct PlaybackView: View {
     var body: some View {
             MapView(route: $route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
                 addTrack()
-            }.navigationBarItems(leading: Rectangle()
-                                    .fill(LinearGradient(gradient: Gradient(colors: trackVM.getSwiftUIColors()), startPoint: .leading, endPoint: .trailing))
-                                    .frame(width: 300, height: 10)
-                                    .cornerRadius(5.0) )
+            }.navigationBarItems(leading: ColorScale(trackVM: trackVM))
     }
     
 }
