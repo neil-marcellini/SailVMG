@@ -38,7 +38,7 @@ struct PlaybackView: View {
             
             LineView(data: trackVM.getVMGs(), title: "VMG kts")
                 .padding(.horizontal)
-        }
+        }.navigationBarTitle("", displayMode: .inline)
             
     }
     
