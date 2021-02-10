@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C7475C2568ABC400A454B7 /* RecordingView.swift */; };
 		31CA9E2825D08C5400DE5A26 /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA9E2725D08C5400DE5A26 /* MapViewDelegate.swift */; };
 		31F9055825D3241C007ACC91 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9055725D3241C007ACC91 /* ColorScale.swift */; };
+		31F9056125D3669F007ACC91 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 31F9056025D3669F007ACC91 /* SwiftUICharts */; };
 		D5EEA8ED4119C672AE84DA74 /* Pods_SailVMGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E658FE9ACB897DF5AD438B1 /* Pods_SailVMGTests.framework */; };
 		F6E863B667DBE0A281AD4CC3 /* Pods_SailVMG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24715C83D67C6CEB8057E414 /* Pods_SailVMG.framework */; };
 /* End PBXBuildFile section */
@@ -95,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6E863B667DBE0A281AD4CC3 /* Pods_SailVMG.framework in Frameworks */,
+				31F9056125D3669F007ACC91 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +267,9 @@
 			dependencies = (
 			);
 			name = SailVMG;
+			packageProductDependencies = (
+				31F9056025D3669F007ACC91 /* SwiftUICharts */,
+			);
 			productName = SailVMG;
 			productReference = 318ABBE9255F400600EFF7E2 /* SailVMG.app */;
 			productType = "com.apple.product-type.application";
@@ -339,6 +344,9 @@
 				Base,
 			);
 			mainGroup = 318ABBE0255F400600EFF7E2;
+			packageReferences = (
+				31F9055F25D3669F007ACC91 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 318ABBEA255F400600EFF7E2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -826,6 +834,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		31F9055F25D3669F007ACC91 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		31F9056025D3669F007ACC91 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31F9055F25D3669F007ACC91 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 318ABBE1255F400600EFF7E2 /* Project object */;
 }

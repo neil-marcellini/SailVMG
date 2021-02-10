@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreGPX
+import SwiftUICharts
 
 
 class Coordinator: NSObject, MKMapViewDelegate {
@@ -24,9 +25,17 @@ struct PlaybackView: View {
     let trackpointRepository = TrackpointRespository()
     
     var body: some View {
+        ZStack {
             MapView(route: $route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
                 addTrack()
             }.navigationBarItems(leading: ColorScale(trackVM: trackVM))
+            VStack {
+                Spacer()
+                LineChartView(data: trackVM.getVMGs(), title: "VMG kts")
+            }
+            
+        }
+            
     }
     
 }

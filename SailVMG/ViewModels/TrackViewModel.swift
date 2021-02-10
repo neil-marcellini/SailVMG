@@ -94,11 +94,15 @@ class TrackViewModel: ObservableObject {
         }
         self.maxVMG = "Max VMG: \(downwind_display) / \(upwind_display) kts"
     }
-
-    func getColors()->[UIColor] {
+    func getVMGs()->[Double] {
         let vmgs = trackpoints.compactMap { trackpoint in
             trackpoint.vmg
         }
+        return vmgs
+    }
+
+    func getColors()->[UIColor] {
+        let vmgs = getVMGs()
         let colors = vmgs.map { vmg in
             return vmgToColor(vmg)
         }
