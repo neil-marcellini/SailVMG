@@ -21,8 +21,9 @@ struct MainScreen: View {
                 }.padding(.horizontal)
                 List {
                     ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
-                        NavigationLink(destination: PlaybackView(trackVM: trackVM)){
-                            TrackView(trackVM: trackVM)
+                        let mapVM = MapViewModel(trackVM: trackVM)
+                        NavigationLink(destination: PlaybackView(trackVM: trackVM, mapVM: mapVM)){
+                            TrackView(trackVM: trackVM, mapVM: mapVM)
                         }
                         
                     }.onDelete { offset in

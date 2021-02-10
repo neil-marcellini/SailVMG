@@ -30,6 +30,8 @@
 		31CA9E2825D08C5400DE5A26 /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA9E2725D08C5400DE5A26 /* MapViewDelegate.swift */; };
 		31F9055825D3241C007ACC91 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9055725D3241C007ACC91 /* ColorScale.swift */; };
 		31F9056125D3669F007ACC91 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 31F9056025D3669F007ACC91 /* SwiftUICharts */; };
+		31F9056625D37419007ACC91 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9056525D37419007ACC91 /* MapViewModel.swift */; };
+		31F9056B25D37609007ACC91 /* MapPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9056A25D37609007ACC91 /* MapPreview.swift */; };
 		D5EEA8ED4119C672AE84DA74 /* Pods_SailVMGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E658FE9ACB897DF5AD438B1 /* Pods_SailVMGTests.framework */; };
 		F6E863B667DBE0A281AD4CC3 /* Pods_SailVMG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24715C83D67C6CEB8057E414 /* Pods_SailVMG.framework */; };
 /* End PBXBuildFile section */
@@ -82,6 +84,8 @@
 		31C7475C2568ABC400A454B7 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 		31CA9E2725D08C5400DE5A26 /* MapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewDelegate.swift; sourceTree = SOURCE_ROOT; };
 		31F9055725D3241C007ACC91 /* ColorScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScale.swift; sourceTree = "<group>"; };
+		31F9056525D37419007ACC91 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		31F9056A25D37609007ACC91 /* MapPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreview.swift; sourceTree = "<group>"; };
 		3E658FE9ACB897DF5AD438B1 /* Pods_SailVMGTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMGTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EB19DD7CF695CA7D213DE1 /* Pods_SailVMG_SailVMGUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMG_SailVMGUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDB21FDAB24133AE1519219 /* Pods-SailVMG-SailVMGUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMG-SailVMGUITests.debug.xcconfig"; path = "Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				31CA9E2725D08C5400DE5A26 /* MapViewDelegate.swift */,
+				31F9056525D37419007ACC91 /* MapViewModel.swift */,
 				31C747502568A85700A454B7 /* LocationViewModel.swift */,
 				3155A04F2571CF6600E885BC /* TrackViewModel.swift */,
 				312307FD25777AA800343C86 /* RecordingViewModel.swift */,
@@ -235,6 +240,7 @@
 				3155A05E2571D42500E885BC /* PlaybackView.swift */,
 				31F9055725D3241C007ACC91 /* ColorScale.swift */,
 				3155A0592571D3F400E885BC /* MapView.swift */,
+				31F9056A25D37609007ACC91 /* MapPreview.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -494,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31F9056625D37419007ACC91 /* MapViewModel.swift in Sources */,
 				3155A05A2571D3F400E885BC /* MapView.swift in Sources */,
 				312307FE25777AA800343C86 /* RecordingViewModel.swift in Sources */,
 				3155A0552571D0A500E885BC /* TrackView.swift in Sources */,
@@ -507,6 +514,7 @@
 				3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */,
 				3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */,
 				3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */,
+				31F9056B25D37609007ACC91 /* MapPreview.swift in Sources */,
 				3111AED32568D49E00DAEF90 /* Track.swift in Sources */,
 				3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */,
 			);

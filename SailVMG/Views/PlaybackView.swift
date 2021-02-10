@@ -20,15 +20,16 @@ class Coordinator: NSObject, MKMapViewDelegate {
 }
 
 struct PlaybackView: View {
-    @State var route: MKPolyline?
+    
     let trackVM: TrackViewModel
-    let trackpointRepository = TrackpointRespository()
+    @ObservedObject var mapVM: MapViewModel
+    
     
     var body: some View {
         VStack {
             ZStack {
-                MapView(route: $route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
-                    addTrack()
+                MapView(route: $mapVM.route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
+                    mapVM.addTrack()
                 }
                 HStack {
                     Spacer()
@@ -43,17 +44,6 @@ struct PlaybackView: View {
     }
     
 }
-
-private extension PlaybackView {
-    func addTrack() {
-        trackpointRepository.getCoordinates(trackVM.track) { coordinates in
-            let track_line = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            route = track_line
-        }
-        
-    }
-}
-
 
 func getCoordinates()->[CLLocationCoordinate2D] {
     var coordinates = Array<CLLocationCoordinate2D>()
@@ -79,7 +69,9 @@ func getCoordinates()->[CLLocationCoordinate2D] {
 
 
 struct ContentView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        PlaybackView(trackVM: TrackViewModel(Track(id: nil, start_time: Date(), end_time: nil)))
+        let trackVM = TrackViewModel(Track(id: nil, start_time: Date(), end_time: nil))
+        return PlaybackView(trackVM: trackVM, mapVM: MapViewModel(trackVM: trackVM))
     }
 }
