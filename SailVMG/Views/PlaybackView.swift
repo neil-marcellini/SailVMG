@@ -28,7 +28,7 @@ struct PlaybackView: View {
     var body: some View {
         VStack {
             ZStack {
-                MapView(route: $mapVM.route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
+                MapView(mapVM: mapVM, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
                     mapVM.addTrack()
                 }
                 HStack {
