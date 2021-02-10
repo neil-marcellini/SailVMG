@@ -10,20 +10,25 @@ import SwiftUI
 struct ColorScale: View {
     let trackVM: TrackViewModel
     var body: some View {
-        VStack(spacing: 0) {
+        HStack(spacing: 0) {
             Spacer()
-            Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: trackVM.getSwiftUIColors()), startPoint: .leading, endPoint: .trailing))
-                .frame(width: 300, height: 10)
-                .cornerRadius(5.0)
-            HStack {
-                Text(String(format: "%.2f", trackVM.max_downwind_vmg ?? 0) + " kts")
-                    .font(.body)
-                Spacer()
+            VStack {
                 Text(String(format: "%.2f", trackVM.max_upwind_vmg ?? 0) + " kts")
                     .font(.body)
+                Spacer()
+                Text(String(format: "%.2f", trackVM.max_downwind_vmg ?? 0) + " kts")
+                    .font(.body)
+                
+                
             }
-        }
+            Rectangle()
+                .fill(LinearGradient(gradient: Gradient(colors: trackVM.getSwiftUIColors()), startPoint: .bottom, endPoint: .top))
+                .frame(width: 10, height: 300)
+                .cornerRadius(5.0)
+                .padding(.leading, 5)
+            
+        }.frame(height: 300)
+        .padding()
         
         
     }

@@ -25,15 +25,19 @@ struct PlaybackView: View {
     let trackpointRepository = TrackpointRespository()
     
     var body: some View {
-        ZStack {
-            MapView(route: $route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
-                addTrack()
-            }.navigationBarItems(leading: ColorScale(trackVM: trackVM))
-            VStack {
-                Spacer()
-                LineChartView(data: trackVM.getVMGs(), title: "VMG kts")
+        VStack {
+            ZStack {
+                MapView(route: $route, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
+                    addTrack()
+                }
+                HStack {
+                    Spacer()
+                    ColorScale(trackVM: trackVM)
+                }
             }
             
+            LineView(data: trackVM.getVMGs(), title: "VMG kts")
+                .padding(.horizontal)
         }
             
     }
