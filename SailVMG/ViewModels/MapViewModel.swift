@@ -38,7 +38,13 @@ class MapViewModel: ObservableObject {
         let view = MKMapView()
         addRoute(to: view)
         let mapSnapshotOptions = MKMapSnapshotter.Options()
-        mapSnapshotOptions.mapRect = self.route!.boundingMapRect
+        let mapRect = self.route!.boundingMapRect
+        let padding = 100.0
+        let newSize = MKMapSize(width: mapRect.size.width + padding, height: mapRect.size.height + padding)
+        let paddedRect = MKMapRect(origin: mapRect.origin, size: newSize)
+        paddedRect.offsetBy(dx: padding / 2, dy: padding / 2)
+        mapSnapshotOptions.mapRect = paddedRect
+//        mapSnapshotOptions.mapRect = self.route!.boundingMapRect
         let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
         snapShotter.start { (snapshot: MKMapSnapshotter.Snapshot?, error: Error?) in
             self.drawImageRoute(snapshot: snapshot)
@@ -53,14 +59,15 @@ class MapViewModel: ObservableObject {
 
         guard let route = route else { return }
         let mapRect = route.boundingMapRect
-        view.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
+        view.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: false)
         view.addOverlay(route)
     }
     
     func drawImageRoute(snapshot: MKMapSnapshotter.Snapshot?) {
-        let image = snapshot?.image
-        UIGraphicsBeginImageContextWithOptions((image?.size)!, true, (image?.scale)!)
-        image?.draw(at: CGPoint(x: 0, y: 0))
+        guard let snapshot = snapshot else { return }
+        let image = snapshot.image
+        UIGraphicsBeginImageContextWithOptions((image.size), true, (image.scale))
+        image.draw(at: CGPoint(x: 0, y: 0))
 
         let context = UIGraphicsGetCurrentContext()
         context!.setStrokeColor(UIColor.blue.cgColor)
@@ -68,11 +75,11 @@ class MapViewModel: ObservableObject {
         context!.beginPath()
 
         for (index, coordinate) in self.coordinates.enumerated() {
-            let point = snapshot?.point(for: coordinate)
+            let point = snapshot.point(for: coordinate)
             if index == 0 {
-                context?.move(to: point!)
+                context?.move(to: point)
             } else {
-                context?.addLine(to:point!)
+                context?.addLine(to:point)
             }
         }
         context?.strokePath()
