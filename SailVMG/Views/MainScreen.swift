@@ -25,7 +25,6 @@ struct MainScreen: View {
                         NavigationLink(destination: PlaybackView(trackVM: trackVM, mapVM: mapVM)){
                             TrackView(trackVM: trackVM, mapVM: mapVM)
                         }
-                        
                     }.onDelete { offset in
                         offset.forEach { index in
                             let trackVM = trackRepository.trackVMs[index]

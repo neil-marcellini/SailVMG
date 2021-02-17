@@ -11,18 +11,22 @@ struct TrackView: View {
     @ObservedObject var trackVM: TrackViewModel
     @ObservedObject var mapVM: MapViewModel
     var body: some View {
-        VStack(alignment: .leading) {
-            MapPreview(previewVM: mapVM)
-            HStack {
-                Text(trackVM.getDate())
-                Text(trackVM.location)
+        if trackVM.loading {
+            ProgressView()
+        } else {
+            VStack(alignment: .leading) {
+                MapPreview(previewVM: mapVM)
+                HStack {
+                    Text(trackVM.getDate())
+                    Text(trackVM.location)
+                }
+                HStack {
+                    Text("Start: \(trackVM.startTime())")
+                    Text("End: \(trackVM.endTime())")
+                }
+                Text(trackVM.maxVMG)
+                
             }
-            HStack {
-                Text("Start: \(trackVM.startTime())")
-                Text("End: \(trackVM.endTime())")
-            }
-            Text(trackVM.maxVMG)
-            
         }
         
     }

@@ -12,25 +12,28 @@ import SwiftUI
 
 class TrackViewModel: ObservableObject {
     let track: Track
-        @Published var trackpoints = [Trackpoint]()
-        @Published var location = ""
-        @Published var maxVMG = "Max VMG: -- / -- kts"
-        var max_upwind_vmg: Double?
-        var max_downwind_vmg: Double?
-        let maxHueDegree: Double
-        let maxHue: Double
+    @Published var trackpoints = [Trackpoint]()
+    @Published var loading = true
+    @Published var location = ""
+    @Published var maxVMG = "Max VMG: -- / -- kts"
+    var max_upwind_vmg: Double?
+    var max_downwind_vmg: Double?
+    let maxHueDegree: Double
+    let maxHue: Double
 
-        init (_ track: Track) {
-                self.track = track
-                maxHueDegree = 238.0
-                maxHue = maxHueDegree / 360.0
-                let trackpointRespository = TrackpointRespository()
-                trackpointRespository.getTrackpoints(track) { trackpoints in
-                    self.trackpoints = trackpoints
-                        self.getLocation(completionHandler: self.formatLocation)
-                        self.getMaxVMG()
-                }
-        }
+    init (_ track: Track) {
+            self.track = track
+            maxHueDegree = 238.0
+            maxHue = maxHueDegree / 360.0
+            let trackpointRespository = TrackpointRespository()
+            trackpointRespository.getTrackpoints(track) { trackpoints in
+                self.trackpoints = trackpoints
+                self.getLocation(completionHandler: self.formatLocation)
+                self.getMaxVMG()
+                self.loading = false
+            }
+    }
+    
     func getLocation(completionHandler: @escaping (CLPlacemark?) -> Void ) {
         // Use the last reported location.
         guard trackpoints.count > 0 else {return}
