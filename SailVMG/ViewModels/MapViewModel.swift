@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+import SwiftUI
 
 class MapViewModel: ObservableObject {
     var trackVM: TrackViewModel
@@ -14,10 +15,12 @@ class MapViewModel: ObservableObject {
     @Published var route: MKPolyline? = nil
     let trackpointRepository = TrackpointRespository()
     var coordinates = [CLLocationCoordinate2D]()
+    @Published var loading = true
     
     init(trackVM: TrackViewModel) {
         self.trackVM = trackVM
         self.addTrack()
+        
     }
     
     func addTrack() {
@@ -26,6 +29,7 @@ class MapViewModel: ObservableObject {
             let track_line = MKPolyline(coordinates: coordinates, count: coordinates.count)
             self.route = track_line
             self.makePreview()
+            self.loading = false
             
         }
     }

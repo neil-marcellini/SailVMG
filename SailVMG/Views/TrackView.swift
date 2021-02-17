@@ -10,8 +10,9 @@ import SwiftUI
 struct TrackView: View {
     @ObservedObject var trackVM: TrackViewModel
     @ObservedObject var mapVM: MapViewModel
+    
     var body: some View {
-        if trackVM.loading {
+        if trackVM.loading || mapVM.loading {
             ProgressView()
         } else {
             VStack(alignment: .leading) {
