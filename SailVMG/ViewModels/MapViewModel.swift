@@ -41,10 +41,9 @@ class MapViewModel: ObservableObject {
         let mapRect = self.route!.boundingMapRect
         let padding = 100.0
         let newSize = MKMapSize(width: mapRect.size.width + padding, height: mapRect.size.height + padding)
-        let paddedRect = MKMapRect(origin: mapRect.origin, size: newSize)
-        paddedRect.offsetBy(dx: padding / 2, dy: padding / 2)
+        var paddedRect = MKMapRect(origin: mapRect.origin, size: newSize)
+        paddedRect = paddedRect.offsetBy(dx: padding / 2, dy: padding / 2)
         mapSnapshotOptions.mapRect = paddedRect
-//        mapSnapshotOptions.mapRect = self.route!.boundingMapRect
         let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
         snapShotter.start { (snapshot: MKMapSnapshotter.Snapshot?, error: Error?) in
             self.drawImageRoute(snapshot: snapshot)
