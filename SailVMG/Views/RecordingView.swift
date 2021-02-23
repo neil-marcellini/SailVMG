@@ -10,6 +10,7 @@ import SwiftUI
 struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @StateObject var recordingViewModel = RecordingViewModel()
+    @State private var audioFeedback = UserDefaults.standard.bool(forKey: "audioFeedback")
     var body: some View {
             VStack {
              

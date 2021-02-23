@@ -36,5 +36,149 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "26D667FD-7026-40AF-ADF8-9D9D3AF7FCA6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SailVMG/Repositories/TrackRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "getTrackVMs()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "26D667FD-7026-40AF-ADF8-9D9D3AF7FCA6 - 4734c554c57f24d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SailVMG.TrackRespository.getTrackVMs() -&gt; ()"
+                  moduleName = "SailVMG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/NeilMarcellini/Code/Xcode/SailVMG/SailVMG/Repositories/TrackRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "137">
+               </Location>
+               <Location
+                  uuid = "26D667FD-7026-40AF-ADF8-9D9D3AF7FCA6 - e75ebaca8d76d5a5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRQueryDocumentSnapshot) -&gt; Swift.Optional&lt;SailVMG.TrackViewModel&gt; in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SailVMG.TrackRespository.getTrackVMs() -&gt; ()"
+                  moduleName = "SailVMG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/NeilMarcellini/Code/Xcode/SailVMG/SailVMG/Repositories/TrackRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "204">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "896A1575-3490-44D5-B20F-21553AEA68E6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SailVMG/ViewModels/MapViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "addTrack()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F835ED53-E184-438E-9C99-2D09DBD8075D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SailVMG/ViewModels/TrackViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "init(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89C3295E-799D-4377-8D57-338D5012CB91"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SailVMG/ViewModels/TrackViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "init(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "89C3295E-799D-4377-8D57-338D5012CB91 - b9f50eca7ac02ecd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;SailVMG.Trackpoint&gt;) -&gt; () in SailVMG.TrackViewModel.init(SailVMG.Track) -&gt; SailVMG.TrackViewModel"
+                  moduleName = "SailVMG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/NeilMarcellini/Code/Xcode/SailVMG/SailVMG/ViewModels/TrackViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "78">
+               </Location>
+               <Location
+                  uuid = "89C3295E-799D-4377-8D57-338D5012CB91 - 151b601ea9f8589d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #2 (Swift.Optional&lt;__C.CLPlacemark&gt;) -&gt; () in implicit closure #1 (SailVMG.TrackViewModel) -&gt; (Swift.Optional&lt;__C.CLPlacemark&gt;) -&gt; () in closure #1 (Swift.Array&lt;SailVMG.Trackpoint&gt;) -&gt; () in SailVMG.TrackViewModel.init(SailVMG.Track) -&gt; SailVMG.TrackViewModel"
+                  moduleName = "SailVMG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/NeilMarcellini/Code/Xcode/SailVMG/SailVMG/ViewModels/TrackViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9253EEB-91A0-4EAB-B749-0D6E85A7E037"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SailVMG/ViewModels/LocationViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "saveTrack()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

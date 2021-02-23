@@ -10,7 +10,7 @@ import CoreData
 
 struct MainScreen: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @ObservedObject var trackRepository = TrackRespository()
+    @StateObject var trackRepository = TrackRespository()
     var body: some View {
         NavigationView {
             VStack {
@@ -28,7 +28,7 @@ struct MainScreen: View {
                     }.onDelete { offset in
                         offset.forEach { index in
                             let trackVM = trackRepository.trackVMs[index]
-                            trackRepository.discardTrack(trackVM.track)
+                            locationViewModel.trackManager.discardTrack(trackVM.track)
                         }
                     }
                 }.listStyle(PlainListStyle())

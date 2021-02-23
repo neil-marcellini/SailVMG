@@ -20,7 +20,7 @@ class LocationViewModel: NSObject, ObservableObject {
  
     @Published var isRecording = false
     @Published var isPaused = false
-    @ObservedObject var trackRepository = TrackRespository()
+    let trackManager = TrackManager()
     let trackpointRepository = TrackpointRespository()
     var track: Track? = nil
     
@@ -48,7 +48,7 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     func startRecording() {
         track = Track(id: nil, start_time: Date(), end_time: nil)
-        let track_id = trackRepository.createTrack(track!)
+        let track_id = trackManager.createTrack(track!)
         track!.id = track_id
         setTrack(track!)
         isRecording = true
@@ -58,7 +58,7 @@ class LocationViewModel: NSObject, ObservableObject {
     
     func saveTrack() {
         isRecording = false
-        trackRepository.setEndTime(track: track!)
+        trackManager.setEndTime(track: track!)
     }
     
     func discardTrack() {
@@ -67,7 +67,7 @@ class LocationViewModel: NSObject, ObservableObject {
             print("No track exists to delete")
             return
         }
-        trackRepository.discardTrack(curr_track)
+        trackManager.discardTrack(curr_track)
     }
     func plusTwd(){
         twd += 1
