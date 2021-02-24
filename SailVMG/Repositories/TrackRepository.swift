@@ -24,7 +24,7 @@ class TrackRespository: ObservableObject {
         db.collection("Tracks")
             .whereField("userId", isEqualTo: userId)
             .order(by: "start_time", descending: true)
-            .addSnapshotListener() { (querySnapshot, err) in
+            .getDocuments() { (querySnapshot, err) in
             if let querySnapshot = querySnapshot {
                 self.trackVMs = querySnapshot.documents.compactMap { document in
                     do {
@@ -38,6 +38,35 @@ class TrackRespository: ObservableObject {
                 }
             }
         }
+    }
+    
+    func setEndTime(track: Track, completion: @escaping ((Date?) -> Void)) {
+        guard let track_id = track.id else {
+            print("Error track has no id discardTrack")
+            return
+        }
+        let end_time = Date()
+        db.collection("Tracks").document(track_id).updateData([
+            "end_time": end_time
+        ]){ err in
+            if let err = err {
+                print("Error setting end time: \(err)")
+                completion(nil)
+            } else {
+                completion(end_time)
+            }
+        }
+        
+    }
+    
+    func addTrackVM(track: Track) {
+        var trackCopy = track
+        setEndTime(track: track) { end_time in
+            if end_time != nil {
+                trackCopy.end_time = end_time
+                self.trackVMs.insert(TrackViewModel(trackCopy), at: 0)
+            }
+        }  
     }
 
 }

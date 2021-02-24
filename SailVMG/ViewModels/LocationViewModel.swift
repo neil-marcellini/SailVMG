@@ -58,7 +58,6 @@ class LocationViewModel: NSObject, ObservableObject {
     
     func saveTrack() {
         isRecording = false
-        trackManager.setEndTime(track: track!)
     }
     
     func discardTrack() {

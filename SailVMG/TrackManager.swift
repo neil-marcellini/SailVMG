@@ -24,20 +24,7 @@ struct TrackManager {
         }
     }
     
-    func setEndTime(track: Track) {
-        guard let track_id = track.id else {
-            print("Error track has no id discardTrack")
-            return
-        }
-        db.collection("Tracks").document(track_id).updateData([
-            "end_time": Date()
-        ]){ err in
-            if let err = err {
-                print("Error setting end time: \(err)")
-            }
-        }
-        
-    }
+    
     
     func discardTrack(_ track: Track) {
         guard let track_id = track.id else {

@@ -29,6 +29,7 @@ struct MainScreen: View {
                         offset.forEach { index in
                             let trackVM = trackRepository.trackVMs[index]
                             locationViewModel.trackManager.discardTrack(trackVM.track)
+                            trackRepository.trackVMs.remove(at: index)
                         }
                     }
                 }.listStyle(PlainListStyle())
@@ -37,7 +38,7 @@ struct MainScreen: View {
                 }){
                     Image(systemName: "play.circle").font(.system(size: 100))
                 }
-                NavigationLink(destination: RecordingView(), isActive: $locationViewModel.isRecording) { EmptyView()}
+                NavigationLink(destination: RecordingView(trackRepository: trackRepository), isActive: $locationViewModel.isRecording) { EmptyView()}
             }.navigationTitle("SailVMG")
         }
             

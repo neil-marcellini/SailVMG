@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
+    @ObservedObject var trackRepository: TrackRespository
     @StateObject var recordingViewModel = RecordingViewModel()
     @State private var audioFeedback = UserDefaults.standard.bool(forKey: "audioFeedback")
     var body: some View {
@@ -92,6 +93,7 @@ struct RecordingView: View {
                     ActionSheet(title: Text("Tracking Paused"), message: nil, buttons: [
                         .default(Text("Save Track")){
                             locationViewModel.saveTrack()
+                            trackRepository.addTrackVM(track: locationViewModel.track!)
                         },
                         .destructive(Text("Discard Track")){
                             locationViewModel.discardTrack()
@@ -109,6 +111,6 @@ struct RecordingView: View {
 
 struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordingView()
+        RecordingView(trackRepository: TrackRespository())
     }
 }
