@@ -21,10 +21,7 @@ struct MainScreen: View {
                 }.padding(.horizontal)
                 List {
                     ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
-                        let mapVM = MapViewModel(trackVM: trackVM)
-                        NavigationLink(destination: PlaybackView(trackVM: trackVM, mapVM: mapVM)){
-                            TrackView(trackVM: trackVM, mapVM: mapVM)
-                        }
+                        TrackListItem(trackVM: trackVM, mapVM: MapViewModel(trackpoints: trackVM.trackpoints) )
                     }.onDelete { offset in
                         offset.forEach { index in
                             let trackVM = trackRepository.trackVMs[index]
@@ -38,7 +35,7 @@ struct MainScreen: View {
                 }){
                     Image(systemName: "play.circle").font(.system(size: 100))
                 }
-                NavigationLink(destination: RecordingView(trackRepository: trackRepository), isActive: $locationViewModel.isRecording) { EmptyView()}
+                NavigationLink(destination: RecordingView(), isActive: $locationViewModel.isRecording) { EmptyView()}
             }.navigationTitle("SailVMG")
         }
             

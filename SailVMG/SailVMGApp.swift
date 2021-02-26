@@ -10,18 +10,17 @@ import Firebase
 
 @main
 struct SailVMGApp: App {
-    @StateObject var recordingViewModel = RecordingViewModel()
     @StateObject var locationViewModel = LocationViewModel()
     
     init(){
         FirebaseApp.configure()
         Auth.auth().signInAnonymously()
+        
     }
     
     var body: some Scene {
         WindowGroup {
             MainScreen()
-                .environmentObject(recordingViewModel)
                 .environmentObject(locationViewModel)
         }
     }

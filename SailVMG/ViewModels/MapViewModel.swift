@@ -7,31 +7,32 @@
 
 import Foundation
 import MapKit
-import SwiftUI
+import UIKit
+import FirebaseStorage
 
 class MapViewModel: ObservableObject {
-    var trackVM: TrackViewModel
     @Published var preview: UIImage? = nil
     @Published var route: MKPolyline? = nil
-    let trackpointRepository = TrackpointRespository()
-    var coordinates = [CLLocationCoordinate2D]()
+    let coordinates: [CLLocationCoordinate2D]
     @Published var loading = true
+    let storage = Storage.storage()
+    let storageRef: StorageReference
     
-    init(trackVM: TrackViewModel) {
-        self.trackVM = trackVM
-        self.addTrack()
-        
+    
+    init(trackpoints: [Trackpoint]) {
+        self.storageRef = storage.reference()
+        self.coordinates = trackpoints.compactMap { trackpoint in
+            return CLLocationCoordinate2D(latitude: Double(trackpoint.latitude), longitude: Double(trackpoint.longitude))
+        }
+        addTrack()
     }
     
     func addTrack() {
-        trackpointRepository.getCoordinates(trackVM.track) { coordinates in
-            self.coordinates = coordinates
-            let track_line = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            self.route = track_line
-            self.makePreview()
-            self.loading = false
-            
-        }
+        let track_line = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        self.route = track_line
+        self.makePreview()
+        self.loading = false
+        
     }
     
     func makePreview() {
@@ -55,7 +56,7 @@ class MapViewModel: ObservableObject {
         if !view.overlays.isEmpty {
             view.removeOverlays(view.overlays)
         }
-
+        
         guard let route = route else { return }
         let mapRect = route.boundingMapRect
         view.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: false)
@@ -67,12 +68,12 @@ class MapViewModel: ObservableObject {
         let image = snapshot.image
         UIGraphicsBeginImageContextWithOptions((image.size), true, (image.scale))
         image.draw(at: CGPoint(x: 0, y: 0))
-
+        
         let context = UIGraphicsGetCurrentContext()
         context!.setStrokeColor(UIColor.blue.cgColor)
         context!.setLineWidth(3.0)
         context!.beginPath()
-
+        
         for (index, coordinate) in self.coordinates.enumerated() {
             let point = snapshot.point(for: coordinate)
             if index == 0 {
@@ -85,6 +86,43 @@ class MapViewModel: ObservableObject {
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         self.preview = finalImage
+        guard let preview = self.preview else {
+            return
+        }
+//        uploadPreview(preview: preview)
     }
-   
+    
+//    func uploadPreview(preview: UIImage) {
+//        guard let track_id = trackVM.track.id else {
+//            print("uploadPreview, no track id")
+//            return
+//        }
+//        let previewRef = storageRef.child("images/previews/\(track_id)")
+//        guard let image_data = preview.pngData() else {
+//            print("Can't convert preview to png")
+//            return
+//        }
+//        previewRef.putData(image_data, metadata: nil) { (metadata, error) in
+//            guard let metadata = metadata else {
+//                // Uh-oh, an error occurred!
+//                print("upload preview error")
+//                print(error as Any)
+//                return
+//            }
+//            previewRef.downloadURL { (url, error) in
+//                guard let downloadURL = url else {
+//                    print("No preview download URL")
+//                    return
+//                }
+//                trackVM.setTrackURL(url)
+//                let urlImageViewModel = URLImageViewModel(callback: self.onPreviewLoad)
+//            }
+//        }
+//
+//    }
+    
+    func onPreviewLoad(preview: UIImage?) {
+        self.preview = preview
+    }
+    
 }

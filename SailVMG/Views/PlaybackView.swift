@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreGPX
-import SwiftUICharts
+
 
 
 class Coordinator: NSObject, MKMapViewDelegate {
@@ -20,25 +20,21 @@ class Coordinator: NSObject, MKMapViewDelegate {
 }
 
 struct PlaybackView: View {
-    
-    let trackVM: TrackViewModel
-    @ObservedObject var mapVM: MapViewModel
-    
-    
+    @EnvironmentObject var mapVM: MapViewModel
+
     var body: some View {
         VStack {
             ZStack {
-                MapView(mapVM: mapVM, mapViewDelegate: MapViewDelegate(trackVM)).onAppear() {
+                MapView().onAppear() {
                     mapVM.addTrack()
                 }
                 HStack {
                     Spacer()
-                    ColorScale(trackVM: trackVM)
+                    ColorScale()
                 }
             }
+            VMGChartView()
             
-            LineView(data: trackVM.getVMGs(), title: "VMG kts")
-                .padding(.horizontal)
         }.navigationBarTitle("", displayMode: .inline)
             
     }
@@ -71,7 +67,6 @@ func getCoordinates()->[CLLocationCoordinate2D] {
 struct ContentView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let trackVM = TrackViewModel(Track(id: nil, start_time: Date(), end_time: nil))
-        return PlaybackView(trackVM: trackVM, mapVM: MapViewModel(trackVM: trackVM))
+        return PlaybackView()
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @ObservedObject var trackRepository: TrackRespository
+    @EnvironmentObject var trackRepository: TrackRespository
     @StateObject var recordingViewModel = RecordingViewModel()
     @State private var audioFeedback = UserDefaults.standard.bool(forKey: "audioFeedback")
     var body: some View {
@@ -111,6 +111,6 @@ struct RecordingView: View {
 
 struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordingView(trackRepository: TrackRespository())
+        RecordingView()
     }
 }

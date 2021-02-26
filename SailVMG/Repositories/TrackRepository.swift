@@ -15,6 +15,7 @@ import FirebaseFirestoreSwift
 class TrackRespository: ObservableObject {
     let db = Firestore.firestore()
     @Published var trackVMs = [TrackViewModel]()
+    
     init() {
         getTrackVMs()
     }
@@ -64,7 +65,8 @@ class TrackRespository: ObservableObject {
         setEndTime(track: track) { end_time in
             if end_time != nil {
                 trackCopy.end_time = end_time
-                self.trackVMs.insert(TrackViewModel(trackCopy), at: 0)
+                var newTrackVM = TrackViewModel(trackCopy)
+                self.trackVMs.insert(newTrackVM, at: 0)
             }
         }  
     }

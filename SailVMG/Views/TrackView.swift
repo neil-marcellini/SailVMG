@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct TrackView: View {
-    @ObservedObject var trackVM: TrackViewModel
-    @ObservedObject var mapVM: MapViewModel
-    
+    @EnvironmentObject var trackVM: TrackViewModel
+    @EnvironmentObject var mapVM: MapViewModel
     var body: some View {
-        if trackVM.loading || mapVM.loading {
+        if mapVM.loading {
             ProgressView()
         } else {
             VStack(alignment: .leading) {
-                MapPreview(previewVM: mapVM)
+                MapPreview()
+//                URLImageView(image: mapVM.preview)
                 HStack {
                     Text(trackVM.getDate())
                     Text(trackVM.location)
@@ -36,7 +36,6 @@ struct TrackView: View {
 
 struct TrackView_Previews: PreviewProvider {
     static var previews: some View {
-        let trackVM = TrackViewModel(Track(id: nil, start_time: Date(), end_time: nil))
-        TrackView(trackVM: trackVM, mapVM: MapViewModel(trackVM: trackVM))
+        TrackView()
     }
 }

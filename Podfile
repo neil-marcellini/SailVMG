@@ -10,6 +10,7 @@ target 'SailVMG' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
   pod 'FirebaseFirestoreSwift'
   pod 'CoreGPX'
   # add pods for any other desired Firebase products

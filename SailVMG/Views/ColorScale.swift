@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ColorScale: View {
-    let trackVM: TrackViewModel
+    @EnvironmentObject var trackVM: TrackViewModel
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
@@ -36,6 +36,6 @@ struct ColorScale: View {
 
 struct ColorScale_Previews: PreviewProvider {
     static var previews: some View {
-        ColorScale(trackVM: TrackViewModel(Track(id: nil, start_time: Date(), end_time: nil)))
+        ColorScale()
     }
 }

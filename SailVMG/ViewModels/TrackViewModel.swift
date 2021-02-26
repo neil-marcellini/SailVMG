@@ -11,7 +11,7 @@ import UIKit
 import SwiftUI
 
 class TrackViewModel: ObservableObject {
-    let track: Track
+    var track: Track
     @Published var trackpoints = [Trackpoint]()
     @Published var loading = true
     @Published var location = ""
