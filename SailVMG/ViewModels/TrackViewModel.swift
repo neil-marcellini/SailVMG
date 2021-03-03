@@ -21,17 +21,14 @@ class TrackViewModel: ObservableObject {
     let maxHueDegree: Double
     let maxHue: Double
     
-    init (_ track: Track) {
+    init (track: Track, trackpoints: [Trackpoint]) {
         self.track = track
+        self.trackpoints = trackpoints
         maxHueDegree = 238.0
         maxHue = maxHueDegree / 360.0
-        let trackpointRespository = TrackpointRespository()
-        trackpointRespository.getTrackpoints(track) { trackpoints in
-            self.trackpoints = trackpoints
-            self.getLocation(completionHandler: self.formatLocation)
-            self.getMaxVMG()
-            self.loading = false
-        }
+        self.getLocation(completionHandler: self.formatLocation)
+        self.getMaxVMG()
+        self.loading = false
     }
     
     func getLocation(completionHandler: @escaping (CLPlacemark?) -> Void ) {

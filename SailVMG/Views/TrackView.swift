@@ -11,7 +11,7 @@ struct TrackView: View {
     @EnvironmentObject var trackVM: TrackViewModel
     @EnvironmentObject var mapVM: MapViewModel
     var body: some View {
-        if mapVM.loading {
+        if trackVM.loading || mapVM.loading {
             ProgressView()
         } else {
             VStack(alignment: .leading) {

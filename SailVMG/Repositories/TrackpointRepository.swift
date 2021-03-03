@@ -22,7 +22,7 @@ class TrackpointRespository: ObservableObject {
         
     }
 
-    func getTrackpoints(_ track: Track, completion: @escaping ([Trackpoint]) -> Void) {
+    func getTrackpoints(_ track: Track, completion: @escaping (Track, [Trackpoint]) -> Void) {
         var trackpoints = [Trackpoint]()
         guard let track_id: String = track.id else {
             print("error with getTrackpoints")
@@ -43,7 +43,7 @@ class TrackpointRespository: ObservableObject {
                         return nil
                     }
                 }
-                completion(trackpoints)
+                completion(track, trackpoints)
             }
     }
     

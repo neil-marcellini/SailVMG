@@ -15,6 +15,7 @@ import FirebaseFirestoreSwift
 class TrackRespository: ObservableObject {
     let db = Firestore.firestore()
     @Published var trackVMs = [TrackViewModel]()
+    let trackpointRepository = TrackpointRespository()
     
     init() {
         getTrackVMs()
@@ -26,19 +27,29 @@ class TrackRespository: ObservableObject {
             .whereField("userId", isEqualTo: userId)
             .order(by: "start_time", descending: true)
             .getDocuments() { (querySnapshot, err) in
-            if let querySnapshot = querySnapshot {
-                self.trackVMs = querySnapshot.documents.compactMap { document in
-                    do {
-                        guard let track = try document.data(as: Track.self) else {return nil}
-                        let trackVM = TrackViewModel(track)
-                        return trackVM
-                    } catch {
-                        print(error)
+                do {
+                    if let querySnapshot = querySnapshot {
+                        for document in querySnapshot.documents {
+                            guard let track = try document.data(as: Track.self) else {continue}
+                            self.trackpointRepository.getTrackpoints(track, completion: self.afterTrackpoints)
+                        }
                     }
-                    return nil
                 }
-            }
+                catch {
+                    print(err as Any)
+                }
+            
         }
+    }
+    
+    func afterTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
+        let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
+        trackVMs.append(trackVM)
+    }
+    
+    func afterNewTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
+        let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
+        trackVMs.insert(trackVM, at: 0)
     }
     
     func setEndTime(track: Track, completion: @escaping ((Date?) -> Void)) {
@@ -65,8 +76,7 @@ class TrackRespository: ObservableObject {
         setEndTime(track: track) { end_time in
             if end_time != nil {
                 trackCopy.end_time = end_time
-                var newTrackVM = TrackViewModel(trackCopy)
-                self.trackVMs.insert(newTrackVM, at: 0)
+                self.trackpointRepository.getTrackpoints(track, completion: self.afterNewTrackpoints)
             }
         }  
     }
