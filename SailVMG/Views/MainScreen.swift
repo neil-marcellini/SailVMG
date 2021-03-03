@@ -35,7 +35,9 @@ struct MainScreen: View {
                 }){
                     Image(systemName: "play.circle").font(.system(size: 100))
                 }
-                NavigationLink(destination: RecordingView(), isActive: $locationViewModel.isRecording) { EmptyView()}
+                NavigationLink(destination: RecordingView()
+                                .environmentObject(locationViewModel)
+                                .environmentObject(trackRepository), isActive: $locationViewModel.isRecording) { EmptyView()}
             }.navigationTitle("SailVMG")
         }
             
