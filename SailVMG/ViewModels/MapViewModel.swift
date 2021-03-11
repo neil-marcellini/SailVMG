@@ -86,43 +86,6 @@ class MapViewModel: ObservableObject {
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         self.preview = finalImage
-        guard let preview = self.preview else {
-            return
-        }
-//        uploadPreview(preview: preview)
-    }
-    
-//    func uploadPreview(preview: UIImage) {
-//        guard let track_id = trackVM.track.id else {
-//            print("uploadPreview, no track id")
-//            return
-//        }
-//        let previewRef = storageRef.child("images/previews/\(track_id)")
-//        guard let image_data = preview.pngData() else {
-//            print("Can't convert preview to png")
-//            return
-//        }
-//        previewRef.putData(image_data, metadata: nil) { (metadata, error) in
-//            guard let metadata = metadata else {
-//                // Uh-oh, an error occurred!
-//                print("upload preview error")
-//                print(error as Any)
-//                return
-//            }
-//            previewRef.downloadURL { (url, error) in
-//                guard let downloadURL = url else {
-//                    print("No preview download URL")
-//                    return
-//                }
-//                trackVM.setTrackURL(url)
-//                let urlImageViewModel = URLImageViewModel(callback: self.onPreviewLoad)
-//            }
-//        }
-//
-//    }
-    
-    func onPreviewLoad(preview: UIImage?) {
-        self.preview = preview
     }
     
 }

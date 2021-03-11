@@ -12,6 +12,9 @@ struct MapPreview: View {
     var body: some View {
         if let preview = mapVM.preview {
             Image(uiImage: preview)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 300)
         }
     }
 }

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1D1024F9D0F5EABB6C4A78B5 /* Pods_SailVMG_SailVMGUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EB19DD7CF695CA7D213DE1 /* Pods_SailVMG_SailVMGUITests.framework */; };
-		3101488425E758FF0082EADB /* URLImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101488325E758FF0082EADB /* URLImageViewModel.swift */; };
-		3101488925E759B50082EADB /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101488825E759B50082EADB /* URLImageView.swift */; };
 		3111AED32568D49E00DAEF90 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED22568D49E00DAEF90 /* Track.swift */; };
 		3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED72568D5D400DAEF90 /* Trackpoint.swift */; };
 		3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */; };
@@ -23,6 +21,8 @@
 		3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A05E2571D42500E885BC /* PlaybackView.swift */; };
 		3155A0822571D68D00E885BC /* Crissy-8-13.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3155A0812571D68D00E885BC /* Crissy-8-13.gpx */; };
 		316A146325E57D9C00EA184A /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A146225E57D9C00EA184A /* TrackManager.swift */; };
+		31773CC625FAA5D900BCEFBD /* TrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31773CC525FAA5D900BCEFBD /* TrackList.swift */; };
+		31773CCB25FAA6CA00BCEFBD /* NoTracksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */; };
 		318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */; };
 		318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEE255F400600EFF7E2 /* MainScreen.swift */; };
 		318ABBF1255F400800EFF7E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF0255F400800EFF7E2 /* Assets.xcassets */; };
@@ -64,8 +64,6 @@
 		1877C52E68D748608492B5D6 /* Pods-SailVMG-SailVMGUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMG-SailVMGUITests.release.xcconfig"; path = "Target Support Files/Pods-SailVMG-SailVMGUITests/Pods-SailVMG-SailVMGUITests.release.xcconfig"; sourceTree = "<group>"; };
 		196256F91682DAEBB042DE2B /* Pods-SailVMGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SailVMGTests.release.xcconfig"; path = "Target Support Files/Pods-SailVMGTests/Pods-SailVMGTests.release.xcconfig"; sourceTree = "<group>"; };
 		24715C83D67C6CEB8057E414 /* Pods_SailVMG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3101488325E758FF0082EADB /* URLImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageViewModel.swift; sourceTree = "<group>"; };
-		3101488825E759B50082EADB /* URLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
 		3111AED22568D49E00DAEF90 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		3111AED72568D5D400DAEF90 /* Trackpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackpoint.swift; sourceTree = "<group>"; };
 		3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -79,6 +77,9 @@
 		3155A05E2571D42500E885BC /* PlaybackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackView.swift; sourceTree = "<group>"; };
 		3155A0812571D68D00E885BC /* Crissy-8-13.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Crissy-8-13.gpx"; sourceTree = "<group>"; };
 		316A146225E57D9C00EA184A /* TrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManager.swift; sourceTree = "<group>"; };
+		31773CC125FA975500BCEFBD /* CrissySimulated.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CrissySimulated.gpx; sourceTree = "<group>"; };
+		31773CC525FAA5D900BCEFBD /* TrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackList.swift; sourceTree = "<group>"; };
+		31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTracksView.swift; sourceTree = "<group>"; };
 		318ABBE9255F400600EFF7E2 /* SailVMG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SailVMG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGApp.swift; sourceTree = "<group>"; };
 		318ABBEE255F400600EFF7E2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
@@ -204,6 +205,7 @@
 				318ABBFA255F400800EFF7E2 /* Info.plist */,
 				3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */,
 				3155A0812571D68D00E885BC /* Crissy-8-13.gpx */,
+				31773CC125FA975500BCEFBD /* CrissySimulated.gpx */,
 				3140457F25DE0A1A00C6BF74 /* 432hz.mp3 */,
 				318ABBF2255F400800EFF7E2 /* Preview Content */,
 			);
@@ -244,7 +246,6 @@
 				31F9056525D37419007ACC91 /* MapViewModel.swift */,
 				312307FD25777AA800343C86 /* RecordingViewModel.swift */,
 				3155A04F2571CF6600E885BC /* TrackViewModel.swift */,
-				3101488325E758FF0082EADB /* URLImageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -254,13 +255,14 @@
 			children = (
 				31F9055725D3241C007ACC91 /* ColorScale.swift */,
 				318ABBEE255F400600EFF7E2 /* MainScreen.swift */,
+				31773CC525FAA5D900BCEFBD /* TrackList.swift */,
+				31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */,
 				31D35FE225E86E2900A96EE0 /* MapPreview.swift */,
 				3155A0592571D3F400E885BC /* MapView.swift */,
 				3155A05E2571D42500E885BC /* PlaybackView.swift */,
 				31C7475C2568ABC400A454B7 /* RecordingView.swift */,
 				31D35FC725E8554300A96EE0 /* TrackListItem.swift */,
 				3155A0542571D0A500E885BC /* TrackView.swift */,
-				3101488825E759B50082EADB /* URLImageView.swift */,
 				31D35FD225E8593100A96EE0 /* VMGChartView.swift */,
 			);
 			path = Views;
@@ -529,16 +531,16 @@
 				3155A0552571D0A500E885BC /* TrackView.swift in Sources */,
 				318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */,
 				31D35FE325E86E2900A96EE0 /* MapPreview.swift in Sources */,
+				31773CCB25FAA6CA00BCEFBD /* NoTracksView.swift in Sources */,
+				31773CC625FAA5D900BCEFBD /* TrackList.swift in Sources */,
 				31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */,
 				31ACC9D5256DD88B009BC3AD /* TrackpointRepository.swift in Sources */,
 				31F9055825D3241C007ACC91 /* ColorScale.swift in Sources */,
-				3101488425E758FF0082EADB /* URLImageViewModel.swift in Sources */,
 				31CA9E2825D08C5400DE5A26 /* MapViewDelegate.swift in Sources */,
 				31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */,
 				3140457B25DE09FF00C6BF74 /* SoundControl.swift in Sources */,
 				318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */,
 				3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */,
-				3101488925E759B50082EADB /* URLImageView.swift in Sources */,
 				3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */,
 				3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */,
 				316A146325E57D9C00EA184A /* TrackManager.swift in Sources */,

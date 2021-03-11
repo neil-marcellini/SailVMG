@@ -16,6 +16,8 @@ class TrackRespository: ObservableObject {
     let db = Firestore.firestore()
     @Published var trackVMs = [TrackViewModel]()
     let trackpointRepository = TrackpointRespository()
+    @Published var trackCount = 0
+    @Published var loading = true
     
     init() {
         getTrackVMs()
@@ -29,8 +31,12 @@ class TrackRespository: ObservableObject {
             .getDocuments() { (querySnapshot, err) in
                 do {
                     if let querySnapshot = querySnapshot {
+                        if querySnapshot.documents.isEmpty {
+                            self.loading = false
+                        }
                         for document in querySnapshot.documents {
                             guard let track = try document.data(as: Track.self) else {continue}
+                            self.trackCount += 1
                             self.trackpointRepository.getTrackpoints(track, completion: self.afterTrackpoints)
                         }
                     }
@@ -42,14 +48,30 @@ class TrackRespository: ObservableObject {
         }
     }
     
+    func hasNoTracks()->Bool {
+        if trackCount == 0 && !loading {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func afterTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
         let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
         trackVMs.append(trackVM)
+        setLoading()
+    }
+    
+    func setLoading() {
+        if trackVMs.count == trackCount {
+            loading = false
+        }
     }
     
     func afterNewTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
         let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
         trackVMs.insert(trackVM, at: 0)
+        setLoading()
     }
     
     func setEndTime(track: Track, completion: @escaping ((Date?) -> Void)) {
@@ -72,6 +94,8 @@ class TrackRespository: ObservableObject {
     }
     
     func addTrackVM(track: Track) {
+        loading = true
+        trackCount += 1
         var trackCopy = track
         setEndTime(track: track) { end_time in
             if end_time != nil {
@@ -79,6 +103,11 @@ class TrackRespository: ObservableObject {
                 self.trackpointRepository.getTrackpoints(track, completion: self.afterNewTrackpoints)
             }
         }  
+    }
+    
+    func removeTrackVM(index: Int) {
+        trackVMs.remove(at: index)
+        trackCount -= 1
     }
 
 }

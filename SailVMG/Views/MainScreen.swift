@@ -19,17 +19,12 @@ struct MainScreen: View {
                         .font(.headline)
                     Spacer()
                 }.padding(.horizontal)
-                List {
-                    ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
-                        TrackListItem(trackVM: trackVM, mapVM: MapViewModel(trackpoints: trackVM.trackpoints) )
-                    }.onDelete { offset in
-                        offset.forEach { index in
-                            let trackVM = trackRepository.trackVMs[index]
-                            locationViewModel.trackManager.discardTrack(trackVM.track)
-                            trackRepository.trackVMs.remove(at: index)
-                        }
-                    }
-                }.listStyle(PlainListStyle())
+                if trackRepository.hasNoTracks() {
+                    NoTracksView()
+                    Spacer()
+                } else {
+                    TrackList().environmentObject(trackRepository)
+                }
                 Button(action: {
                     locationViewModel.startRecording()
                 }){
@@ -40,9 +35,8 @@ struct MainScreen: View {
                                 .environmentObject(trackRepository), isActive: $locationViewModel.isRecording) { EmptyView()}
             }.navigationTitle("SailVMG")
         }
-            
-        }
     }
+}
 
 
 struct MainScreen_Previews: PreviewProvider {

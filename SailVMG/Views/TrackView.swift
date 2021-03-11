@@ -16,7 +16,6 @@ struct TrackView: View {
         } else {
             VStack(alignment: .leading) {
                 MapPreview()
-//                URLImageView(image: mapVM.preview)
                 HStack {
                     Text(trackVM.getDate())
                     Text(trackVM.location)
