@@ -116,10 +116,10 @@ class LocationViewModel: NSObject, ObservableObject {
         let updated_trackpoint = Trackpoint(id: trackpoint.id, track_id: track.id!, time: trackpoint.time, latitude: trackpoint.latitude, longitude: trackpoint.longitude, speed: trackpoint.speed, course: trackpoint.course, vmg: vmg, twd: twd)
         speed = trackpoint.speed
         course = trackpoint.course
+        print(updated_trackpoint)
         trackpointRepository.addTrackPoint(to: track, trackpoint: updated_trackpoint)
     }
-    
-    
+   
     
 }
 extension LocationViewModel: CLLocationManagerDelegate {
