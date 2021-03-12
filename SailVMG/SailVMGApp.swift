@@ -15,6 +15,9 @@ struct SailVMGApp: App {
     init(){
         FirebaseApp.configure()
         Auth.auth().signInAnonymously()
+        // for launch screen debugging
+        try! FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
+        sleep(2)
         
     }
     

@@ -36,6 +36,7 @@
 		31D35FC825E8554300A96EE0 /* TrackListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D35FC725E8554300A96EE0 /* TrackListItem.swift */; };
 		31D35FD325E8593100A96EE0 /* VMGChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D35FD225E8593100A96EE0 /* VMGChartView.swift */; };
 		31D35FE325E86E2900A96EE0 /* MapPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D35FE225E86E2900A96EE0 /* MapPreview.swift */; };
+		31D4436C25FC03E900843318 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D4436B25FC03E900843318 /* Launch Screen.storyboard */; };
 		31F9055825D3241C007ACC91 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9055725D3241C007ACC91 /* ColorScale.swift */; };
 		31F9056125D3669F007ACC91 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 31F9056025D3669F007ACC91 /* SwiftUICharts */; };
 		31F9056625D37419007ACC91 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9056525D37419007ACC91 /* MapViewModel.swift */; };
@@ -99,6 +100,7 @@
 		31D35FC725E8554300A96EE0 /* TrackListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListItem.swift; sourceTree = "<group>"; };
 		31D35FD225E8593100A96EE0 /* VMGChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMGChartView.swift; sourceTree = "<group>"; };
 		31D35FE225E86E2900A96EE0 /* MapPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreview.swift; sourceTree = "<group>"; };
+		31D4436B25FC03E900843318 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		31F9055725D3241C007ACC91 /* ColorScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScale.swift; sourceTree = "<group>"; };
 		31F9056525D37419007ACC91 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		3E658FE9ACB897DF5AD438B1 /* Pods_SailVMGTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SailVMGTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +205,7 @@
 				31C7474F2568A84300A454B7 /* ViewModels */,
 				318ABBF0255F400800EFF7E2 /* Assets.xcassets */,
 				318ABBFA255F400800EFF7E2 /* Info.plist */,
+				31D4436B25FC03E900843318 /* Launch Screen.storyboard */,
 				3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */,
 				3155A0812571D68D00E885BC /* Crissy-8-13.gpx */,
 				31773CC125FA975500BCEFBD /* CrissySimulated.gpx */,
@@ -392,6 +395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31D4436C25FC03E900843318 /* Launch Screen.storyboard in Resources */,
 				318ABBF4255F400800EFF7E2 /* Preview Assets.xcassets in Resources */,
 				3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */,
 				318ABBF1255F400800EFF7E2 /* Assets.xcassets in Resources */,
