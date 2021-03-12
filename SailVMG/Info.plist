@@ -36,7 +36,14 @@
 		<string>location</string>
 	</array>
 	<key>UILaunchScreen</key>
-	<dict/>
+	<dict>
+		<key>UIColorName</key>
+		<string>launchBackground</string>
+		<key>UIImageName</key>
+		<string>logo</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<true/>
+	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
