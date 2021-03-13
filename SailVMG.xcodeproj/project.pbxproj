@@ -29,6 +29,7 @@
 		318ABBF4255F400800EFF7E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF3255F400800EFF7E2 /* Preview Assets.xcassets */; };
 		318ABC04255F400900EFF7E2 /* SailVMGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC03255F400900EFF7E2 /* SailVMGTests.swift */; };
 		318ABC0F255F400900EFF7E2 /* SailVMGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */; };
+		318D97DA25FC789B0016E302 /* TWDControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318D97D925FC789B0016E302 /* TWDControl.swift */; };
 		31ACC9D5256DD88B009BC3AD /* TrackpointRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ACC9D4256DD88B009BC3AD /* TrackpointRepository.swift */; };
 		31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C747502568A85700A454B7 /* LocationViewModel.swift */; };
 		31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C7475C2568ABC400A454B7 /* RecordingView.swift */; };
@@ -93,6 +94,7 @@
 		318ABC0A255F400900EFF7E2 /* SailVMGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SailVMGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGUITests.swift; sourceTree = "<group>"; };
 		318ABC10255F400900EFF7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		318D97D925FC789B0016E302 /* TWDControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWDControl.swift; sourceTree = "<group>"; };
 		31ACC9D4256DD88B009BC3AD /* TrackpointRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackpointRepository.swift; sourceTree = "<group>"; };
 		31C747502568A85700A454B7 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		31C7475C2568ABC400A454B7 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				3155A0592571D3F400E885BC /* MapView.swift */,
 				3155A05E2571D42500E885BC /* PlaybackView.swift */,
 				31C7475C2568ABC400A454B7 /* RecordingView.swift */,
+				318D97D925FC789B0016E302 /* TWDControl.swift */,
 				31D35FC725E8554300A96EE0 /* TrackListItem.swift */,
 				3155A0542571D0A500E885BC /* TrackView.swift */,
 				31D35FD225E8593100A96EE0 /* VMGChartView.swift */,
@@ -547,6 +550,7 @@
 				3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */,
 				3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */,
 				3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */,
+				318D97DA25FC789B0016E302 /* TWDControl.swift in Sources */,
 				316A146325E57D9C00EA184A /* TrackManager.swift in Sources */,
 				31D35FD325E8593100A96EE0 /* VMGChartView.swift in Sources */,
 				3111AED32568D49E00DAEF90 /* Track.swift in Sources */,

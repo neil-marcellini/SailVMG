@@ -17,7 +17,7 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var vmg: Double = 0
     @Published var twa: Int = 0
     @Published var twd: Double = 180
- 
+    
     @Published var isRecording = false
     @Published var isPaused = false
     let trackManager = TrackManager()
@@ -25,6 +25,16 @@ class LocationViewModel: NSObject, ObservableObject {
     var track: Track? = nil
     
     let locationManager = CLLocationManager()
+    let soundControl = SoundControl()
+    @Published var audioFeedback = UserDefaults.standard.bool(forKey: "audioFeedback") {
+        didSet {
+            if audioFeedback {
+                self.startRecording()
+            } else {
+                self.soundControl.stop()
+            }
+        }
+    }
     
     override init() {
         super.init()
@@ -38,10 +48,24 @@ class LocationViewModel: NSObject, ObservableObject {
     func pause() {
         isPaused = true
         self.locationManager.stopUpdatingLocation()
+        if audioFeedback {
+            soundControl.stop()
+        }
     }
     func resume() {
         isPaused = false
         self.locationManager.startUpdatingLocation()
+        if audioFeedback {
+            startSound()
+        }
+    }
+    
+    func startSound() {
+        do {
+            try self.soundControl.play()
+        } catch {
+            print("play error")
+        }
     }
     
     func setTrack(_ new_track: Track) {
@@ -119,7 +143,7 @@ class LocationViewModel: NSObject, ObservableObject {
         print(updated_trackpoint)
         trackpointRepository.addTrackPoint(to: track, trackpoint: updated_trackpoint)
     }
-   
+    
     
 }
 extension LocationViewModel: CLLocationManagerDelegate {
