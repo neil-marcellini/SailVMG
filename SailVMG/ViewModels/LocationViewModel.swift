@@ -132,6 +132,9 @@ class LocationViewModel: NSObject, ObservableObject {
         // Return the component of speed towards true wind angle.
         twa = calculateTwa(twd: twd, course: course)
         let vmg = speed * cos(Double(twa) * .pi / 180)
+        if audioFeedback {
+            self.soundControl.adjustPitch(measurement: vmg)
+        }
         return vmg
     }
     
@@ -142,8 +145,7 @@ class LocationViewModel: NSObject, ObservableObject {
         course = trackpoint.course
         print(updated_trackpoint)
         trackpointRepository.addTrackPoint(to: track, trackpoint: updated_trackpoint)
-    }
-    
+    }    
     
 }
 extension LocationViewModel: CLLocationManagerDelegate {
