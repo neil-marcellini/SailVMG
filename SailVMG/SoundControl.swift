@@ -14,9 +14,12 @@ class SoundControl {
     let speedControl = AVAudioUnitVarispeed()
     let pitchControl = AVAudioUnitTimePitch()
     var audioPlayer: AVAudioPlayer?
+    let sound_file = "bing1s.mp3"
+    
     func play() throws {
-
-        let path = Bundle.main.path(forResource: "432hz.mp3", ofType:nil)!
+        self.configureAudioSession()
+        self.setAudioSession(active: true)
+        let path = Bundle.main.path(forResource: sound_file, ofType:nil)!
         let url = URL(fileURLWithPath: path)
         // 1: load the file
         let file = try AVAudioFile(forReading: url)
@@ -34,9 +37,9 @@ class SoundControl {
         engine.attach(speedControl)
 
         // 4: arrange the parts so that output from one is input to another
-        engine.connect(audioPlayer, to: speedControl, format: nil)
-        engine.connect(speedControl, to: pitchControl, format: nil)
-        engine.connect(pitchControl, to: engine.mainMixerNode, format: nil)
+        engine.connect(audioPlayer, to: speedControl, format: audioFormat)
+        engine.connect(speedControl, to: pitchControl, format: audioFormat)
+        engine.connect(pitchControl, to: engine.mainMixerNode, format: audioFormat)
 
         // 5: prepare the player to play its file from the beginning
 //        audioPlayer.scheduleFile(file, at: nil)
@@ -49,6 +52,7 @@ class SoundControl {
     
     func stop() {
         engine.stop()
+        self.setAudioSession(active: false)
     }
     
     func newPlay() {
@@ -69,4 +73,27 @@ class SoundControl {
     func adjustPitch(measurement: Double){
         self.pitchControl.pitch = Float(measurement) * 50
     }
+    
+    func configureAudioSession() {
+        // Access the shared, singleton audio session instance
+        let session = AVAudioSession.sharedInstance()
+        do {
+            // Configure the audio session for movie playback
+            try session.setCategory(AVAudioSession.Category.playback,
+                                    mode: AVAudioSession.Mode.default,
+                                    options: [])
+        } catch let error as NSError {
+            print("Failed to set the audio session category and mode: \(error.localizedDescription)")
+        }
+    }
+    func setAudioSession(active: Bool) {
+        // Access the shared, singleton audio session instance
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setActive(active)
+        } catch let error as NSError {
+            print("Unable to activate audio session: \(error.localizedDescription)")
+        }
+    }
+    
 }

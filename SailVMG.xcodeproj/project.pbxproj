@@ -30,6 +30,7 @@
 		318ABC04255F400900EFF7E2 /* SailVMGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC03255F400900EFF7E2 /* SailVMGTests.swift */; };
 		318ABC0F255F400900EFF7E2 /* SailVMGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */; };
 		318D97DA25FC789B0016E302 /* TWDControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318D97D925FC789B0016E302 /* TWDControl.swift */; };
+		31A6D842260ACDD8003E28F9 /* bing1s.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 31A6D841260ACDD8003E28F9 /* bing1s.mp3 */; };
 		31ACC9D5256DD88B009BC3AD /* TrackpointRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ACC9D4256DD88B009BC3AD /* TrackpointRepository.swift */; };
 		31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C747502568A85700A454B7 /* LocationViewModel.swift */; };
 		31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C7475C2568ABC400A454B7 /* RecordingView.swift */; };
@@ -95,6 +96,7 @@
 		318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGUITests.swift; sourceTree = "<group>"; };
 		318ABC10255F400900EFF7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		318D97D925FC789B0016E302 /* TWDControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWDControl.swift; sourceTree = "<group>"; };
+		31A6D841260ACDD8003E28F9 /* bing1s.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bing1s.mp3; sourceTree = "<group>"; };
 		31ACC9D4256DD88B009BC3AD /* TrackpointRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackpointRepository.swift; sourceTree = "<group>"; };
 		31C747502568A85700A454B7 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		31C7475C2568ABC400A454B7 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				3155A0812571D68D00E885BC /* Crissy-8-13.gpx */,
 				31773CC125FA975500BCEFBD /* CrissySimulated.gpx */,
 				3140457F25DE0A1A00C6BF74 /* 432hz.mp3 */,
+				31A6D841260ACDD8003E28F9 /* bing1s.mp3 */,
 				318ABBF2255F400800EFF7E2 /* Preview Content */,
 			);
 			path = SailVMG;
@@ -402,6 +405,7 @@
 				318ABBF4255F400800EFF7E2 /* Preview Assets.xcassets in Resources */,
 				3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */,
 				318ABBF1255F400800EFF7E2 /* Assets.xcassets in Resources */,
+				31A6D842260ACDD8003E28F9 /* bing1s.mp3 in Resources */,
 				3140458025DE0A1A00C6BF74 /* 432hz.mp3 in Resources */,
 				3155A0822571D68D00E885BC /* Crissy-8-13.gpx in Resources */,
 			);
