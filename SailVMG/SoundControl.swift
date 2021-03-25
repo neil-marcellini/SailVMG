@@ -11,8 +11,7 @@ import AVKit
 import SwiftUI
 class SoundControl {
     let engine = AVAudioEngine()
-    let speedControl = AVAudioUnitVarispeed()
-    let pitchControl = AVAudioUnitTimePitch()
+    let audioControl = AVAudioUnitTimePitch()
     var audioPlayer: AVAudioPlayer?
     let sound_file = "bing1s.mp3"
     
@@ -33,13 +32,11 @@ class SoundControl {
 
         // 3: connect the components to our playback engine
         engine.attach(audioPlayer)
-        engine.attach(pitchControl)
-        engine.attach(speedControl)
+        engine.attach(audioControl)
 
         // 4: arrange the parts so that output from one is input to another
-        engine.connect(audioPlayer, to: pitchControl, format: audioFormat)
-//        engine.connect(speedControl, to: pitchControl, format: audioFormat)
-        engine.connect(pitchControl, to: engine.mainMixerNode, format: audioFormat)
+        engine.connect(audioPlayer, to: audioControl, format: audioFormat)
+        engine.connect(audioControl, to: engine.mainMixerNode, format: audioFormat)
 
         // 5: prepare the player to play its file from the beginning
 //        audioPlayer.scheduleFile(file, at: nil)
@@ -55,34 +52,20 @@ class SoundControl {
         self.setAudioSession(active: false)
     }
     
-    func newPlay() {
-        let path = Bundle.main.path(forResource: "432hz.mp3", ofType:nil)!
-        let url = URL(fileURLWithPath: path)
-
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.numberOfLoops = -1
-            audioPlayer?.enableRate = true
-            audioPlayer?.play()
-        } catch {
-            // couldn't load file :(
-            print(error)
-        }
-    }
     
     func adjustPitch(measurement: Double){
-        self.pitchControl.pitch = Float(measurement) * 50
+        self.audioControl.pitch = Float(measurement) * 50
     }
     
     func adjustSpeed(measurement: Double, maxMeasurement: Double) {
-//        range of rate = 1/32 to 32.0, default = 1
-//        squish measurement between 1 and 32 based on maxMeasurment
+        // range of rate = 1/32 to 32.0, default = 1
+        // squish measurement between 1 and 32 based on maxMeasurment
         let fractionOfMax = measurement / maxMeasurement
-        // change by a fraction of the measurement
+        // change by a fraction of the ratio
         let rateStrength = 0.25
         let newRate = fractionOfMax * 31 * rateStrength + 1
         print("newRate = \(newRate)")
-        self.pitchControl.rate = Float(newRate)
+        self.audioControl.rate = Float(newRate)
     }
     
     func configureAudioSession() {

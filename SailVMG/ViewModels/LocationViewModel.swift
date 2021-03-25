@@ -154,7 +154,7 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     
     func adjustAudio() {
-        //self.soundControl.adjustPitch(measurement: vmg)
+        self.soundControl.adjustPitch(measurement: vmg)
         // assume that max vmg change is 30kts per second
         let maxVMGChage = 30.0
         self.soundControl.adjustSpeed(measurement: abs(vmg_delta), maxMeasurement: maxVMGChage)
