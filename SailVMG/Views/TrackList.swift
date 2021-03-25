@@ -21,7 +21,7 @@ struct TrackList: View {
                     trackRepository.removeTrackVM(index: index)
                 }
             }
-        }.listStyle(PlainListStyle())
+        }
     }
 }
 

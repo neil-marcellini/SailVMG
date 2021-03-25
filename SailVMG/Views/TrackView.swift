@@ -14,18 +14,20 @@ struct TrackView: View {
         if trackVM.loading || mapVM.loading {
             ProgressView()
         } else {
-            VStack(alignment: .leading) {
+            HStack {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(trackVM.getDate())
+                        Text(trackVM.location)
+                    }.font(.headline)
+                    HStack {
+                        Image(systemName: "clock")
+                        Text(trackVM.getDuration())
+                    }
+                    Text(trackVM.maxVMG)
+                    Spacer()
+                }
                 MapPreview()
-                HStack {
-                    Text(trackVM.getDate())
-                    Text(trackVM.location)
-                }
-                HStack {
-                    Text("Start: \(trackVM.startTime())")
-                    Text("End: \(trackVM.endTime())")
-                }
-                Text(trackVM.maxVMG)
-                
             }
         }
         

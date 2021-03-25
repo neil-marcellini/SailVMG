@@ -14,7 +14,7 @@ struct MapPreview: View {
             Image(uiImage: preview)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 300, height: 300)
+                .frame(width: 150, height: 150)
         }
     }
 }

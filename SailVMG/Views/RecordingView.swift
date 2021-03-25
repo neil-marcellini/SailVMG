@@ -59,6 +59,8 @@ struct RecordingView: View {
                 ActionSheet(title: Text("Tracking Paused"), message: nil, buttons: [
                     .default(Text("Save Track")){
                         locationViewModel.saveTrack()
+                        let end_time = Date()
+                        locationViewModel.track!.end_time = end_time
                         trackRepository.addTrackVM(track: locationViewModel.track!)
                     },
                     .destructive(Text("Discard Track")){

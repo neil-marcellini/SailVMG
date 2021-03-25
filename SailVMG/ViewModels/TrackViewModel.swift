@@ -77,6 +77,27 @@ class TrackViewModel: ObservableObject {
         }
         return dateFormatter.string(from: end_time)
     }
+    
+    func getDuration() -> String {
+        guard let end_time = track.end_time else {
+            return ""
+        }
+        let duration = end_time.timeIntervalSince(track.start_time)
+        let durationDisplay = formatDuration(seconds: duration)
+        return durationDisplay
+    }
+    
+    func formatDuration(seconds: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.zeroFormattingBehavior = .default
+        guard let duration = formatter.string(from: seconds) else {
+            return ""
+        }
+        return duration
+    }
+    
     func getMaxVMG() {
         var upwind_display = "--"
         var downwind_display = "--"

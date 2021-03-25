@@ -74,20 +74,20 @@ class TrackRespository: ObservableObject {
         setLoading()
     }
     
-    func setEndTime(track: Track, completion: @escaping ((Date?) -> Void)) {
+    func setEndTime(track: Track, completion: @escaping ((Bool) -> Void)) {
         guard let track_id = track.id else {
             print("Error track has no id discardTrack")
             return
         }
-        let end_time = Date()
+        
         db.collection("Tracks").document(track_id).updateData([
-            "end_time": end_time
+            "end_time": track.end_time
         ]){ err in
             if let err = err {
                 print("Error setting end time: \(err)")
-                completion(nil)
+                completion(false)
             } else {
-                completion(end_time)
+                completion(true)
             }
         }
         
@@ -96,10 +96,8 @@ class TrackRespository: ObservableObject {
     func addTrackVM(track: Track) {
         loading = true
         trackCount += 1
-        var trackCopy = track
-        setEndTime(track: track) { end_time in
-            if end_time != nil {
-                trackCopy.end_time = end_time
+        setEndTime(track: track) { success in
+            if success {
                 self.trackpointRepository.getTrackpoints(track, completion: self.afterNewTrackpoints)
             }
         }  

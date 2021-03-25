@@ -11,12 +11,14 @@ struct TrackListItem: View {
     @StateObject var trackVM: TrackViewModel
     @StateObject var mapVM: MapViewModel
     var body: some View {
-        VStack {
+        ZStack {
+            TrackView()
+                .environmentObject(trackVM)
+                .environmentObject(mapVM)
             NavigationLink(destination: PlaybackView().environmentObject(trackVM)
                             .environmentObject(mapVM)){
-                TrackView().environmentObject(trackVM)
-                    .environmentObject(mapVM)
-            }
+                EmptyView()
+            }.buttonStyle(PlainButtonStyle())
         }
     }
 }
