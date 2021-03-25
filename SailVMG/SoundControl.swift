@@ -37,8 +37,8 @@ class SoundControl {
         engine.attach(speedControl)
 
         // 4: arrange the parts so that output from one is input to another
-        engine.connect(audioPlayer, to: speedControl, format: audioFormat)
-        engine.connect(speedControl, to: pitchControl, format: audioFormat)
+        engine.connect(audioPlayer, to: pitchControl, format: audioFormat)
+//        engine.connect(speedControl, to: pitchControl, format: audioFormat)
         engine.connect(pitchControl, to: engine.mainMixerNode, format: audioFormat)
 
         // 5: prepare the player to play its file from the beginning
@@ -72,6 +72,17 @@ class SoundControl {
     
     func adjustPitch(measurement: Double){
         self.pitchControl.pitch = Float(measurement) * 50
+    }
+    
+    func adjustSpeed(measurement: Double, maxMeasurement: Double) {
+//        range of rate = 1/32 to 32.0, default = 1
+//        squish measurement between 1 and 32 based on maxMeasurment
+        let fractionOfMax = measurement / maxMeasurement
+        // change by a fraction of the measurement
+        let rateStrength = 0.25
+        let newRate = fractionOfMax * 31 * rateStrength + 1
+        print("newRate = \(newRate)")
+        self.pitchControl.rate = Float(newRate)
     }
     
     func configureAudioSession() {

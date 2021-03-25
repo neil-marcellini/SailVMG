@@ -15,6 +15,8 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var speed: Double = 0
     @Published var course: Double = 0
     @Published var vmg: Double = 0
+    @Published var prev_vmg: Double = 0
+    @Published var vmg_delta: Double = 0
     @Published var twa: Int = 0
     @Published var twd: Double = 180
     
@@ -132,20 +134,31 @@ class LocationViewModel: NSObject, ObservableObject {
         // Return the component of speed towards true wind angle.
         twa = calculateTwa(twd: twd, course: course)
         let vmg = speed * cos(Double(twa) * .pi / 180)
-        if audioFeedback {
-            self.soundControl.adjustPitch(measurement: vmg)
-        }
         return vmg
     }
     
     func recordTrackpoint(_ trackpoint: Trackpoint, track: Track) {
+        prev_vmg = vmg
         vmg = calculateVMG(speed: trackpoint.speed, course: trackpoint.course, twd: twd)
+        vmg_delta = vmg - prev_vmg
+        print("prev_vmg = \(prev_vmg)")
+        print("vmg = \(vmg)")
+        print("vmg_delta = \(vmg_delta)")
         let updated_trackpoint = Trackpoint(id: trackpoint.id, track_id: track.id!, time: trackpoint.time, latitude: trackpoint.latitude, longitude: trackpoint.longitude, speed: trackpoint.speed, course: trackpoint.course, vmg: vmg, twd: twd)
         speed = trackpoint.speed
         course = trackpoint.course
-        print(updated_trackpoint)
+        if audioFeedback {
+            adjustAudio()
+        }
         trackpointRepository.addTrackPoint(to: track, trackpoint: updated_trackpoint)
-    }    
+    }
+    
+    func adjustAudio() {
+        //self.soundControl.adjustPitch(measurement: vmg)
+        // assume that max vmg change is 30kts per second
+        let maxVMGChage = 30.0
+        self.soundControl.adjustSpeed(measurement: abs(vmg_delta), maxMeasurement: maxVMGChage)
+    }
     
 }
 extension LocationViewModel: CLLocationManagerDelegate {
