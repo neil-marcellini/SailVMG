@@ -12,7 +12,6 @@
 		3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AED72568D5D400DAEF90 /* Trackpoint.swift */; };
 		3111AEDD2568DA7D00DAEF90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */; };
 		3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AF352568DEA200DAEF90 /* TrackRepository.swift */; };
-		312307FE25777AA800343C86 /* RecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312307FD25777AA800343C86 /* RecordingViewModel.swift */; };
 		3140457B25DE09FF00C6BF74 /* SoundControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3140457A25DE09FF00C6BF74 /* SoundControl.swift */; };
 		3140458025DE0A1A00C6BF74 /* 432hz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3140457F25DE0A1A00C6BF74 /* 432hz.mp3 */; };
 		3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A04F2571CF6600E885BC /* TrackViewModel.swift */; };
@@ -78,7 +77,6 @@
 		3111AED72568D5D400DAEF90 /* Trackpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackpoint.swift; sourceTree = "<group>"; };
 		3111AEDC2568DA7D00DAEF90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3111AF352568DEA200DAEF90 /* TrackRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepository.swift; sourceTree = "<group>"; };
-		312307FD25777AA800343C86 /* RecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewModel.swift; sourceTree = "<group>"; };
 		3140457A25DE09FF00C6BF74 /* SoundControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundControl.swift; sourceTree = "<group>"; };
 		3140457F25DE0A1A00C6BF74 /* 432hz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 432hz.mp3; sourceTree = "<group>"; };
 		3155A04F2571CF6600E885BC /* TrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel.swift; sourceTree = "<group>"; };
@@ -268,7 +266,6 @@
 				31D3E4682613CA9E00BB6D28 /* NavigationControl.swift */,
 				31CA9E2725D08C5400DE5A26 /* MapViewDelegate.swift */,
 				31F9056525D37419007ACC91 /* MapViewModel.swift */,
-				312307FD25777AA800343C86 /* RecordingViewModel.swift */,
 				3155A04F2571CF6600E885BC /* TrackViewModel.swift */,
 			);
 			path = ViewModels;
@@ -568,7 +565,6 @@
 				3155A05A2571D3F400E885BC /* MapView.swift in Sources */,
 				31D35FC825E8554300A96EE0 /* TrackListItem.swift in Sources */,
 				316175172612BE4A00D3D37A /* GPXExporter.swift in Sources */,
-				312307FE25777AA800343C86 /* RecordingViewModel.swift in Sources */,
 				3155A0552571D0A500E885BC /* TrackView.swift in Sources */,
 				31D3E4512613A03C00BB6D28 /* Compass.swift in Sources */,
 				318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */,

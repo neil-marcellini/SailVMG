@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TWDControl: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    let recordingViewModel = RecordingViewModel()
     let labelColor = Color(.label)
     var body: some View {
         VStack {
@@ -22,7 +21,7 @@ struct TWDControl: View {
                         .font(.system(size: 50))
                         .foregroundColor(labelColor)
                 }
-                Text(recordingViewModel.twdDisplay(locationViewModel.twd))
+                Text(locationViewModel.twdDisplay())
                     .frame(width: 50)
                 Button(action: { locationViewModel.plusTwd() }){
                     Image(systemName: "plus.app.fill")

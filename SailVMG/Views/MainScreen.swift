@@ -20,7 +20,7 @@ struct MainScreen: View {
                         NoTracksView()
                         Spacer()
                     } else {
-                        TrackList().environmentObject(trackRepository)
+                        TrackList()
                     }
                     Button(action: {
                         nav.selection = "TWDSetup"

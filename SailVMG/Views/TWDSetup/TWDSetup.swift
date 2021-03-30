@@ -13,22 +13,16 @@ struct TWDSetup: View {
     @EnvironmentObject var nav: NavigationControl
     var body: some View {
         VStack {
+            Spacer()
             Text("TWD")
                 .font(.largeTitle)
-            Text("\(locationViewModel.heading)°")
+            Text(locationViewModel.headingDisplay())
                 .font(.largeTitle)
             Spacer()
             Compass()
-                .onAppear {
-                    locationViewModel.locationManager.startUpdatingHeading()
-                }
-                .onDisappear {
-                    locationViewModel.locationManager.stopUpdatingHeading()
-                }
-                .rotationEffect(Angle(degrees: locationViewModel.heading))
             Spacer()
-            
             Button(action: {
+                locationViewModel.twd = locationViewModel.heading
                 locationViewModel.startRecording()
                 nav.selection = "RecordingView"
             }){

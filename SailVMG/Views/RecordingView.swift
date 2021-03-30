@@ -10,7 +10,6 @@ import SwiftUI
 struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var trackRepository: TrackRespository
-    @StateObject var recordingViewModel = RecordingViewModel()
     @EnvironmentObject var nav: NavigationControl
     var body: some View {
         VStack {
@@ -18,7 +17,7 @@ struct RecordingView: View {
             VStack {
                 Text("TWA")
                     .font(.title)
-                Text(recordingViewModel.twaDisplay(locationViewModel.twa))
+                Text(locationViewModel.twaDisplay())
             }
             Spacer()
             Image(systemName: "location.north.fill")
@@ -30,7 +29,7 @@ struct RecordingView: View {
                 Text("VMG")
                     .font(.title)
                     .foregroundColor(.blue)
-                Text(recordingViewModel.vmgDisplay(locationViewModel.vmg))
+                Text(locationViewModel.vmgDisplay())
             }.padding()
             
             HStack {
@@ -39,14 +38,14 @@ struct RecordingView: View {
                     Text("SOG")
                         .font(.title)
                         .foregroundColor(.red)
-                    Text(recordingViewModel.speedDisplay(locationViewModel.speed))
+                    Text(locationViewModel.speedDisplay())
                 }
                 Spacer()
                 VStack {
                     Text("COG")
                         .font(.title)
                         .foregroundColor(.red)
-                    Text(recordingViewModel.courseDisplay(locationViewModel.course))
+                    Text(locationViewModel.courseDisplay())
                 }
                 Spacer()
             }

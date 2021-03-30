@@ -104,6 +104,31 @@ class LocationViewModel: NSObject, ObservableObject {
     func minusTwd() {
         twd -= 1
     }
+    
+    func speedDisplay() ->  String {
+        return String(format: "%.2f kts", speed)
+    }
+    
+    func courseDisplay() ->  String {
+        return String(format: "%.0f°", course)
+    }
+    
+    func twdDisplay() ->  String {
+        return String(format: "%03.0f°", twd)
+    }
+    func twaDisplay() ->  String {
+        return String(format: "%03d°", twa)
+    }
+    
+    func vmgDisplay() ->  String {
+        return String(format: "%.2f kts", vmg)
+    }
+    
+    func headingDisplay() -> String {
+        return String(format: "%03.0f°", heading)
+    }
+    
+    
     func directionSubtract(_ d1: Int, _ d2: Int) -> Int {
         var delta = d1 - d2
         if delta < 0 {
