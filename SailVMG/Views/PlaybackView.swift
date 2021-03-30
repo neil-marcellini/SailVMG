@@ -21,8 +21,6 @@ class Coordinator: NSObject, MKMapViewDelegate {
 
 struct PlaybackView: View {
     @EnvironmentObject var mapVM: MapViewModel
-    @EnvironmentObject var trackVM: TrackViewModel
-    let gpx_export = GPXExporter()
     var body: some View {
         VStack {
             ZStack {
@@ -37,12 +35,7 @@ struct PlaybackView: View {
             VMGChartView()
             
         }.navigationBarTitle("", displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {
-            let gpx_data = gpx_export.getGPXFile(trackpoints: trackVM.trackpoints)
-            let items = [gpx_data]
-            let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
-            UIApplication.shared.windows.first?.rootViewController?.present(ac, animated: true, completion: nil)
-        }, label: {Image(systemName: "square.and.arrow.up")}))
+        .navigationBarItems(trailing: ShareButton())
             
     }
     

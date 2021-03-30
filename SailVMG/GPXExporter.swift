@@ -11,19 +11,29 @@ import CoreGPX
 struct GPXExporter {
     
     
-    func getGPXFile(trackpoints: [Trackpoint])->NSURL? {
-        let gpx_data = getGPXString(trackpoints: trackpoints)
-        let filename = getDocumentsDirectory().appendingPathComponent("track.gpx")
+    func getGPXFile(trackVM: TrackViewModel)->NSURL? {
+        let gpx = getGPXString(trackpoints: trackVM.trackpoints)
+        let fileName = getFileName(trackVM: trackVM)
+        let filePath = getDocumentsDirectory().appendingPathComponent(fileName)
 
         do {
-            try gpx_data.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
-            let fileURL = NSURL(fileURLWithPath: filename.path)
+            try gpx.write(to: filePath, atomically: true, encoding: String.Encoding.utf8)
+            let fileURL = NSURL(fileURLWithPath: filePath.path)
             return fileURL
         } catch {
             // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
             print("Error writing gpx file.")
             return nil
         }
+    }
+    
+    func getFileName(trackVM: TrackViewModel)->String {
+        var trackDate = trackVM.getDate()
+        trackDate = trackDate.replacingOccurrences(of: "/", with: "-")
+        var trackStartTime = trackVM.startTime()
+        trackStartTime = trackStartTime.replacingOccurrences(of: ":", with: ".")
+        let file_name = "\(trackDate) \(trackStartTime).gpx"
+        return file_name
     }
     
     func getDocumentsDirectory() -> URL {
