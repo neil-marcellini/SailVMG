@@ -72,7 +72,7 @@ struct RecordingView: View {
                     
                 ])
             })
-        }.navigationBarTitle("SailVMG")
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: Toggle("Audio Feedback", isOn: $locationViewModel.audioFeedback))
     }

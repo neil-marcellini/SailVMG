@@ -15,11 +15,6 @@ struct MainScreen: View {
         VStack(spacing: 0) {
             NavigationView {
                 VStack {
-                    HStack {
-                        Text("Tracks")
-                            .font(.headline)
-                        Spacer()
-                    }.padding(.horizontal)
                     if trackRepository.hasNoTracks() {
                         NoTracksView()
                         Spacer()

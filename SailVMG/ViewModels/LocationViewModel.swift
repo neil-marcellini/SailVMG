@@ -31,7 +31,7 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var audioFeedback = UserDefaults.standard.bool(forKey: "audioFeedback") {
         didSet {
             if audioFeedback {
-                self.startRecording()
+                startSound()
             } else {
                 self.soundControl.stop()
             }
@@ -41,7 +41,7 @@ class LocationViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         self.locationManager.allowsBackgroundLocationUpdates = true
         self.locationManager.requestAlwaysAuthorization()
     }
@@ -88,12 +88,12 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     
     func discardTrack() {
-        isRecording = false
         guard let curr_track = track else {
             print("No track exists to delete")
             return
         }
         trackManager.discardTrack(curr_track)
+        isRecording = false
     }
     func plusTwd(){
         twd += 1

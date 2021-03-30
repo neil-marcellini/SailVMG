@@ -15,7 +15,7 @@ class TrackViewModel: ObservableObject {
     @Published var trackpoints = [Trackpoint]()
     @Published var loading = true
     @Published var location = ""
-    @Published var maxVMG = "Max VMG: -- / -- kts"
+    @Published var maxVMG = "-- / -- kts"
     var max_upwind_vmg: Double?
     var max_downwind_vmg: Double?
     let maxHueDegree: Double
@@ -91,7 +91,7 @@ class TrackViewModel: ObservableObject {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
         formatter.allowedUnits = [.hour, .minute]
-        formatter.zeroFormattingBehavior = .default
+        formatter.zeroFormattingBehavior = .pad
         guard let duration = formatter.string(from: seconds) else {
             return ""
         }
@@ -114,7 +114,7 @@ class TrackViewModel: ObservableObject {
                 downwind_display = String(format: "%.2f", max_downwind_vmg)
             }
         }
-        self.maxVMG = "Max VMG: \(downwind_display) / \(upwind_display) kts"
+        self.maxVMG = "\(downwind_display) / \(upwind_display) kts"
     }
     func getVMGs()->[Double] {
         let vmgs = trackpoints.compactMap { trackpoint in

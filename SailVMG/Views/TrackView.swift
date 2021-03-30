@@ -15,19 +15,26 @@ struct TrackView: View {
             ProgressView()
         } else {
             HStack {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("\(trackVM.getDate()) \(trackVM.startTime())")
+                        .font(.headline)
                     HStack {
-                        Text(trackVM.getDate())
+                        Image(systemName: "mappin.and.ellipse")
                         Text(trackVM.location)
-                    }.font(.headline)
+                    }
                     HStack {
                         Image(systemName: "clock")
                         Text(trackVM.getDuration())
                     }
+                    Text("Max VMG:")
                     Text(trackVM.maxVMG)
                     Spacer()
                 }
-                MapPreview()
+                Spacer()
+                VStack {
+                    MapPreview()
+                    Spacer()
+                }
             }
         }
         
