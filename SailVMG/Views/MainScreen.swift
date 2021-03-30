@@ -11,6 +11,7 @@ import CoreData
 struct MainScreen: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @StateObject var trackRepository = TrackRespository()
+    @StateObject var nav = NavigationControl()
     var body: some View {
         VStack(spacing: 0) {
             NavigationView {
@@ -22,15 +23,24 @@ struct MainScreen: View {
                         TrackList().environmentObject(trackRepository)
                     }
                     Button(action: {
-                        locationViewModel.startRecording()
+                        nav.selection = "TWDSetup"
                     }){
                         Image(systemName: "play.circle").font(.system(size: 100))
                     }
-                    NavigationLink(destination: RecordingView()
-                                    .environmentObject(locationViewModel)
-                                    .environmentObject(trackRepository), isActive: $locationViewModel.isRecording) { EmptyView()}
+                    NavigationLink(destination: TWDSetup(),
+                                   tag: "TWDSetup",
+                                   selection: $nav.selection){
+                        EmptyView()
+                    }
+                    NavigationLink(destination: RecordingView(),
+                                   tag: "RecordingView",
+                                   selection: $nav.selection) { EmptyView()}
+                    
                 }.navigationTitle("SailVMG")
             }
+            .environmentObject(nav)
+            .environmentObject(locationViewModel)
+            .environmentObject(trackRepository)
         }
        
     }

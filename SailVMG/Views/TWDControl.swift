@@ -10,7 +10,7 @@ import SwiftUI
 struct TWDControl: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     let recordingViewModel = RecordingViewModel()
-    let labelColor = Color(UIColor.label)
+    let labelColor = Color(.label)
     var body: some View {
         VStack {
             Text("TWD")

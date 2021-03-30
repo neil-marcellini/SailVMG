@@ -11,7 +11,7 @@ struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var trackRepository: TrackRespository
     @StateObject var recordingViewModel = RecordingViewModel()
-    let labelColor = Color(UIColor.label)
+    @EnvironmentObject var nav: NavigationControl
     var body: some View {
         VStack {
             TWDControl()
@@ -62,9 +62,11 @@ struct RecordingView: View {
                         let end_time = Date()
                         locationViewModel.track!.end_time = end_time
                         trackRepository.addTrackVM(track: locationViewModel.track!)
+                        nav.selection = nil
                     },
                     .destructive(Text("Discard Track")){
                         locationViewModel.discardTrack()
+                        nav.selection = nil
                     },
                     .cancel(Text("Resume Tracking")){
                         locationViewModel.resume()

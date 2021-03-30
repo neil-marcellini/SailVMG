@@ -40,6 +40,11 @@
 		31D35FD325E8593100A96EE0 /* VMGChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D35FD225E8593100A96EE0 /* VMGChartView.swift */; };
 		31D35FE325E86E2900A96EE0 /* MapPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D35FE225E86E2900A96EE0 /* MapPreview.swift */; };
 		31D3E44C26138E4200BB6D28 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3E44B26138E4200BB6D28 /* ShareButton.swift */; };
+		31D3E4512613A03C00BB6D28 /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3E4502613A03C00BB6D28 /* Compass.swift */; };
+		31D3E4562613A90800BB6D28 /* CompassTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3E4552613A90800BB6D28 /* CompassTick.swift */; };
+		31D3E45C2613AA2600BB6D28 /* LargeCompassTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3E45B2613AA2600BB6D28 /* LargeCompassTick.swift */; };
+		31D3E4612613BF7F00BB6D28 /* TWDSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3E4602613BF7F00BB6D28 /* TWDSetup.swift */; };
+		31D3E4692613CA9F00BB6D28 /* NavigationControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3E4682613CA9E00BB6D28 /* NavigationControl.swift */; };
 		31D4436C25FC03E900843318 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D4436B25FC03E900843318 /* Launch Screen.storyboard */; };
 		31F9055825D3241C007ACC91 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9055725D3241C007ACC91 /* ColorScale.swift */; };
 		31F9056125D3669F007ACC91 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 31F9056025D3669F007ACC91 /* SwiftUICharts */; };
@@ -108,6 +113,11 @@
 		31D35FD225E8593100A96EE0 /* VMGChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMGChartView.swift; sourceTree = "<group>"; };
 		31D35FE225E86E2900A96EE0 /* MapPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreview.swift; sourceTree = "<group>"; };
 		31D3E44B26138E4200BB6D28 /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
+		31D3E4502613A03C00BB6D28 /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
+		31D3E4552613A90800BB6D28 /* CompassTick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassTick.swift; sourceTree = "<group>"; };
+		31D3E45B2613AA2600BB6D28 /* LargeCompassTick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCompassTick.swift; sourceTree = "<group>"; };
+		31D3E4602613BF7F00BB6D28 /* TWDSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWDSetup.swift; sourceTree = "<group>"; };
+		31D3E4682613CA9E00BB6D28 /* NavigationControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControl.swift; sourceTree = "<group>"; };
 		31D4436B25FC03E900843318 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		31F9055725D3241C007ACC91 /* ColorScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScale.swift; sourceTree = "<group>"; };
 		31F9056525D37419007ACC91 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -255,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				31C747502568A85700A454B7 /* LocationViewModel.swift */,
+				31D3E4682613CA9E00BB6D28 /* NavigationControl.swift */,
 				31CA9E2725D08C5400DE5A26 /* MapViewDelegate.swift */,
 				31F9056525D37419007ACC91 /* MapViewModel.swift */,
 				312307FD25777AA800343C86 /* RecordingViewModel.swift */,
@@ -268,6 +279,7 @@
 			children = (
 				31F9055725D3241C007ACC91 /* ColorScale.swift */,
 				318ABBEE255F400600EFF7E2 /* MainScreen.swift */,
+				31D3E45A2613A97200BB6D28 /* TWDSetup */,
 				31773CC525FAA5D900BCEFBD /* TrackList.swift */,
 				31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */,
 				31D35FE225E86E2900A96EE0 /* MapPreview.swift */,
@@ -281,6 +293,17 @@
 				31D35FD225E8593100A96EE0 /* VMGChartView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		31D3E45A2613A97200BB6D28 /* TWDSetup */ = {
+			isa = PBXGroup;
+			children = (
+				31D3E4552613A90800BB6D28 /* CompassTick.swift */,
+				31D3E45B2613AA2600BB6D28 /* LargeCompassTick.swift */,
+				31D3E4502613A03C00BB6D28 /* Compass.swift */,
+				31D3E4602613BF7F00BB6D28 /* TWDSetup.swift */,
+			);
+			path = TWDSetup;
 			sourceTree = "<group>";
 		};
 		EB7B52AF11B2E4393EEB7FEC /* Frameworks */ = {
@@ -547,13 +570,17 @@
 				316175172612BE4A00D3D37A /* GPXExporter.swift in Sources */,
 				312307FE25777AA800343C86 /* RecordingViewModel.swift in Sources */,
 				3155A0552571D0A500E885BC /* TrackView.swift in Sources */,
+				31D3E4512613A03C00BB6D28 /* Compass.swift in Sources */,
 				318ABBEF255F400600EFF7E2 /* MainScreen.swift in Sources */,
 				31D35FE325E86E2900A96EE0 /* MapPreview.swift in Sources */,
 				31773CCB25FAA6CA00BCEFBD /* NoTracksView.swift in Sources */,
 				31773CC625FAA5D900BCEFBD /* TrackList.swift in Sources */,
 				31C747512568A85700A454B7 /* LocationViewModel.swift in Sources */,
 				31D3E44C26138E4200BB6D28 /* ShareButton.swift in Sources */,
+				31D3E4562613A90800BB6D28 /* CompassTick.swift in Sources */,
 				31ACC9D5256DD88B009BC3AD /* TrackpointRepository.swift in Sources */,
+				31D3E4692613CA9F00BB6D28 /* NavigationControl.swift in Sources */,
+				31D3E4612613BF7F00BB6D28 /* TWDSetup.swift in Sources */,
 				31F9055825D3241C007ACC91 /* ColorScale.swift in Sources */,
 				31CA9E2825D08C5400DE5A26 /* MapViewDelegate.swift in Sources */,
 				31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */,
@@ -562,6 +589,7 @@
 				3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */,
 				3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */,
 				3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */,
+				31D3E45C2613AA2600BB6D28 /* LargeCompassTick.swift in Sources */,
 				318D97DA25FC789B0016E302 /* TWDControl.swift in Sources */,
 				316A146325E57D9C00EA184A /* TrackManager.swift in Sources */,
 				31D35FD325E8593100A96EE0 /* VMGChartView.swift in Sources */,

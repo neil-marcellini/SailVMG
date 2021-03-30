@@ -11,7 +11,6 @@ import Firebase
 @main
 struct SailVMGApp: App {
     @StateObject var locationViewModel = LocationViewModel()
-    
     init(){
         FirebaseApp.configure()
         Auth.auth().signInAnonymously()

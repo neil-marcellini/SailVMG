@@ -22,6 +22,9 @@ class LocationViewModel: NSObject, ObservableObject {
     
     @Published var isRecording = false
     @Published var isPaused = false
+    
+    // for compass
+    @Published var heading: Double = 0
     let trackManager = TrackManager()
     let trackpointRepository = TrackpointRespository()
     var track: Track? = nil
@@ -160,6 +163,7 @@ class LocationViewModel: NSObject, ObservableObject {
         self.soundControl.adjustSpeed(measurement: abs(vmg_delta), maxMeasurement: maxVMGChage)
     }
     
+    
 }
 extension LocationViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -170,6 +174,10 @@ extension LocationViewModel: CLLocationManagerDelegate {
         course = location.course
         let trackpoint = Trackpoint(id: UUID(), track_id: "", time: Date(), latitude: latitude, longitude: longitude, speed: speed, course: course, vmg: nil, twd: nil)
         recordTrackpoint(trackpoint, track: track!)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        heading = newHeading.trueHeading
     }
     
     func mpsToKts(_ speedMps: CLLocationSpeed) -> Double {
