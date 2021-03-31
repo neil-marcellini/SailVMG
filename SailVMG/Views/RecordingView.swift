@@ -11,6 +11,7 @@ struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var trackRepository: TrackRespository
     @EnvironmentObject var nav: NavigationControl
+    @StateObject var audioSettings = AudioSettings()
     var body: some View {
         VStack {
             TWDControl()
@@ -52,12 +53,12 @@ struct RecordingView: View {
             Spacer()
             Button(action: {
                 locationViewModel.pause()
+                audioSettings.soundControl.stop()
             }){
                 Image(systemName: locationViewModel.isPaused ? "play.circle" : "pause.circle").font(.system(size: 100))
             }.actionSheet(isPresented: $locationViewModel.isPaused, content: {
                 ActionSheet(title: Text("Tracking Paused"), message: nil, buttons: [
                     .default(Text("Save Track")){
-                        locationViewModel.saveTrack()
                         let end_time = Date()
                         locationViewModel.track!.end_time = end_time
                         trackRepository.addTrackVM(track: locationViewModel.track!)
@@ -69,13 +70,31 @@ struct RecordingView: View {
                     },
                     .cancel(Text("Resume Tracking")){
                         locationViewModel.resume()
+                        audioSettings.startSound()
                     }
                     
                 ])
             })
+            NavigationLink(destination: SettingsView(), isActive: $audioSettings.showSettings) { EmptyView() }
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing: Toggle("Audio Feedback", isOn: $locationViewModel.audioFeedback))
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Toggle("Audio Feedback", isOn: $audioSettings.audioFeedback)
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {audioSettings.showSettings = true}) {
+                    Image(systemName: "gear")
+                        .font(.title)
+                }
+            }
+        }
+        .onAppear {
+            locationViewModel.updateHook = audioSettings.trackpointUpdated
+            if audioSettings.audioFeedback {
+                audioSettings.startSound()
+            }
+        }
     }
 }
 

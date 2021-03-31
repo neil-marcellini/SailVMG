@@ -19,8 +19,6 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var vmg_delta: Double = 0
     @Published var twa: Int = 0
     @Published var twd: Double = 180
-    
-    @Published var isRecording = false
     @Published var isPaused = false
     
     // for compass
@@ -30,16 +28,10 @@ class LocationViewModel: NSObject, ObservableObject {
     var track: Track? = nil
     
     let locationManager = CLLocationManager()
-    let soundControl = SoundControl()
-    @Published var audioFeedback = UserDefaults.standard.bool(forKey: "audioFeedback") {
-        didSet {
-            if audioFeedback {
-                startSound()
-            } else {
-                self.soundControl.stop()
-            }
-        }
-    }
+    
+    
+    // callback to send out updated trackpoints
+    var updateHook: ((Trackpoint) -> Void)? = nil
     
     override init() {
         super.init()
@@ -53,25 +45,13 @@ class LocationViewModel: NSObject, ObservableObject {
     func pause() {
         isPaused = true
         self.locationManager.stopUpdatingLocation()
-        if audioFeedback {
-            soundControl.stop()
-        }
     }
     func resume() {
         isPaused = false
         self.locationManager.startUpdatingLocation()
-        if audioFeedback {
-            startSound()
-        }
     }
     
-    func startSound() {
-        do {
-            try self.soundControl.play()
-        } catch {
-            print("play error")
-        }
-    }
+    
     
     func setTrack(_ new_track: Track) {
         track = new_track
@@ -81,14 +61,9 @@ class LocationViewModel: NSObject, ObservableObject {
         let track_id = trackManager.createTrack(track!)
         track!.id = track_id
         setTrack(track!)
-        isRecording = true
         resume()
     }
     
-    
-    func saveTrack() {
-        isRecording = false
-    }
     
     func discardTrack() {
         guard let curr_track = track else {
@@ -96,7 +71,6 @@ class LocationViewModel: NSObject, ObservableObject {
             return
         }
         trackManager.discardTrack(curr_track)
-        isRecording = false
     }
     func plusTwd(){
         twd += 1
@@ -172,21 +146,18 @@ class LocationViewModel: NSObject, ObservableObject {
         print("prev_vmg = \(prev_vmg)")
         print("vmg = \(vmg)")
         print("vmg_delta = \(vmg_delta)")
-        let updated_trackpoint = Trackpoint(id: trackpoint.id, track_id: track.id!, time: trackpoint.time, latitude: trackpoint.latitude, longitude: trackpoint.longitude, speed: trackpoint.speed, course: trackpoint.course, vmg: vmg, twd: twd)
+        let updated_trackpoint = Trackpoint(id: trackpoint.id, track_id: track.id!, time: trackpoint.time, latitude: trackpoint.latitude, longitude: trackpoint.longitude, speed: trackpoint.speed, course: trackpoint.course, vmg: vmg, vmg_delta: vmg_delta, twd: twd)
         speed = trackpoint.speed
         course = trackpoint.course
-        if audioFeedback {
-            adjustAudio()
+        
+        if let updateCallback = updateHook {
+            updateCallback(updated_trackpoint)
         }
+        
         trackpointRepository.addTrackPoint(to: track, trackpoint: updated_trackpoint)
     }
     
-    func adjustAudio() {
-        self.soundControl.adjustPitch(measurement: vmg)
-        // assume that max vmg change is 30kts per second
-        let maxVMGChage = 30.0
-        self.soundControl.adjustSpeed(measurement: abs(vmg_delta), maxMeasurement: maxVMGChage)
-    }
+    
     
     
 }
@@ -197,7 +168,7 @@ extension LocationViewModel: CLLocationManagerDelegate {
         longitude = location.coordinate.longitude
         speed = mpsToKts(location.speed)
         course = location.course
-        let trackpoint = Trackpoint(id: UUID(), track_id: "", time: Date(), latitude: latitude, longitude: longitude, speed: speed, course: course, vmg: nil, twd: nil)
+        let trackpoint = Trackpoint(id: UUID(), track_id: "", time: Date(), latitude: latitude, longitude: longitude, speed: speed, course: course, vmg: nil, vmg_delta: nil, twd: nil)
         recordTrackpoint(trackpoint, track: track!)
     }
     
