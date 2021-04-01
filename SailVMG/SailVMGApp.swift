@@ -14,7 +14,12 @@ struct SailVMGApp: App {
     init(){
         FirebaseApp.configure()
         Auth.auth().signInAnonymously()
-        
+        // set default values
+        UserDefaults.standard.register(defaults: ["audioFeedback": true,
+                                                  "updatePitch": true,
+                                                  "updateFrequency": true,
+                                                  "pitchValue": "VMG",
+                                                  "frequencyValue": "VMG Acceleration",])
     }
     
     var body: some Scene {

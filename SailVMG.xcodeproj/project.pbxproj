@@ -14,6 +14,7 @@
 		3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111AF352568DEA200DAEF90 /* TrackRepository.swift */; };
 		3140457B25DE09FF00C6BF74 /* SoundControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3140457A25DE09FF00C6BF74 /* SoundControl.swift */; };
 		3140458025DE0A1A00C6BF74 /* 432hz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3140457F25DE0A1A00C6BF74 /* 432hz.mp3 */; };
+		314BCA46261543B500A46EF7 /* Measureable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314BCA45261543B500A46EF7 /* Measureable.swift */; };
 		3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A04F2571CF6600E885BC /* TrackViewModel.swift */; };
 		3155A0552571D0A500E885BC /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A0542571D0A500E885BC /* TrackView.swift */; };
 		3155A05A2571D3F400E885BC /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A0592571D3F400E885BC /* MapView.swift */; };
@@ -81,6 +82,7 @@
 		3111AF352568DEA200DAEF90 /* TrackRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepository.swift; sourceTree = "<group>"; };
 		3140457A25DE09FF00C6BF74 /* SoundControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundControl.swift; sourceTree = "<group>"; };
 		3140457F25DE0A1A00C6BF74 /* 432hz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 432hz.mp3; sourceTree = "<group>"; };
+		314BCA45261543B500A46EF7 /* Measureable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measureable.swift; sourceTree = "<group>"; };
 		3155A04F2571CF6600E885BC /* TrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel.swift; sourceTree = "<group>"; };
 		3155A0542571D0A500E885BC /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		3155A0592571D3F400E885BC /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			children = (
 				3111AED22568D49E00DAEF90 /* Track.swift */,
 				3111AED72568D5D400DAEF90 /* Trackpoint.swift */,
+				314BCA45261543B500A46EF7 /* Measureable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				31ACC9D5256DD88B009BC3AD /* TrackpointRepository.swift in Sources */,
 				31D3E4692613CA9F00BB6D28 /* NavigationControl.swift in Sources */,
 				31D3E4612613BF7F00BB6D28 /* TWDSetup.swift in Sources */,
+				314BCA46261543B500A46EF7 /* Measureable.swift in Sources */,
 				31F9055825D3241C007ACC91 /* ColorScale.swift in Sources */,
 				31CA9E2825D08C5400DE5A26 /* MapViewDelegate.swift in Sources */,
 				31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */,

@@ -8,10 +8,34 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var audioSettings: AudioSettings
     var body: some View {
-        VStack {
-            Text("Settings")
-        }
+        Form {
+            Section {
+                Toggle("Pitch", isOn: $audioSettings.updatePitch)
+                HStack {
+                    Picker("Change", selection: $audioSettings.pitchValue) {
+                        ForEach(Measureable.allCases) { value in
+                            Text(value.rawValue).tag(value)
+                        }
+                    }.pickerStyle(MenuPickerStyle())
+                    Spacer()
+                    Text(audioSettings.pitchValue.rawValue)
+                }
+                Toggle("Frequency", isOn: $audioSettings.updateFrequency)
+                HStack {
+                    Picker("Change", selection: $audioSettings.frequencyValue) {
+                        ForEach(Measureable.allCases) { value in
+                            Text(value.rawValue).tag(value)
+                        }
+                    }.pickerStyle(MenuPickerStyle())
+                    Spacer()
+                    Text(audioSettings.frequencyValue.rawValue)
+                }
+               
+            }
+            
+        }.navigationBarTitle("Audio Settings")
         
     }
 }

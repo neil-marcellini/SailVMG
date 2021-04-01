@@ -12,6 +12,7 @@ struct MainScreen: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @StateObject var trackRepository = TrackRespository()
     @StateObject var nav = NavigationControl()
+    @StateObject var audioSettings = AudioSettings()
     var body: some View {
         VStack(spacing: 0) {
             NavigationView {
@@ -41,6 +42,7 @@ struct MainScreen: View {
             .environmentObject(nav)
             .environmentObject(locationViewModel)
             .environmentObject(trackRepository)
+            .environmentObject(audioSettings)
         }
        
     }

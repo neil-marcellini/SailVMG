@@ -11,7 +11,7 @@ struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var trackRepository: TrackRespository
     @EnvironmentObject var nav: NavigationControl
-    @StateObject var audioSettings = AudioSettings()
+    @EnvironmentObject var audioSettings: AudioSettings
     var body: some View {
         VStack {
             TWDControl()
@@ -80,12 +80,15 @@ struct RecordingView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Toggle("Audio Feedback", isOn: $audioSettings.audioFeedback)
+                Button(action: {audioSettings.audioFeedback.toggle()}) {
+                    Image(systemName: audioSettings.audioFeedback ? "speaker.wave.2" : "speaker.slash")
+                        .font(.largeTitle)
+                }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {audioSettings.showSettings = true}) {
                     Image(systemName: "gear")
-                        .font(.title)
+                        .font(.largeTitle)
                 }
             }
         }
