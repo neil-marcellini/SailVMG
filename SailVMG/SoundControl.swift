@@ -60,13 +60,12 @@ class SoundControl {
         self.audioControl.pitch = Float(measurement * semitonesPerKnot) * semitone
     }
     
-    func adjustSpeed(measurement: Double, maxMeasurement: Double) {
+    func adjustSpeed(measurement: Double, maxMeasurement: Double, ratePerKnot: Double) {
         // range of rate = 1/32 to 32.0, default = 1
         // squish measurement between 1 and 32 based on maxMeasurment
         let fractionOfMax = measurement / maxMeasurement
         // change by a fraction of the ratio
-        let rateStrength = 0.25
-        let newRate = fractionOfMax * 31 * rateStrength + 1
+        let newRate = fractionOfMax * 31 * ratePerKnot + 1
         print("newRate = \(newRate)")
         self.audioControl.rate = Float(newRate)
     }

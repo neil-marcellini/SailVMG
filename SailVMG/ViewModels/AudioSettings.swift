@@ -48,6 +48,12 @@ class AudioSettings: ObservableObject {
         }
     }
     
+    @Published var ratePerKnot: Double = UserDefaults.standard.double(forKey: "ratePerKnot") {
+        didSet {
+            UserDefaults.standard.setValue(ratePerKnot, forKey: "ratePerKnot")
+        }
+    }
+    
     
 
     func startSound() {
@@ -93,15 +99,15 @@ class AudioSettings: ObservableObject {
             maxValueChange = 30.0
         }
         if updateFrequency {
-            self.soundControl.adjustSpeed(measurement: abs(frequencyMeasurement), maxMeasurement: maxValueChange)
+            self.soundControl.adjustSpeed(measurement: abs(frequencyMeasurement), maxMeasurement: maxValueChange, ratePerKnot: ratePerKnot)
         } else {
             // set frequency to 1
-            self.soundControl.adjustSpeed(measurement: 0, maxMeasurement: maxValueChange)
+            self.soundControl.adjustSpeed(measurement: 0, maxMeasurement: maxValueChange, ratePerKnot: ratePerKnot)
         }
         
     }
     
-    func semitonesDisplay()->String {
-        return String(format: "%.2f", semitonesPerKnot)
+    func sliderDisplay(value: Double)->String {
+        return String(format: "%.2f", value)
     }
 }

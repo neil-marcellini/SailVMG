@@ -12,32 +12,55 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section {
-                Toggle("Pitch", isOn: $audioSettings.updatePitch)
                 HStack {
-                    Picker("Change", selection: $audioSettings.pitchValue) {
-                        ForEach(Measureable.allCases) { value in
-                            Text(value.rawValue).tag(value)
-                        }
-                    }.pickerStyle(MenuPickerStyle())
+                    Text("Pitch")
                     Spacer()
-                    Text(audioSettings.pitchValue.rawValue)
+                    Toggle(isOn: $audioSettings.updatePitch) { EmptyView()}
+                        .toggleStyle(SwitchToggleStyle(tint: Color.blue))
                 }
-                VStack(alignment: .leading){
-                    Text("Semitones Per Knot = \(audioSettings.semitonesDisplay())")
-                    Slider(value: $audioSettings.semitonesPerKnot, in: 0.25...2.0, step: 0.25, minimumValueLabel: Text("0.25"), maximumValueLabel: Text("2"), label: {EmptyView()})
-                }
-                Toggle("Frequency", isOn: $audioSettings.updateFrequency)
-                HStack {
-                    Picker("Change", selection: $audioSettings.frequencyValue) {
-                        ForEach(Measureable.allCases) { value in
-                            Text(value.rawValue).tag(value)
-                        }
-                    }.pickerStyle(MenuPickerStyle())
-                    Spacer()
-                    Text(audioSettings.frequencyValue.rawValue)
-                }
-               
             }
+            if audioSettings.updatePitch {
+                Section {
+                    VStack(alignment: .leading) {
+                        Text("Metric")
+                        Picker("", selection: $audioSettings.pitchValue) {
+                            ForEach(Measureable.allCases) { value in
+                                Text(value.rawValue).tag(value)
+                            }
+                        }.pickerStyle(SegmentedPickerStyle())
+                    }
+                    VStack(alignment: .leading){
+                        Text("Semitones Per Knot = \(String(format: "%.2f", audioSettings.semitonesPerKnot))")
+                        Slider(value: $audioSettings.semitonesPerKnot, in: 0.25...2.0, step: 0.25, minimumValueLabel: Text("0.25"), maximumValueLabel: Text("2"), label: {EmptyView()})
+                    }
+                }
+            }
+            Section {
+                HStack {
+                    Text("Frequency")
+                    Spacer()
+                    Toggle(isOn: $audioSettings.updateFrequency) { EmptyView()}
+                        .toggleStyle(SwitchToggleStyle(tint: Color.blue))
+                }
+            }
+            
+            if audioSettings.updateFrequency {
+                Section {
+                    VStack(alignment: .leading) {
+                        Text("Metric")
+                        Picker("", selection: $audioSettings.frequencyValue) {
+                            ForEach(Measureable.allCases) { value in
+                                Text(value.rawValue).tag(value)
+                            }
+                        }.pickerStyle(SegmentedPickerStyle())
+                    }
+                    VStack(alignment: .leading){
+                        Text("Frequency Per Knot = \(String(format: "%.2f", audioSettings.ratePerKnot))")
+                        Slider(value: $audioSettings.ratePerKnot, in: 0.125...1.0, step: 0.125, minimumValueLabel: Text("0.125"), maximumValueLabel: Text("1"), label: {EmptyView()})
+                    }
+                }
+            }
+            
             
         }.navigationBarTitle("Audio Settings")
         

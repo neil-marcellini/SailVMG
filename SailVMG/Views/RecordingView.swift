@@ -70,7 +70,9 @@ struct RecordingView: View {
                     },
                     .cancel(Text("Resume Tracking")){
                         locationViewModel.resume()
-                        audioSettings.startSound()
+                        if audioSettings.audioFeedback {
+                            audioSettings.startSound()
+                        }  
                     }
                     
                 ])
