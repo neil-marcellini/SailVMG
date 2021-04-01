@@ -53,8 +53,11 @@ class SoundControl {
     }
     
     
-    func adjustPitch(measurement: Double){
-        self.audioControl.pitch = Float(measurement) * 50
+    func adjustPitch(measurement: Double, semitonesPerKnot: Double){
+        // pitch measured in "cents" 100 cents = 1 semitone
+        // max pitch = 2400 = 24 semitones
+        let semitone:Float = 100.0
+        self.audioControl.pitch = Float(measurement * semitonesPerKnot) * semitone
     }
     
     func adjustSpeed(measurement: Double, maxMeasurement: Double) {

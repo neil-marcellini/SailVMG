@@ -41,6 +41,14 @@ class AudioSettings: ObservableObject {
             UserDefaults.standard.setValue(frequencyValue.rawValue, forKey: "frequencyValue")
         }
     }
+    
+    @Published var semitonesPerKnot: Double = UserDefaults.standard.double(forKey: "semitonesPerKnot") {
+        didSet {
+            UserDefaults.standard.setValue(semitonesPerKnot, forKey: "semitonesPerKnot")
+        }
+    }
+    
+    
 
     func startSound() {
         do {
@@ -67,26 +75,33 @@ class AudioSettings: ObservableObject {
             pitchMeasurement = vmg
         }
         if updatePitch {
-            self.soundControl.adjustPitch(measurement: pitchMeasurement)
+            self.soundControl.adjustPitch(measurement: pitchMeasurement, semitonesPerKnot: semitonesPerKnot)
         } else {
             // set pitch to 0
-            self.soundControl.adjustPitch(measurement: 0)
+            self.soundControl.adjustPitch(measurement: 0, semitonesPerKnot: semitonesPerKnot)
         }
         var frequencyMeasurement = vmg_delta
+        // assume that max vmg change is 30kts per second
+        var maxValueChange = 30.0
         switch frequencyValue {
         case .vmg:
             frequencyMeasurement = vmg
+            // assume max vmg is 60 kts
+            maxValueChange = 60.0
         default:
             frequencyMeasurement = vmg_delta
+            maxValueChange = 30.0
         }
-        // assume that max vmg change is 30kts per second
-        let maxVMGChage = 30.0
         if updateFrequency {
-            self.soundControl.adjustSpeed(measurement: abs(frequencyMeasurement), maxMeasurement: maxVMGChage)
+            self.soundControl.adjustSpeed(measurement: abs(frequencyMeasurement), maxMeasurement: maxValueChange)
         } else {
             // set frequency to 1
-            self.soundControl.adjustSpeed(measurement: 0, maxMeasurement: maxVMGChage)
+            self.soundControl.adjustSpeed(measurement: 0, maxMeasurement: maxValueChange)
         }
         
+    }
+    
+    func semitonesDisplay()->String {
+        return String(format: "%.2f", semitonesPerKnot)
     }
 }

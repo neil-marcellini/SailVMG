@@ -19,7 +19,8 @@ struct SailVMGApp: App {
                                                   "updatePitch": true,
                                                   "updateFrequency": true,
                                                   "pitchValue": "VMG",
-                                                  "frequencyValue": "VMG Acceleration",])
+                                                  "frequencyValue": "VMG Acceleration",
+                                                  "semitonesPerKnot": 0.5,])
     }
     
     var body: some Scene {

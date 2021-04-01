@@ -22,6 +22,10 @@ struct SettingsView: View {
                     Spacer()
                     Text(audioSettings.pitchValue.rawValue)
                 }
+                VStack(alignment: .leading){
+                    Text("Semitones Per Knot = \(audioSettings.semitonesDisplay())")
+                    Slider(value: $audioSettings.semitonesPerKnot, in: 0.25...2.0, step: 0.25, minimumValueLabel: Text("0.25"), maximumValueLabel: Text("2"), label: {EmptyView()})
+                }
                 Toggle("Frequency", isOn: $audioSettings.updateFrequency)
                 HStack {
                     Picker("Change", selection: $audioSettings.frequencyValue) {
