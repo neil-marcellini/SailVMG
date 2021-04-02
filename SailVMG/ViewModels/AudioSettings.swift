@@ -9,7 +9,6 @@ import Foundation
 class AudioSettings: ObservableObject {
     let soundControl = SoundControl()
     
-    
     @Published var audioFeedback = UserDefaults.standard.bool(forKey: "audioFeedback") {
         didSet {
             UserDefaults.standard.setValue(audioFeedback, forKey: "audioFeedback")
@@ -53,6 +52,7 @@ class AudioSettings: ObservableObject {
             UserDefaults.standard.setValue(ratePerKnot, forKey: "ratePerKnot")
         }
     }
+    @Published var showResetConfirmation = false
     
     
 
@@ -105,6 +105,16 @@ class AudioSettings: ObservableObject {
             self.soundControl.adjustSpeed(measurement: 0, maxMeasurement: maxValueChange, ratePerKnot: ratePerKnot)
         }
         
+    }
+    
+    func resetAllSettings() {
+        audioFeedback = true
+        updatePitch = true
+        updateFrequency = true
+        pitchValue = Measureable.vmg
+        frequencyValue = Measureable.vmg_acceleration
+        semitonesPerKnot = 0.5
+        ratePerKnot = 0.25
     }
     
     func sliderDisplay(value: Double)->String {

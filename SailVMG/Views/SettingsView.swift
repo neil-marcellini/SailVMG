@@ -18,9 +18,7 @@ struct SettingsView: View {
                     Toggle(isOn: $audioSettings.updatePitch) { EmptyView()}
                         .toggleStyle(SwitchToggleStyle(tint: Color.blue))
                 }
-            }
-            if audioSettings.updatePitch {
-                Section {
+                if audioSettings.updatePitch {
                     VStack(alignment: .leading) {
                         Text("Metric")
                         Picker("", selection: $audioSettings.pitchValue) {
@@ -42,10 +40,7 @@ struct SettingsView: View {
                     Toggle(isOn: $audioSettings.updateFrequency) { EmptyView()}
                         .toggleStyle(SwitchToggleStyle(tint: Color.blue))
                 }
-            }
-            
-            if audioSettings.updateFrequency {
-                Section {
+                if audioSettings.updateFrequency {
                     VStack(alignment: .leading) {
                         Text("Metric")
                         Picker("", selection: $audioSettings.frequencyValue) {
@@ -60,8 +55,13 @@ struct SettingsView: View {
                     }
                 }
             }
-            
-            
+            Button(action: {audioSettings.showResetConfirmation = true}, label: {
+                Text("Reset All")
+                    .foregroundColor(.red)
+            })
+            .alert(isPresented: $audioSettings.showResetConfirmation) {
+                Alert(title: Text("Reset All Settings"), message: Text("Are you sure you want to reset all settings to the default?"), primaryButton: .default(Text("Yes"), action: audioSettings.resetAllSettings), secondaryButton: .cancel())
+            }
         }.navigationBarTitle("Audio Settings")
         
     }
