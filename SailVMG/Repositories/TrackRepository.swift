@@ -18,6 +18,7 @@ class TrackRespository: ObservableObject {
     let trackpointRepository = TrackpointRespository()
     @Published var trackCount = 0
     @Published var loading = true
+    @Published var showDeleteConfirmation = false
     
     init() {
         getTrackVMs()
@@ -76,7 +77,7 @@ class TrackRespository: ObservableObject {
     
     func setEndTime(track: Track, completion: @escaping ((Bool) -> Void)) {
         guard let track_id = track.id else {
-            print("Error track has no id discardTrack")
+            print("Error track has no id")
             return
         }
         
@@ -106,6 +107,28 @@ class TrackRespository: ObservableObject {
     func removeTrackVM(index: Int) {
         trackVMs.remove(at: index)
         trackCount -= 1
+    }
+    
+    func deleteAll() {
+        for trackVM in trackVMs {
+            discardTrack(trackVM.track)
+        }
+        trackVMs = [TrackViewModel]()
+        trackCount = 0
+    }
+    
+    func discardTrack(_ track: Track) {
+        guard let track_id = track.id else {
+            print("Error track has no id discardTrack")
+            return
+        }
+        db.collection("Tracks").document(track_id).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
     }
 
 }

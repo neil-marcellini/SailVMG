@@ -11,14 +11,30 @@ struct TrackList: View {
     @EnvironmentObject var trackRepository: TrackRespository
     @EnvironmentObject var locationViewModel: LocationViewModel
     var body: some View {
-        List {
-            ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
-                TrackListItem(trackVM: trackVM, mapVM: MapViewModel(trackpoints: trackVM.trackpoints) )
-            }.onDelete { offset in
-                offset.forEach { index in
-                    let trackVM = trackRepository.trackVMs[index]
-                    locationViewModel.trackManager.discardTrack(trackVM.track)
-                    trackRepository.removeTrackVM(index: index)
+        VStack {
+            HStack {
+                Spacer()
+                Button(action: {
+                    trackRepository.showDeleteConfirmation = true
+                }){
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                }
+                .alert(isPresented: $trackRepository.showDeleteConfirmation) {
+                    Alert(title: Text("Delete All Tracks"), message: Text("Are you sure you want to permanently delete all of your recorded tracks?"), primaryButton: .default(Text("Yes"), action: trackRepository.deleteAll), secondaryButton: .cancel())
+                }
+                .padding()
+            }
+            
+            List {
+                ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
+                    TrackListItem(trackVM: trackVM, mapVM: MapViewModel(trackpoints: trackVM.trackpoints) )
+                }.onDelete { offset in
+                    offset.forEach { index in
+                        let trackVM = trackRepository.trackVMs[index]
+                        locationViewModel.trackManager.discardTrack(trackVM.track)
+                        trackRepository.removeTrackVM(index: index)
+                    }
                 }
             }
         }
