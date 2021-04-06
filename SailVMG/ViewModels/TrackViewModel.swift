@@ -148,9 +148,9 @@ class TrackViewModel: ObservableObject {
         if let max_vmg = max_upwind_vmg, let min_vmg = max_downwind_vmg {
             ratio = abs((min_vmg - vmg) / (max_vmg - min_vmg))
         }
-//        print("ratio = \(ratio)")
+        print("ratio = \(ratio)")
         let hue = CGFloat(ratio * maxHue)
-//        print("hue value: \(hue)")
+        print("hue value: \(hue)")
         return UIColor(hue: hue, saturation: 1, brightness: 1, alpha: 1)
         
     }

@@ -21,8 +21,7 @@ struct SailVMGApp: App {
                                                   "pitchValue": "VMG",
                                                   "frequencyValue": "VMG Acceleration",
                                                   "semitonesPerKnot": 0.5,
-                                                  "ratePerKnot": 0.25,
-                                                  "trackVMsID": UUID().uuidString])
+                                                  "ratePerKnot": 0.25])
     }
     
     var body: some Scene {

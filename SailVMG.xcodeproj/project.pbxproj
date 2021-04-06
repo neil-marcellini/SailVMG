@@ -20,7 +20,6 @@
 		3155A05A2571D3F400E885BC /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A0592571D3F400E885BC /* MapView.swift */; };
 		3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A05E2571D42500E885BC /* PlaybackView.swift */; };
 		3155A0822571D68D00E885BC /* Crissy-8-13.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3155A0812571D68D00E885BC /* Crissy-8-13.gpx */; };
-		3155FCDF26191E340071B562 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155FCDE26191E340071B562 /* Cache.swift */; };
 		316175172612BE4A00D3D37A /* GPXExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316175162612BE4A00D3D37A /* GPXExporter.swift */; };
 		316A146325E57D9C00EA184A /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A146225E57D9C00EA184A /* TrackManager.swift */; };
 		31773CC625FAA5D900BCEFBD /* TrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31773CC525FAA5D900BCEFBD /* TrackList.swift */; };
@@ -89,7 +88,6 @@
 		3155A0592571D3F400E885BC /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		3155A05E2571D42500E885BC /* PlaybackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackView.swift; sourceTree = "<group>"; };
 		3155A0812571D68D00E885BC /* Crissy-8-13.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Crissy-8-13.gpx"; sourceTree = "<group>"; };
-		3155FCDE26191E340071B562 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		316175162612BE4A00D3D37A /* GPXExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXExporter.swift; sourceTree = "<group>"; };
 		316A146225E57D9C00EA184A /* TrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManager.swift; sourceTree = "<group>"; };
 		31773CC125FA975500BCEFBD /* CrissySimulated.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CrissySimulated.gpx; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 				3111AED22568D49E00DAEF90 /* Track.swift */,
 				3111AED72568D5D400DAEF90 /* Trackpoint.swift */,
 				314BCA45261543B500A46EF7 /* Measureable.swift */,
-				3155FCDE26191E340071B562 /* Cache.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -577,7 +574,6 @@
 				31F9056625D37419007ACC91 /* MapViewModel.swift in Sources */,
 				3155A05A2571D3F400E885BC /* MapView.swift in Sources */,
 				31D35FC825E8554300A96EE0 /* TrackListItem.swift in Sources */,
-				3155FCDF26191E340071B562 /* Cache.swift in Sources */,
 				316175172612BE4A00D3D37A /* GPXExporter.swift in Sources */,
 				3155A0552571D0A500E885BC /* TrackView.swift in Sources */,
 				31D3E4512613A03C00BB6D28 /* Compass.swift in Sources */,
