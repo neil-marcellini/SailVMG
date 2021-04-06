@@ -19,12 +19,21 @@ class TrackRespository: ObservableObject {
     @Published var trackCount = 0
     @Published var loading = true
     @Published var showDeleteConfirmation = false
+    private let cache = Cache<UUID, [TrackViewModel]>()
+    let trackVMsID: UUID = UUID(uuidString: UserDefaults.standard.string(forKey: "trackVMsID")!)!
     
     init() {
         getTrackVMs()
     }
     
     func getTrackVMs() {
+        // try to load from cache first
+        if let cached = cache.value(forKey: trackVMsID) {
+            trackVMs = cached
+            print("trackVMs cache hit")
+            return
+        }
+        print("trackVMs cache miss")
         let userId = Auth.auth().currentUser?.uid
         db.collection("Tracks")
             .whereField("userId", isEqualTo: userId)
@@ -60,7 +69,12 @@ class TrackRespository: ObservableObject {
     func afterTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
         let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
         trackVMs.append(trackVM)
+        cacheTrackVMs()
         setLoading()
+    }
+    
+    func cacheTrackVMs() {
+        cache.insert(trackVMs, forKey: trackVMsID)
     }
     
     func setLoading() {
@@ -72,6 +86,7 @@ class TrackRespository: ObservableObject {
     func afterNewTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
         let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
         trackVMs.insert(trackVM, at: 0)
+        cacheTrackVMs()
         setLoading()
     }
     
@@ -107,6 +122,7 @@ class TrackRespository: ObservableObject {
     func removeTrackVM(index: Int) {
         trackVMs.remove(at: index)
         trackCount -= 1
+        cacheTrackVMs()
     }
     
     func deleteAll() {
@@ -115,6 +131,7 @@ class TrackRespository: ObservableObject {
         }
         trackVMs = [TrackViewModel]()
         trackCount = 0
+        cacheTrackVMs()
     }
     
     func discardTrack(_ track: Track) {
