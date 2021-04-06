@@ -19,9 +19,19 @@ class TrackRespository: ObservableObject {
     @Published var trackCount = 0
     @Published var loading = true
     @Published var showDeleteConfirmation = false
+    var launchCount = UserDefaults.standard.integer(forKey: "launchCount")
     
     init() {
-        getTrackVMs()
+        if launchCount != 1 {
+            print("offline fetch trackVMs")
+            db.disableNetwork() { error in
+                self.getTrackVMs()
+                self.db.enableNetwork(completion: nil)
+            }
+        } else {
+            getTrackVMs()
+        }
+        
     }
     
     func getTrackVMs() {
@@ -60,6 +70,7 @@ class TrackRespository: ObservableObject {
     func afterTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
         let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
         trackVMs.append(trackVM)
+        sortTrackVMs()
         setLoading()
     }
     
@@ -67,6 +78,10 @@ class TrackRespository: ObservableObject {
         if trackVMs.count == trackCount {
             loading = false
         }
+    }
+    
+    func sortTrackVMs() {
+        trackVMs.sort(by: {$0.track.start_time > $1.track.start_time})
     }
     
     func afterNewTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {

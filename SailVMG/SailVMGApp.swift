@@ -21,7 +21,12 @@ struct SailVMGApp: App {
                                                   "pitchValue": "VMG",
                                                   "frequencyValue": "VMG Acceleration",
                                                   "semitonesPerKnot": 0.5,
-                                                  "ratePerKnot": 0.25])
+                                                  "ratePerKnot": 0.25,
+                                                  "launchCount": 0])
+        var launchCount = UserDefaults.standard.integer(forKey: "launchCount")
+        launchCount += 1
+        print("launchCount = \(launchCount)")
+        UserDefaults.standard.set(launchCount, forKey: "launchCount")
     }
     
     var body: some Scene {
