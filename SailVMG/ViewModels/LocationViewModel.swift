@@ -154,7 +154,7 @@ class LocationViewModel: NSObject, ObservableObject {
             updateCallback(updated_trackpoint)
         }
         
-        trackpointRepository.addTrackPoint(to: track, trackpoint: updated_trackpoint)
+        trackpointRepository.addTrackpoint(to: track, trackpoint: updated_trackpoint)
     }
     
     

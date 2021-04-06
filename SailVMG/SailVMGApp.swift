@@ -11,6 +11,7 @@ import Firebase
 @main
 struct SailVMGApp: App {
     @StateObject var locationViewModel = LocationViewModel()
+    @StateObject var trackRepository = TrackRespository()
     init(){
         FirebaseApp.configure()
         Auth.auth().signInAnonymously()
@@ -33,6 +34,6 @@ struct SailVMGApp: App {
         WindowGroup {
             MainScreen()
                 .environmentObject(locationViewModel)
-        }
+                .environmentObject(trackRepository)        }
     }
 }

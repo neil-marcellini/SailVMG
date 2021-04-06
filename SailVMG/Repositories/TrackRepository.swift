@@ -16,50 +16,56 @@ class TrackRespository: ObservableObject {
     let db = Firestore.firestore()
     @Published var trackVMs = [TrackViewModel]()
     let trackpointRepository = TrackpointRespository()
-    @Published var trackCount = 0
     @Published var loading = true
     @Published var showDeleteConfirmation = false
     var launchCount = UserDefaults.standard.integer(forKey: "launchCount")
+    //callback
+    var afterTracks: (([Track]) -> Void)? = nil
     
     init() {
         if launchCount != 1 {
             print("offline fetch trackVMs")
             db.disableNetwork() { error in
-                self.getTrackVMs()
+                self.getTracks()
                 self.db.enableNetwork(completion: nil)
             }
         } else {
-            getTrackVMs()
+            getTracks()
         }
         
     }
     
-    func getTrackVMs() {
+    
+    func getTracks() {
         let userId = Auth.auth().currentUser?.uid
         db.collection("Tracks")
             .whereField("userId", isEqualTo: userId)
             .order(by: "start_time", descending: true)
             .getDocuments() { (querySnapshot, err) in
-                do {
-                    if let querySnapshot = querySnapshot {
-                        if querySnapshot.documents.isEmpty {
-                            self.loading = false
-                        }
-                        for document in querySnapshot.documents {
-                            guard let track = try document.data(as: Track.self) else {continue}
-                            self.trackCount += 1
-                            self.trackpointRepository.getTrackpoints(track, completion: self.afterTrackpoints)
-                        }
-                    }
+                guard let querySnapshot = querySnapshot else {return}
+                let tracks: [Track] = querySnapshot.documents.compactMap { document in
+                    guard let track = try? document.data(as: Track.self) else { return nil}
+                    return track
                 }
-                catch {
-                    print(err as Any)
+                self.createTrackVMs(tracks: tracks)
+                self.loading = false
+                guard let tracksCallback = self.afterTracks else {
+                    print("tracksCallback not set")
+                    return
                 }
-            
+                tracksCallback(tracks)
+            }
+    }
+    
+    func createTrackVMs(tracks: [Track]) {
+        for track in tracks {
+            let trackVM = TrackViewModel(track: track)
+            trackVMs.append(trackVM)
         }
     }
     
     func hasNoTracks()->Bool {
+        let trackCount = trackVMs.count
         if trackCount == 0 && !loading {
             return true
         } else {
@@ -68,26 +74,13 @@ class TrackRespository: ObservableObject {
     }
     
     func afterTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
-        let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
+        let trackVM = TrackViewModel(track: track)
         trackVMs.append(trackVM)
-        sortTrackVMs()
-        setLoading()
-    }
-    
-    func setLoading() {
-        if trackVMs.count == trackCount {
-            loading = false
-        }
-    }
-    
-    func sortTrackVMs() {
-        trackVMs.sort(by: {$0.track.start_time > $1.track.start_time})
     }
     
     func afterNewTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
-        let trackVM = TrackViewModel(track: track, trackpoints: trackpoints)
+        let trackVM = TrackViewModel(track: track)
         trackVMs.insert(trackVM, at: 0)
-        setLoading()
     }
     
     func setEndTime(track: Track, completion: @escaping ((Bool) -> Void)) {
@@ -110,18 +103,12 @@ class TrackRespository: ObservableObject {
     }
     
     func addTrackVM(track: Track) {
-        loading = true
-        trackCount += 1
-        setEndTime(track: track) { success in
-            if success {
-                self.trackpointRepository.getTrackpoints(track, completion: self.afterNewTrackpoints)
-            }
-        }  
+        let newTrackVM = TrackViewModel(track: track)
+        trackVMs.insert(newTrackVM, at: 0)
     }
     
     func removeTrackVM(index: Int) {
         trackVMs.remove(at: index)
-        trackCount -= 1
     }
     
     func deleteAll() {
@@ -129,7 +116,6 @@ class TrackRespository: ObservableObject {
             discardTrack(trackVM.track)
         }
         trackVMs = [TrackViewModel]()
-        trackCount = 0
     }
     
     func discardTrack(_ track: Track) {
@@ -145,5 +131,5 @@ class TrackRespository: ObservableObject {
             }
         }
     }
-
+    
 }

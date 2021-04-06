@@ -10,7 +10,8 @@ import CoreData
 
 struct MainScreen: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @StateObject var trackRepository = TrackRespository()
+    @EnvironmentObject var trackRepository: TrackRespository
+    @StateObject var trackpointRepository = TrackpointRespository()
     @StateObject var nav = NavigationControl()
     @StateObject var audioSettings = AudioSettings()
     var body: some View {
@@ -38,13 +39,17 @@ struct MainScreen: View {
                                    selection: $nav.selection) { EmptyView()}
                     
                 }.navigationTitle("SailVMG")
+                .navigationViewStyle(StackNavigationViewStyle())
             }
             .environmentObject(nav)
             .environmentObject(locationViewModel)
             .environmentObject(trackRepository)
+            .environmentObject(trackpointRepository)
             .environmentObject(audioSettings)
         }
-       
+        .onAppear {
+            trackRepository.afterTracks = trackpointRepository.getAllTrackpoints
+        }  
     }
 }
 

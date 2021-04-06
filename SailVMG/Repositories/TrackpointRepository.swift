@@ -11,18 +11,19 @@ import FirebaseFirestoreSwift
 import CoreLocation
 class TrackpointRespository: ObservableObject {
     let db = Firestore.firestore()
+    @Published var trackpoints: [Track.ID: [Trackpoint]] = [:]
     
-    func addTrackPoint(to track: Track, trackpoint: Trackpoint) {
-
-        do {
-            let _ = try db.collection("Trackpoints").addDocument(from: trackpoint)
-        } catch {
-            fatalError("Unable to encode task \(error.localizedDescription)")
+    func getAllTrackpoints(trackList: [Track]) {
+        for track in trackList {
+            getTrackpoints(track) { trackpoints in
+                self.trackpoints[track.id] = trackpoints
+            }
         }
-        
     }
-
-    func getTrackpoints(_ track: Track, completion: @escaping (Track, [Trackpoint]) -> Void) {
+    
+    
+    func getTrackpoints(_ track: Track, completion: @escaping ([Trackpoint]) -> Void) {
+        // get all trackpoints given a list of tracks
         var trackpoints = [Trackpoint]()
         guard let track_id: String = track.id else {
             print("error with getTrackpoints")
@@ -43,9 +44,32 @@ class TrackpointRespository: ObservableObject {
                         return nil
                     }
                 }
-                completion(track, trackpoints)
+                completion(trackpoints)
             }
     }
+    
+    func addTrackpoint(to track: Track, trackpoint: Trackpoint) {
+        if let curr_trackpoints = trackpoints[track.id] {
+            var new_trackpoints = curr_trackpoints
+            new_trackpoints.append(trackpoint)
+            
+        } else {
+            // no trackpoints for this track yet, make new list
+            trackpoints[track.id] = [trackpoint]
+        }
+        saveTrackpoint(trackpoint)
+        
+    }
+    
+    func saveTrackpoint(_ trackpoint: Trackpoint) {
+        do {
+            let _ = try db.collection("Trackpoints").addDocument(from: trackpoint)
+        } catch {
+            fatalError("Unable to encode task \(error.localizedDescription)")
+        }
+    }
+    
+    
     
     func getCoordinates(_ track: Track, completion: @escaping ([CLLocationCoordinate2D]) -> Void) {
         var trackpoints = [CLLocationCoordinate2D]()
@@ -73,5 +97,5 @@ class TrackpointRespository: ObservableObject {
             }
     }
     
-        
+    
 }

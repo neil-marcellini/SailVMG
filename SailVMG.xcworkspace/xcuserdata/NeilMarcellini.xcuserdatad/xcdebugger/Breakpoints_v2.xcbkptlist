@@ -14,9 +14,9 @@
             filePath = "SailVMG/Repositories/TrackRepository.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "getTrackVMs()"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "getTracks()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
             endingLineNumber = "25"
-            landmarkName = "init(track:trackpoints:)"
+            landmarkName = "init(track:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +78,9 @@
             filePath = "SailVMG/ViewModels/TrackViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "init(track:trackpoints:)"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "init(track:)"
             landmarkType = "7">
             <Locations>
                <Location

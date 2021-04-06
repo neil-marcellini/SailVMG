@@ -21,9 +21,8 @@ class TrackViewModel: ObservableObject {
     let maxHueDegree: Double
     let maxHue: Double
     
-    init (track: Track, trackpoints: [Trackpoint]) {
+    init (track: Track) {
         self.track = track
-        self.trackpoints = trackpoints
         maxHueDegree = 238.0
         maxHue = maxHueDegree / 360.0
         self.getLocation(completionHandler: self.formatLocation)
