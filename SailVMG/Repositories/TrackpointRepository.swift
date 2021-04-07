@@ -9,8 +9,11 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import CoreLocation
+import Combine
+
 class TrackpointRespository: ObservableObject {
     let db = Firestore.firestore()
+    var trackpointCancel: AnyCancellable? = nil
     @Published var trackpoints: [Track.ID: [Trackpoint]] = [:]
     
     func getAllTrackpoints(trackList: [Track]) {
@@ -52,6 +55,7 @@ class TrackpointRespository: ObservableObject {
         if let curr_trackpoints = trackpoints[track.id] {
             var new_trackpoints = curr_trackpoints
             new_trackpoints.append(trackpoint)
+            trackpoints[track.id] = new_trackpoints
             
         } else {
             // no trackpoints for this track yet, make new list

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
@@ -66,12 +67,14 @@ struct RecordingView: View {
                         if let trackpoints = trackpointRepository.trackpoints[track.id] {
                             trackRepository.addTrackVM(track: track, trackpoints: trackpoints)
                         } else { print("Error, no trackpoints when saving")}
+                        trackpointRepository.trackpointCancel?.cancel()
                         nav.selection = nil
                     },
                     .destructive(Text("Discard Track")){
                         // remove from trackpointRepository
                         trackpointRepository.trackpoints[locationViewModel.track!.id] = nil
                         locationViewModel.discardTrack()
+                        trackpointRepository.trackpointCancel?.cancel()
                         nav.selection = nil
                     },
                     .cancel(Text("Resume Tracking")){
@@ -105,10 +108,11 @@ struct RecordingView: View {
             if audioSettings.audioFeedback {
                 audioSettings.startSound()
             }
-            locationViewModel.$trackpoint.sink { newTrackpoint in
+            trackpointRepository.trackpointCancel = locationViewModel.$trackpoint.sink { newTrackpoint in
                 guard let track = locationViewModel.track else {return}
                 guard let trackpoint = newTrackpoint else {return}
-                self.trackpointRepository.addTrackpoint(to: locationViewModel.track!, trackpoint: trackpoint)
+                print("newTrackpoint = \(trackpoint)")
+                self.trackpointRepository.addTrackpoint(to: track, trackpoint: trackpoint)
             }
     }
 }
