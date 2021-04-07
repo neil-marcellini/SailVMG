@@ -20,11 +20,11 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var twa: Int = 0
     @Published var twd: Double = 180
     @Published var isPaused = false
+    @Published var trackpoint: Trackpoint? = nil
     
     // for compass
     @Published var heading: Double = 0
     let trackManager = TrackManager()
-    let trackpointRepository = TrackpointRespository()
     var track: Track? = nil
     
     let locationManager = CLLocationManager()
@@ -147,6 +147,7 @@ class LocationViewModel: NSObject, ObservableObject {
         print("vmg = \(vmg)")
         print("vmg_delta = \(vmg_delta)")
         let updated_trackpoint = Trackpoint(id: trackpoint.id, track_id: track.id!, time: trackpoint.time, latitude: trackpoint.latitude, longitude: trackpoint.longitude, speed: trackpoint.speed, course: trackpoint.course, vmg: vmg, vmg_delta: vmg_delta, twd: twd)
+        self.trackpoint = updated_trackpoint
         speed = trackpoint.speed
         course = trackpoint.course
         
@@ -154,7 +155,6 @@ class LocationViewModel: NSObject, ObservableObject {
             updateCallback(updated_trackpoint)
         }
         
-        trackpointRepository.addTrackpoint(to: track, trackpoint: updated_trackpoint)
     }
     
     

@@ -13,7 +13,6 @@ import SwiftUI
 class TrackViewModel: ObservableObject {
     var track: Track
     @Published var trackpoints: [Trackpoint]? = nil
-    @Published var loading = true
     @Published var location = ""
     @Published var maxVMG = "-- / -- kts"
     var max_upwind_vmg: Double?

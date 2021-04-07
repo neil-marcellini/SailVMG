@@ -105,10 +105,14 @@ struct RecordingView: View {
             if audioSettings.audioFeedback {
                 audioSettings.startSound()
             }
-        }
+            locationViewModel.$trackpoint.sink { newTrackpoint in
+                guard let track = locationViewModel.track else {return}
+                guard let trackpoint = newTrackpoint else {return}
+                self.trackpointRepository.addTrackpoint(to: locationViewModel.track!, trackpoint: trackpoint)
+            }
     }
 }
-
+}
 struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
         RecordingView()
