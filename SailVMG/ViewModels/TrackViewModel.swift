@@ -12,7 +12,7 @@ import SwiftUI
 
 class TrackViewModel: ObservableObject {
     var track: Track
-    @Published var trackpoints = [Trackpoint]()
+    @Published var trackpoints: [Trackpoint]? = nil
     @Published var loading = true
     @Published var location = ""
     @Published var maxVMG = "-- / -- kts"
@@ -25,15 +25,19 @@ class TrackViewModel: ObservableObject {
         self.track = track
         maxHueDegree = 238.0
         maxHue = maxHueDegree / 360.0
-        self.getLocation(completionHandler: self.formatLocation)
-        self.getMaxVMG()
-        self.loading = false
     }
     
+    func calculateMetrics(new_trackpoints: [Trackpoint]) {
+        trackpoints = new_trackpoints
+        getLocation(completionHandler: formatLocation)
+        getMaxVMG()
+    }
+    
+    
     func getLocation(completionHandler: @escaping (CLPlacemark?) -> Void ) {
-        // Use the last reported location.
-        guard trackpoints.count > 0 else {return}
-        guard let firstPoint = trackpoints.first else { return }
+        // Use the first reported location.
+        guard let curr_trackpoints = trackpoints else {return}
+        guard let firstPoint = curr_trackpoints.first else { return }
         let startLocation = CLLocation(latitude: firstPoint.latitude, longitude: firstPoint.longitude)
         let geocoder = CLGeocoder()
         // Look up the location and pass it to the completion handler
@@ -55,6 +59,8 @@ class TrackViewModel: ObservableObject {
         if let city = place.locality,
            let state = place.administrativeArea {
             location = "\(city), \(state)"
+            track.city = city
+            track.state = state
         }
     }
     func getDate()->String {
@@ -100,23 +106,27 @@ class TrackViewModel: ObservableObject {
     func getMaxVMG() {
         var upwind_display = "--"
         var downwind_display = "--"
-        guard trackpoints.count > 0 else {return}
-        let max_upwind = trackpoints.max { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
+        guard let curr_trackpoints = trackpoints else {return}
+        let max_upwind = curr_trackpoints.max { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
         if let max_upwind_vmg = max_upwind?.vmg {
             self.max_upwind_vmg = max_upwind_vmg
+            track.max_upwind_vmg = max_upwind_vmg
             upwind_display = String(format: "%.2f", max_upwind_vmg)
         }
-        let max_downwind = trackpoints.min { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
+        let max_downwind = curr_trackpoints.min { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
         if let max_downwind_vmg = max_downwind?.vmg {
             if max_downwind_vmg < 0 {
                 self.max_downwind_vmg = max_downwind_vmg
+                track.max_downwind_vmg = max_downwind_vmg
                 downwind_display = String(format: "%.2f", max_downwind_vmg)
             }
         }
         self.maxVMG = "\(downwind_display) / \(upwind_display) kts"
+        
     }
     func getVMGs()->[Double] {
-        let vmgs = trackpoints.compactMap { trackpoint in
+        guard let curr_trackpoints = trackpoints else {return []}
+        let vmgs = curr_trackpoints.compactMap { trackpoint in
             trackpoint.vmg
         }
         return vmgs
@@ -155,9 +165,10 @@ class TrackViewModel: ObservableObject {
     }
     
     func getLocations()->[CGFloat] {
-        let length: Double = 1 / Double(trackpoints.count)
+        guard let curr_trackpoints = trackpoints else {return []}
+        let length: Double = 1 / Double(curr_trackpoints.count)
         let unit_length = CGFloat(length)
-        let location_units = Array(repeating: unit_length, count: trackpoints.count)
+        let location_units = Array(repeating: unit_length, count: curr_trackpoints.count)
         return location_units
         
     }

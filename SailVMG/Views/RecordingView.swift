@@ -10,6 +10,7 @@ import SwiftUI
 struct RecordingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var trackRepository: TrackRespository
+    @EnvironmentObject var trackpointRepository: TrackpointRespository
     @EnvironmentObject var nav: NavigationControl
     @EnvironmentObject var audioSettings: AudioSettings
     var body: some View {
@@ -61,10 +62,15 @@ struct RecordingView: View {
                     .default(Text("Save Track")){
                         let end_time = Date()
                         locationViewModel.track!.end_time = end_time
-                        trackRepository.addTrackVM(track: locationViewModel.track!)
+                        let track = locationViewModel.track!
+                        if let trackpoints = trackpointRepository.trackpoints[track.id] {
+                            trackRepository.addTrackVM(track: track, trackpoints: trackpoints)
+                        } else { print("Error, no trackpoints when saving")}
                         nav.selection = nil
                     },
                     .destructive(Text("Discard Track")){
+                        // remove from trackpointRepository
+                        trackpointRepository.trackpoints[locationViewModel.track!.id] = nil
                         locationViewModel.discardTrack()
                         nav.selection = nil
                     },

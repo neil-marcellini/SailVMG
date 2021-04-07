@@ -11,7 +11,8 @@ import CoreGPX
 struct GPXExporter {
     
     func getGPXFile(trackVM: TrackViewModel)->NSURL? {
-        let gpx = getGPXString(trackpoints: trackVM.trackpoints)
+        guard let trackpoints = trackVM.trackpoints else {return nil}
+        let gpx = getGPXString(trackpoints: trackpoints)
         let fileName = getFileName(trackVM: trackVM)
         let filePath = getDocumentsDirectory().appendingPathComponent(fileName)
 

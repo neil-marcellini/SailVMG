@@ -28,7 +28,7 @@ struct TrackList: View {
             
             List {
                 ForEach(trackRepository.trackVMs, id: \.track.id) { trackVM in
-                    TrackListItem(trackVM: trackVM, mapVM: MapViewModel(trackpoints: trackVM.trackpoints) )
+                    TrackListItem(trackVM: trackVM, mapVM: MapViewModel(trackpoints: []) )
                 }.onDelete { offset in
                     offset.forEach { index in
                         let trackVM = trackRepository.trackVMs[index]

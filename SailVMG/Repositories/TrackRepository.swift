@@ -102,8 +102,9 @@ class TrackRespository: ObservableObject {
         
     }
     
-    func addTrackVM(track: Track) {
+    func addTrackVM(track: Track, trackpoints: [Trackpoint]) {
         let newTrackVM = TrackViewModel(track: track)
+        newTrackVM.calculateMetrics(new_trackpoints: trackpoints)
         trackVMs.insert(newTrackVM, at: 0)
     }
     
