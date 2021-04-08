@@ -23,16 +23,16 @@ class TrackRespository: ObservableObject {
     var afterTracks: (([Track]) -> Void)? = nil
     
     init() {
-        if launchCount != 1 {
-            print("offline fetch trackVMs")
-            db.disableNetwork() { error in
-                self.getTracks()
-                self.db.enableNetwork(completion: nil)
-            }
-        } else {
-            getTracks()
-        }
-        
+//        if launchCount != 1 {
+//            print("offline fetch trackVMs")
+//            db.disableNetwork() { error in
+//                self.getTracks()
+//                self.db.enableNetwork(completion: nil)
+//            }
+//        } else {
+//            getTracks()
+//        }
+        getTracks()
     }
     
     
@@ -55,6 +55,25 @@ class TrackRespository: ObservableObject {
                 }
                 tracksCallback(tracks)
             }
+    }
+    
+    func createTrack() -> Track? {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("Error, no currentUser id")
+            return nil
+        }
+        var track = Track(id: nil, start_time: Date(), end_time: nil)
+        let trackRef = getTrackRef(track: track)
+        track.id = trackRef.documentID
+        track.userId = userId
+        updateTrack(newTrack: track)
+        return track
+    }
+    
+    
+    func getTrackRef(track: Track) -> DocumentReference {
+        let newTrackRef = db.collection("Tracks").document()
+        return newTrackRef
     }
     
     func createTrackVMs(tracks: [Track]) {
@@ -103,9 +122,27 @@ class TrackRespository: ObservableObject {
     }
     
     func addTrackVM(track: Track, trackpoints: [Trackpoint]) {
+        print("addTrackVM track userID = \(track.userId)")
         let newTrackVM = TrackViewModel(track: track)
         newTrackVM.calculateMetrics(new_trackpoints: trackpoints)
+        let updatedTrack = newTrackVM.track
+        print("updatedTrack userID = \(updatedTrack.userId)")
+        updateTrack(newTrack: updatedTrack)
         trackVMs.insert(newTrackVM, at: 0)
+    }
+    
+    
+    func updateTrack(newTrack: Track) {
+        guard let track_id = newTrack.id else {
+            print("Error track has no id")
+            return
+        }
+        print("Updating track")
+        do {
+            try db.collection("Tracks").document(track_id).setData(from: newTrack, merge: true)
+        } catch {
+            print("Error updating track")
+        }
     }
     
     func removeTrackVM(index: Int) {

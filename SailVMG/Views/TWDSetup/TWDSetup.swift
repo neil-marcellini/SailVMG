@@ -23,12 +23,17 @@ struct TWDSetup: View {
             Spacer()
             Button(action: {
                 locationViewModel.twd = locationViewModel.heading
-                locationViewModel.startRecording()
+                guard let track = trackRepository.createTrack() else {
+                    nav.selection = nil
+                    return
+                }
+                locationViewModel.startRecording(track: track)
                 nav.selection = "RecordingView"
+                
             }){
                 Image(systemName: "checkmark.circle").font(.system(size: 100))
             }
-                
+            
         }.navigationTitle("TWD Setup")
     }
 }

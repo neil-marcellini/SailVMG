@@ -32,7 +32,7 @@ struct TrackList: View {
                 }.onDelete { offset in
                     offset.forEach { index in
                         let trackVM = trackRepository.trackVMs[index]
-                        locationViewModel.trackManager.discardTrack(trackVM.track)
+                        trackRepository.discardTrack(trackVM.track)
                         trackRepository.removeTrackVM(index: index)
                     }
                 }

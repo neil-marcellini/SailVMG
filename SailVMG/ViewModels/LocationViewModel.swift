@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import SwiftUI
+import Firebase
 
 class LocationViewModel: NSObject, ObservableObject {
     @Published var latitude: Double = 0
@@ -24,7 +25,6 @@ class LocationViewModel: NSObject, ObservableObject {
     
     // for compass
     @Published var heading: Double = 0
-    let trackManager = TrackManager()
     var track: Track? = nil
     
     let locationManager = CLLocationManager()
@@ -50,28 +50,12 @@ class LocationViewModel: NSObject, ObservableObject {
         isPaused = false
         self.locationManager.startUpdatingLocation()
     }
-    
-    
-    
-    func setTrack(_ new_track: Track) {
-        track = new_track
-    }
-    func startRecording() {
-        track = Track(id: nil, start_time: Date(), end_time: nil)
-        let track_id = trackManager.createTrack(track!)
-        track!.id = track_id
-        setTrack(track!)
+  
+    func startRecording(track: Track) {
+        self.track = track
         resume()
     }
     
-    
-    func discardTrack() {
-        guard let curr_track = track else {
-            print("No track exists to delete")
-            return
-        }
-        trackManager.discardTrack(curr_track)
-    }
     func plusTwd(){
         twd += 1
     }

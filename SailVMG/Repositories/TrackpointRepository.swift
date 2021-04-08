@@ -13,7 +13,7 @@ import Combine
 
 class TrackpointRespository: ObservableObject {
     let db = Firestore.firestore()
-    var trackpointCancel: AnyCancellable? = nil
+    var trackpointUpdates: AnyCancellable? = nil
     @Published var trackpoints: [Track.ID: [Trackpoint]] = [:]
     
     func getAllTrackpoints(trackList: [Track]) {
@@ -71,6 +71,13 @@ class TrackpointRespository: ObservableObject {
         } catch {
             fatalError("Unable to encode task \(error.localizedDescription)")
         }
+    }
+    
+    // return the time of the last trackpoint
+    func getEndTime(track: Track)->Date? {
+        guard let all_trackpoints = trackpoints[track.id] else { return nil}
+        guard let last_trackpoint = all_trackpoints.last else {return nil}
+        return last_trackpoint.time
     }
     
     

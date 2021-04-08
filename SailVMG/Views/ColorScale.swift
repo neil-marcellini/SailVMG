@@ -13,10 +13,10 @@ struct ColorScale: View {
         HStack(spacing: 0) {
             Spacer()
             VStack {
-                Text(String(format: "%.2f", trackVM.max_upwind_vmg ?? 0) + " kts")
+                Text(String(format: "%.2f", trackVM.track.max_upwind_vmg ?? 0) + " kts")
                     .font(.body)
                 Spacer()
-                Text(String(format: "%.2f", trackVM.max_downwind_vmg ?? 0) + " kts")
+                Text(String(format: "%.2f", trackVM.track.max_downwind_vmg ?? 0) + " kts")
                     .font(.body)
                 
                 

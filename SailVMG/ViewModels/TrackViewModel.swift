@@ -13,10 +13,6 @@ import SwiftUI
 class TrackViewModel: ObservableObject {
     var track: Track
     @Published var trackpoints: [Trackpoint]? = nil
-    @Published var location = ""
-    @Published var maxVMG = "-- / -- kts"
-    var max_upwind_vmg: Double?
-    var max_downwind_vmg: Double?
     let maxHueDegree: Double
     let maxHue: Double
     
@@ -30,6 +26,13 @@ class TrackViewModel: ObservableObject {
         trackpoints = new_trackpoints
         getLocation(completionHandler: formatLocation)
         getMaxVMG()
+    }
+    
+    func locationDisplay() -> String {
+        guard let city = track.city else {return ""}
+        guard let state = track.state else {return ""}
+        let location = "\(city), \(state)"
+        return location
     }
     
     
@@ -53,11 +56,11 @@ class TrackViewModel: ObservableObject {
         })
     }
     
+    
     func formatLocation(_ place: CLPlacemark?) {
         guard let place = place else {return}
         if let city = place.locality,
            let state = place.administrativeArea {
-            location = "\(city), \(state)"
             track.city = city
             track.state = state
         }
@@ -102,25 +105,29 @@ class TrackViewModel: ObservableObject {
         return duration
     }
     
+    
+    func displayMaxVMG() -> String {
+        var maxVMG = "-- / -- kts"
+        guard let max_downwind = track.max_downwind_vmg else {return maxVMG}
+        guard let max_upwind = track.max_upwind_vmg else {return maxVMG}
+        let downwind_display = String(format: "%.2f", max_downwind)
+        let upwind_display = String(format: "%.2f", max_upwind)
+        maxVMG = "\(downwind_display) / \(upwind_display) kts"
+        return maxVMG
+    }
+    
     func getMaxVMG() {
-        var upwind_display = "--"
-        var downwind_display = "--"
         guard let curr_trackpoints = trackpoints else {return}
         let max_upwind = curr_trackpoints.max { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
         if let max_upwind_vmg = max_upwind?.vmg {
-            self.max_upwind_vmg = max_upwind_vmg
             track.max_upwind_vmg = max_upwind_vmg
-            upwind_display = String(format: "%.2f", max_upwind_vmg)
         }
         let max_downwind = curr_trackpoints.min { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
         if let max_downwind_vmg = max_downwind?.vmg {
             if max_downwind_vmg < 0 {
-                self.max_downwind_vmg = max_downwind_vmg
                 track.max_downwind_vmg = max_downwind_vmg
-                downwind_display = String(format: "%.2f", max_downwind_vmg)
             }
         }
-        self.maxVMG = "\(downwind_display) / \(upwind_display) kts"
         
     }
     func getVMGs()->[Double] {
@@ -153,7 +160,7 @@ class TrackViewModel: ObservableObject {
     func vmgToColor(_ vmg: Double) -> UIColor {
         // 0.66 is a dark blue in HSV
         var ratio: Double = 1
-        if let max_vmg = max_upwind_vmg, let min_vmg = max_downwind_vmg {
+        if let max_vmg = track.max_upwind_vmg, let min_vmg = track.max_downwind_vmg {
             ratio = abs((min_vmg - vmg) / (max_vmg - min_vmg))
         }
         print("ratio = \(ratio)")

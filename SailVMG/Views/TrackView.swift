@@ -17,14 +17,14 @@ struct TrackView: View {
                     .font(.headline)
                 HStack {
                     Image(systemName: "mappin.and.ellipse")
-                    Text(trackVM.location)
+                    Text(trackVM.locationDisplay())
                 }
                 HStack {
                     Image(systemName: "clock")
                     Text(trackVM.getDuration())
                 }
                 Text("Max VMG:")
-                Text(trackVM.maxVMG)
+                Text(trackVM.displayMaxVMG())
                 Spacer()
             }
             Spacer()
