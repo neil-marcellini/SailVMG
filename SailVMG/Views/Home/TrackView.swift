@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TrackView: View {
     @EnvironmentObject var trackVM: TrackViewModel
-    @EnvironmentObject var mapVM: MapViewModel
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 10) {

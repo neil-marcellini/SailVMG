@@ -29,6 +29,7 @@ class MapViewModel: ObservableObject {
     
     func getPreview(trackpoints: [Trackpoint], afterURL: @escaping ((URL)->Void), afterImage: @escaping ((UIImage)->Void)) {
         addTrack(trackpoints: trackpoints)
+        makePreview()
         previewUpdates = self.$preview.sink { newImage in
             guard let image = newImage else {return}
             afterImage(image)
@@ -78,9 +79,7 @@ class MapViewModel: ObservableObject {
         }
         let track_line = MKPolyline(coordinates: route_cords, count: route_cords.count)
         self.route = track_line
-        self.makePreview()
         self.loading = false
-        
     }
     
     func makePreview() {

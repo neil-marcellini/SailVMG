@@ -21,6 +21,7 @@
 		3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3155A05E2571D42500E885BC /* PlaybackView.swift */; };
 		3155A0822571D68D00E885BC /* Crissy-8-13.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3155A0812571D68D00E885BC /* Crissy-8-13.gpx */; };
 		316175172612BE4A00D3D37A /* GPXExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316175162612BE4A00D3D37A /* GPXExporter.swift */; };
+		3162FE092620E1CC000386BF /* MapLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162FE082620E1CC000386BF /* MapLoadingView.swift */; };
 		31773CC625FAA5D900BCEFBD /* TrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31773CC525FAA5D900BCEFBD /* TrackList.swift */; };
 		31773CCB25FAA6CA00BCEFBD /* NoTracksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */; };
 		318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABBEC255F400600EFF7E2 /* SailVMGApp.swift */; };
@@ -88,6 +89,7 @@
 		3155A05E2571D42500E885BC /* PlaybackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackView.swift; sourceTree = "<group>"; };
 		3155A0812571D68D00E885BC /* Crissy-8-13.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Crissy-8-13.gpx"; sourceTree = "<group>"; };
 		316175162612BE4A00D3D37A /* GPXExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXExporter.swift; sourceTree = "<group>"; };
+		3162FE082620E1CC000386BF /* MapLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLoadingView.swift; sourceTree = "<group>"; };
 		31773CC125FA975500BCEFBD /* CrissySimulated.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CrissySimulated.gpx; sourceTree = "<group>"; };
 		31773CC525FAA5D900BCEFBD /* TrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackList.swift; sourceTree = "<group>"; };
 		31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTracksView.swift; sourceTree = "<group>"; };
@@ -192,6 +194,33 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		3162FE0D2620E253000386BF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				318ABBEE255F400600EFF7E2 /* MainScreen.swift */,
+				31D35FE225E86E2900A96EE0 /* MapPreview.swift */,
+				31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */,
+				31773CC525FAA5D900BCEFBD /* TrackList.swift */,
+				31D35FC725E8554300A96EE0 /* TrackListItem.swift */,
+				3155A0542571D0A500E885BC /* TrackView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3162FE0E2620E2C9000386BF /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				31F9055725D3241C007ACC91 /* ColorScale.swift */,
+				3155A0592571D3F400E885BC /* MapView.swift */,
+				3155A05E2571D42500E885BC /* PlaybackView.swift */,
+				3162FE082620E1CC000386BF /* MapLoadingView.swift */,
+				31D3E44B26138E4200BB6D28 /* ShareButton.swift */,
+				318D97D925FC789B0016E302 /* TWDControl.swift */,
+				31D35FD225E8593100A96EE0 /* VMGChartView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		318ABBE0255F400600EFF7E2 = {
 			isa = PBXGroup;
 			children = (
@@ -279,21 +308,11 @@
 		31C747582568AA9F00A454B7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				31F9055725D3241C007ACC91 /* ColorScale.swift */,
-				318ABBEE255F400600EFF7E2 /* MainScreen.swift */,
+				3162FE0E2620E2C9000386BF /* Map */,
+				3162FE0D2620E253000386BF /* Home */,
 				31D3E45A2613A97200BB6D28 /* TWDSetup */,
-				31773CC525FAA5D900BCEFBD /* TrackList.swift */,
-				31773CCA25FAA6CA00BCEFBD /* NoTracksView.swift */,
-				31D35FE225E86E2900A96EE0 /* MapPreview.swift */,
-				3155A0592571D3F400E885BC /* MapView.swift */,
-				3155A05E2571D42500E885BC /* PlaybackView.swift */,
-				31D3E44B26138E4200BB6D28 /* ShareButton.swift */,
 				31C7475C2568ABC400A454B7 /* RecordingView.swift */,
 				31D3E4752613DBAD00BB6D28 /* SettingsView.swift */,
-				318D97D925FC789B0016E302 /* TWDControl.swift */,
-				31D35FC725E8554300A96EE0 /* TrackListItem.swift */,
-				3155A0542571D0A500E885BC /* TrackView.swift */,
-				31D35FD225E8593100A96EE0 /* VMGChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -589,6 +608,7 @@
 				31CA9E2825D08C5400DE5A26 /* MapViewDelegate.swift in Sources */,
 				31C7475D2568ABC400A454B7 /* RecordingView.swift in Sources */,
 				3140457B25DE09FF00C6BF74 /* SoundControl.swift in Sources */,
+				3162FE092620E1CC000386BF /* MapLoadingView.swift in Sources */,
 				318ABBED255F400600EFF7E2 /* SailVMGApp.swift in Sources */,
 				3155A0502571CF6600E885BC /* TrackViewModel.swift in Sources */,
 				3111AF362568DEA200DAEF90 /* TrackRepository.swift in Sources */,

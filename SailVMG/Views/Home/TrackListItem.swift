@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TrackListItem: View {
     @StateObject var trackVM: TrackViewModel
-    @StateObject var mapVM: MapViewModel
     var body: some View {
         ZStack {
             if trackVM.loading {
@@ -20,9 +19,7 @@ struct TrackListItem: View {
             } else {
                 TrackView()
                     .environmentObject(trackVM)
-                    .environmentObject(mapVM)
-                NavigationLink(destination: PlaybackView().environmentObject(trackVM)
-                                .environmentObject(mapVM)){
+                NavigationLink(destination: PlaybackView().environmentObject(trackVM)){
                     EmptyView()
                 }.buttonStyle(PlainButtonStyle())
             }
@@ -33,6 +30,6 @@ struct TrackListItem: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackListItem(trackVM: TrackViewModel(track: Track(id: nil, start_time: Date(), end_time: nil, userId: nil, preview_url: nil)), mapVM: MapViewModel())
+        TrackListItem(trackVM: TrackViewModel(track: Track(id: nil, start_time: Date(), end_time: nil, userId: nil, preview_url: nil)))
     }
 }
