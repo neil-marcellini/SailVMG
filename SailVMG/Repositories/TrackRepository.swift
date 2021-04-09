@@ -25,15 +25,6 @@ class TrackRespository: ObservableObject {
     var newTrackVM: TrackViewModel? = nil
     
     init() {
-//        if launchCount != 1 {
-//            print("offline fetch trackVMs")
-//            db.disableNetwork() { error in
-//                self.getTracks()
-//                self.db.enableNetwork(completion: nil)
-//            }
-//        } else {
-//            getTracks()
-//        }
         getTracks()
     }
     
@@ -94,16 +85,6 @@ class TrackRespository: ObservableObject {
         }
     }
     
-    func afterTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
-        let trackVM = TrackViewModel(track: track)
-        trackVMs.append(trackVM)
-    }
-    
-    func afterNewTrackpoints(track: Track, trackpoints: [Trackpoint]) -> Void {
-        let trackVM = TrackViewModel(track: track)
-        trackVMs.insert(trackVM, at: 0)
-    }
-    
     
     func addTrackVM(track: Track, trackpoints: [Trackpoint]) {
         newTrackVM = TrackViewModel(track: track)
@@ -113,20 +94,32 @@ class TrackRespository: ObservableObject {
         trackVMs.insert(newTrackVM!, at: 0)   
     }
     
-    func afterPreviewURL(previewURL: URL) {
+    func afterPreviewURLs(previewURLs: [String:URL]) {
         guard let trackVM = newTrackVM else {
             print("Error, no trackVM afterMap")
             return
         }
-        trackVM.track.preview_url = previewURL
+        for (mode, url) in previewURLs {
+            if mode == "light" {
+                trackVM.track.light_preview_url = url
+            } else if mode == "dark" {
+                trackVM.track.dark_preview_url = url
+            }
+        }
     }
     
-    func afterPreviewImage(preview: UIImage) {
+    func afterPreviewImages(previews: [String:UIImage]) {
         guard let trackVM = newTrackVM else {
             print("Error, no trackVM afterPreviewImage")
             return
         }
-        trackVM.trackPreview = preview
+        for (mode, preview) in previews {
+            if mode == "light" {
+                trackVM.light_preview = preview
+            } else if mode == "dark" {
+                trackVM.dark_preview = preview
+            }
+        }
     }
     
     func updateTrack(newTrack: Track) {

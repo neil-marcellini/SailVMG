@@ -34,6 +34,8 @@ struct SailVMGApp: App {
         WindowGroup {
             MainScreen()
                 .environmentObject(locationViewModel)
-                .environmentObject(trackRepository)        }
+                .environmentObject(trackRepository)
+            
+        }
     }
 }

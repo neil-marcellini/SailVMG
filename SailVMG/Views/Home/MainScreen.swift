@@ -15,6 +15,7 @@ struct MainScreen: View {
     @StateObject var nav = NavigationControl()
     @StateObject var audioSettings = AudioSettings()
     @StateObject var mapVM = MapViewModel()
+    
     var body: some View {
         VStack(spacing: 0) {
             NavigationView {

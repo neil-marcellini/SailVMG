@@ -8,13 +8,14 @@
 import Foundation
 import MapKit
 import UIKit
+import SwiftUI
 import FirebaseStorage
 import Combine
 
 class MapViewModel: ObservableObject {
     @Published var route: MKPolyline? = nil
-    @Published var preview: UIImage? = nil
-    @Published var previewURL: URL? = nil
+    @Published var previews: [String: UIImage] = [:]
+    @Published var previewURLs: [String:URL] = [:]
     var coordinates: [CLLocationCoordinate2D]? = nil
     @Published var loading = true
     let storage = Storage.storage()
@@ -22,48 +23,32 @@ class MapViewModel: ObservableObject {
     
     var urlUpdates: AnyCancellable? = nil
     var previewUpdates: AnyCancellable? = nil
+    var colorScheme: ColorScheme? = nil
     
     init() {
         self.storageRef = storage.reference()
     }
     
-    func getPreview(trackpoints: [Trackpoint], afterURL: @escaping ((URL)->Void), afterImage: @escaping ((UIImage)->Void)) {
+    func getPreview(trackpoints: [Trackpoint], afterURLs: @escaping (([String:URL])->Void), afterImages: @escaping (([String: UIImage])->Void)) {
+        previews = [:]
+        previewURLs = [:]
         addTrack(trackpoints: trackpoints)
-        makePreview()
-        previewUpdates = self.$preview.sink { newImage in
-            guard let image = newImage else {return}
-            afterImage(image)
-            self.previewUpdates?.cancel()
+        makePreviews()
+        previewUpdates = self.$previews.sink { previewDict in
+            if previewDict.count == ColorScheme.allCases.count {
+                afterImages(previewDict)
+                self.previewUpdates?.cancel()
+            }
         }
-        urlUpdates = self.$previewURL.sink { newURL in
-            guard let url = newURL else {return}
-            afterURL(url)
-            self.urlUpdates?.cancel()
+        urlUpdates = self.$previewURLs.sink { urlsDict in
+            if urlsDict.count == ColorScheme.allCases.count {
+                afterURLs(urlsDict)
+                self.urlUpdates?.cancel()
+            }
         }
     }
     
-    func uploadImage() {
-        guard let preview = self.preview else {return}
-        guard let data = preview.pngData() else {return}
-        let previewId = UUID()
-        let previewRef = storageRef.child("images/previews/\(previewId.uuidString)")
-        let uploadTask = previewRef.putData(data, metadata: nil) { (metadata, error) in
-            if metadata == nil {
-                // Uh-oh, an error occurred!
-                print("Error, uploadImage")
-                    return
-            }
-            // You can also access to download URL after upload.
-            previewRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
-                self.previewURL = downloadURL
-                
-            }
-        }
-    }
+    
     
     func getCoordinates(trackpoints: [Trackpoint]) {
         self.coordinates = trackpoints.compactMap { trackpoint in
@@ -82,21 +67,33 @@ class MapViewModel: ObservableObject {
         self.loading = false
     }
     
-    func makePreview() {
+    func makePreviews() {
         let view = MKMapView()
         addRoute(to: view)
-        let mapSnapshotOptions = MKMapSnapshotter.Options()
+        
         let mapRect = self.route!.boundingMapRect
         let padding = 100.0
         let newSize = MKMapSize(width: mapRect.size.width + padding, height: mapRect.size.height + padding)
         var paddedRect = MKMapRect(origin: mapRect.origin, size: newSize)
         paddedRect = paddedRect.offsetBy(dx: padding / 2, dy: padding / 2)
-        mapSnapshotOptions.mapRect = paddedRect
-        let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
-        snapShotter.start { (snapshot: MKMapSnapshotter.Snapshot?, error: Error?) in
-            self.drawImageRoute(snapshot: snapshot)
+       
+        // make a light and dark snapshot
+        for mode in ColorScheme.allCases {
+            let mapSnapshotOptions = MKMapSnapshotter.Options()
+            mapSnapshotOptions.mapRect = paddedRect
+            if mode == .dark {
+                let darkTrait = UITraitCollection(userInterfaceStyle: .dark)
+                let traits = UITraitCollection(traitsFrom: [mapSnapshotOptions.traitCollection, darkTrait])
+                mapSnapshotOptions.traitCollection = traits
+            }
+            let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
+            snapShotter.start { (snapshot: MKMapSnapshotter.Snapshot?, error: Error?) in
+                if error != nil {
+                    print("Error, snapshot: \(String(describing: error))")
+                }
+                self.drawImageRoute(snapshot: snapshot, mode: mode)
+            }
         }
-        
     }
     
     func addRoute(to view: MKMapView) {
@@ -110,7 +107,7 @@ class MapViewModel: ObservableObject {
         view.addOverlay(route)
     }
     
-    func drawImageRoute(snapshot: MKMapSnapshotter.Snapshot?) {
+    func drawImageRoute(snapshot: MKMapSnapshotter.Snapshot?, mode: ColorScheme) {
         guard let snapshot = snapshot else { return }
         let image = snapshot.image
         UIGraphicsBeginImageContextWithOptions((image.size), true, (image.scale))
@@ -131,10 +128,41 @@ class MapViewModel: ObservableObject {
             }
         }
         context?.strokePath()
-        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        guard let finalImage = UIGraphicsGetImageFromCurrentImageContext() else {return}
         UIGraphicsEndImageContext()
-        self.preview = finalImage
-        uploadImage()
+        // set the preview if it matches the current colorScheme
+        if mode == .dark {
+            previews["dark"] = finalImage
+        } else if (mode == .light) {
+            previews["light"] = finalImage
+        }
+        uploadImage(preview: finalImage, mode: mode)
+    }
+    
+    func uploadImage(preview: UIImage, mode: ColorScheme) {
+        guard let data = preview.pngData() else {return}
+        var modeString = "light"
+        if mode == .dark {
+            modeString = "dark"
+        }
+        let previewId = UUID()
+        let previewRef = storageRef.child("images/previews/\(modeString).\(previewId.uuidString)")
+        let uploadTask = previewRef.putData(data, metadata: nil) { (metadata, error) in
+            if metadata == nil {
+                // Uh-oh, an error occurred!
+                print("Error, uploadImage")
+                    return
+            }
+            // You can also access to download URL after upload.
+            previewRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                self.previewURLs[modeString] = downloadURL
+                
+            }
+        }
     }
     
 }

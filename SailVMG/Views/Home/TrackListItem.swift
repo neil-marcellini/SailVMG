@@ -30,6 +30,6 @@ struct TrackListItem: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackListItem(trackVM: TrackViewModel(track: Track(id: nil, start_time: Date(), end_time: nil, userId: nil, preview_url: nil)))
+        TrackListItem(trackVM: TrackViewModel(track: Track(id: nil, start_time: Date())))
     }
 }

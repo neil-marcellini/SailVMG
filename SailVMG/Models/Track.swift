@@ -14,7 +14,8 @@ struct Track: Codable, Identifiable {
     var start_time: Date
     var end_time: Date?
     var userId: String?
-    var preview_url: URL?
+    var light_preview_url: URL?
+    var dark_preview_url: URL?
     var city: String?
     var state: String?
     var max_upwind_vmg: Double?

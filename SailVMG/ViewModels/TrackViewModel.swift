@@ -13,7 +13,8 @@ import Combine
 
 class TrackViewModel: ObservableObject {
     @Published var track: Track
-    @Published var trackPreview: UIImage?
+    @Published var light_preview: UIImage?
+    @Published var dark_preview: UIImage?
     @Published var loading = false
     @Published var trackpoints: [Trackpoint]? = nil
     let maxHueDegree: Double
@@ -42,7 +43,9 @@ class TrackViewModel: ObservableObject {
             &&
             track.state != nil
             &&
-            track.preview_url != nil
+            track.light_preview_url != nil
+            &&
+            track.dark_preview_url != nil
         )
         if !loading {
             trackLoadingUpdates?.cancel()
@@ -190,9 +193,7 @@ class TrackViewModel: ObservableObject {
         if let max_vmg = track.max_upwind_vmg, let min_vmg = track.max_downwind_vmg {
             ratio = abs((min_vmg - vmg) / (max_vmg - min_vmg))
         }
-        print("ratio = \(ratio)")
         let hue = CGFloat(ratio * maxHue)
-        print("hue value: \(hue)")
         return UIColor(hue: hue, saturation: 1, brightness: 1, alpha: 1)
         
     }
