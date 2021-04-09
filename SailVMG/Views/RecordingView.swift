@@ -15,7 +15,6 @@ struct RecordingView: View {
     @EnvironmentObject var nav: NavigationControl
     @EnvironmentObject var audioSettings: AudioSettings
     @EnvironmentObject var mapVM: MapViewModel
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
     var body: some View {
         VStack {
             TWDControl()
@@ -67,7 +66,6 @@ struct RecordingView: View {
                         locationViewModel.track!.end_time = end_time
                         trackRepository.updateTrack(newTrack: locationViewModel.track!)
                         if let trackpoints = trackpointRepository.trackpoints[locationViewModel.track!.id] {
-                            mapVM.colorScheme = self.colorScheme
                             mapVM.getPreview(trackpoints: trackpoints, afterURLs: trackRepository.afterPreviewURLs, afterImages: trackRepository.afterPreviewImages)
                             trackRepository.addTrackVM(track: locationViewModel.track!, trackpoints: trackpoints)
                         } else { print("Error, no trackpoints when saving")}

@@ -80,33 +80,4 @@ class TrackpointRespository: ObservableObject {
         return last_trackpoint.time
     }
     
-    
-    
-    func getCoordinates(_ track: Track, completion: @escaping ([CLLocationCoordinate2D]) -> Void) {
-        var trackpoints = [CLLocationCoordinate2D]()
-        guard let track_id: String = track.id else {
-            print("error with getCoordinates")
-            completion(trackpoints)
-            return
-        }
-        db.collection("Trackpoints")
-            .whereField("track_id", isEqualTo: track_id)
-            .order(by: "time")
-            .getDocuments() { (querySnapshot, err) in
-                if let querySnapshot = querySnapshot {
-                    trackpoints = querySnapshot.documents.compactMap { document in
-                        do {
-                            guard let trackpoint = try document.data(as: Trackpoint.self) else {return nil}
-                            return CLLocationCoordinate2D(latitude: Double(trackpoint.latitude), longitude: Double(trackpoint.longitude))
-                        } catch {
-                            print(error)
-                        }
-                        return nil
-                    }
-                }
-                completion(trackpoints)
-            }
-    }
-    
-    
 }

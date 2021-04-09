@@ -19,9 +19,6 @@ class TrackViewModel: ObservableObject {
     @Published var trackpoints: [Trackpoint]? = nil
     let maxHueDegree: Double
     let maxHue: Double
-    
-    var afterLocation: ((TrackViewModel)->Void)?
-    
     var trackLoadingUpdates: AnyCancellable? = nil
     
     init (track: Track) {

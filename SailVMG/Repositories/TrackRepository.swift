@@ -17,7 +17,6 @@ class TrackRespository: ObservableObject {
     let trackpointRepository = TrackpointRespository()
     @Published var loading = true
     @Published var showDeleteConfirmation = false
-    var launchCount = UserDefaults.standard.integer(forKey: "launchCount")
     //callback
     var afterTracks: (([Track]) -> Void)? = nil
     var trackUpdates: AnyCancellable?

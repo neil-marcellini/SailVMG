@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TrackList: View {
     @EnvironmentObject var trackRepository: TrackRespository
-    @EnvironmentObject var locationViewModel: LocationViewModel
     var body: some View {
         VStack {
             HStack {

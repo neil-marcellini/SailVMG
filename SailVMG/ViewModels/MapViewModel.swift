@@ -17,13 +17,11 @@ class MapViewModel: ObservableObject {
     @Published var previews: [String: UIImage] = [:]
     @Published var previewURLs: [String:URL] = [:]
     var coordinates: [CLLocationCoordinate2D]? = nil
-    @Published var loading = true
     let storage = Storage.storage()
     let storageRef: StorageReference
     
     var urlUpdates: AnyCancellable? = nil
     var previewUpdates: AnyCancellable? = nil
-    var colorScheme: ColorScheme? = nil
     
     init() {
         self.storageRef = storage.reference()
@@ -64,7 +62,6 @@ class MapViewModel: ObservableObject {
         }
         let track_line = MKPolyline(coordinates: route_cords, count: route_cords.count)
         self.route = track_line
-        self.loading = false
     }
     
     func makePreviews() {
@@ -130,7 +127,6 @@ class MapViewModel: ObservableObject {
         context?.strokePath()
         guard let finalImage = UIGraphicsGetImageFromCurrentImageContext() else {return}
         UIGraphicsEndImageContext()
-        // set the preview if it matches the current colorScheme
         if mode == .dark {
             previews["dark"] = finalImage
         } else if (mode == .light) {
