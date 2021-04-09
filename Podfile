@@ -13,6 +13,7 @@ target 'SailVMG' do
   pod 'Firebase/Storage'
   pod 'FirebaseFirestoreSwift'
   pod 'CoreGPX'
+  pod 'URLImage'
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
 

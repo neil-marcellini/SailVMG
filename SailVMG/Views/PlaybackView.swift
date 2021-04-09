@@ -25,7 +25,7 @@ struct PlaybackView: View {
         VStack {
             ZStack {
                 MapView().onAppear() {
-                    mapVM.addTrack()
+//                    mapVM.addTrack()
                 }
                 HStack {
                     Spacer()

@@ -22,6 +22,8 @@ class TrackRespository: ObservableObject {
     var afterTracks: (([Track]) -> Void)? = nil
     var trackUpdates: AnyCancellable?
     
+    var newTrackVM: TrackViewModel? = nil
+    
     init() {
 //        if launchCount != 1 {
 //            print("offline fetch trackVMs")
@@ -104,11 +106,27 @@ class TrackRespository: ObservableObject {
     
     
     func addTrackVM(track: Track, trackpoints: [Trackpoint]) {
-        let newTrackVM = TrackViewModel(track: track)
-        trackUpdates = newTrackVM.$track.sink(receiveValue: updateTrack)
-        newTrackVM.calculateMetrics(new_trackpoints: trackpoints)
-        newTrackVM.loading = true
-        trackVMs.insert(newTrackVM, at: 0)   
+        newTrackVM = TrackViewModel(track: track)
+        trackUpdates = newTrackVM!.$track.sink(receiveValue: updateTrack)
+        newTrackVM!.calculateMetrics(new_trackpoints: trackpoints)
+        newTrackVM!.loading = true
+        trackVMs.insert(newTrackVM!, at: 0)   
+    }
+    
+    func afterPreviewURL(previewURL: URL) {
+        guard let trackVM = newTrackVM else {
+            print("Error, no trackVM afterMap")
+            return
+        }
+        trackVM.track.preview_url = previewURL
+    }
+    
+    func afterPreviewImage(preview: UIImage) {
+        guard let trackVM = newTrackVM else {
+            print("Error, no trackVM afterPreviewImage")
+            return
+        }
+        trackVM.trackPreview = preview
     }
     
     func updateTrack(newTrack: Track) {

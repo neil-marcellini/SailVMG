@@ -9,26 +9,74 @@ import Foundation
 import MapKit
 import UIKit
 import FirebaseStorage
+import Combine
 
 class MapViewModel: ObservableObject {
-    @Published var preview: UIImage? = nil
     @Published var route: MKPolyline? = nil
-    let coordinates: [CLLocationCoordinate2D]
+    @Published var preview: UIImage? = nil
+    @Published var previewURL: URL? = nil
+    var coordinates: [CLLocationCoordinate2D]? = nil
     @Published var loading = true
     let storage = Storage.storage()
     let storageRef: StorageReference
     
+    var urlUpdates: AnyCancellable? = nil
+    var previewUpdates: AnyCancellable? = nil
     
-    init(trackpoints: [Trackpoint]) {
+    init() {
         self.storageRef = storage.reference()
+    }
+    
+    func getPreview(trackpoints: [Trackpoint], afterURL: @escaping ((URL)->Void), afterImage: @escaping ((UIImage)->Void)) {
+        addTrack(trackpoints: trackpoints)
+        previewUpdates = self.$preview.sink { newImage in
+            guard let image = newImage else {return}
+            afterImage(image)
+            self.previewUpdates?.cancel()
+        }
+        urlUpdates = self.$previewURL.sink { newURL in
+            guard let url = newURL else {return}
+            afterURL(url)
+            self.urlUpdates?.cancel()
+        }
+    }
+    
+    func uploadImage() {
+        guard let preview = self.preview else {return}
+        guard let data = preview.pngData() else {return}
+        let previewId = UUID()
+        let previewRef = storageRef.child("images/previews/\(previewId.uuidString)")
+        let uploadTask = previewRef.putData(data, metadata: nil) { (metadata, error) in
+            if metadata == nil {
+                // Uh-oh, an error occurred!
+                print("Error, uploadImage")
+                    return
+            }
+            // You can also access to download URL after upload.
+            previewRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                self.previewURL = downloadURL
+                
+            }
+        }
+    }
+    
+    func getCoordinates(trackpoints: [Trackpoint]) {
         self.coordinates = trackpoints.compactMap { trackpoint in
             return CLLocationCoordinate2D(latitude: Double(trackpoint.latitude), longitude: Double(trackpoint.longitude))
         }
-        addTrack()
     }
     
-    func addTrack() {
-        let track_line = MKPolyline(coordinates: coordinates, count: coordinates.count)
+    func addTrack(trackpoints: [Trackpoint]) {
+        getCoordinates(trackpoints: trackpoints)
+        guard let route_cords = coordinates else {
+            print("Error, no coordinates addTrack")
+            return
+        }
+        let track_line = MKPolyline(coordinates: route_cords, count: route_cords.count)
         self.route = track_line
         self.makePreview()
         self.loading = false
@@ -73,8 +121,9 @@ class MapViewModel: ObservableObject {
         context!.setStrokeColor(UIColor.blue.cgColor)
         context!.setLineWidth(3.0)
         context!.beginPath()
+        guard let coordinates = self.coordinates else {return}
         
-        for (index, coordinate) in self.coordinates.enumerated() {
+        for (index, coordinate) in coordinates.enumerated() {
             let point = snapshot.point(for: coordinate)
             if index == 0 {
                 context?.move(to: point)
@@ -86,6 +135,7 @@ class MapViewModel: ObservableObject {
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         self.preview = finalImage
+        uploadImage()
     }
     
 }

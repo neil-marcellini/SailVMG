@@ -13,6 +13,7 @@ import Combine
 
 class TrackViewModel: ObservableObject {
     @Published var track: Track
+    @Published var trackPreview: UIImage?
     @Published var loading = false
     @Published var trackpoints: [Trackpoint]? = nil
     let maxHueDegree: Double
