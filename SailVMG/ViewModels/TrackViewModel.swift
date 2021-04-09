@@ -9,17 +9,43 @@ import Foundation
 import CoreLocation
 import UIKit
 import SwiftUI
+import Combine
 
 class TrackViewModel: ObservableObject {
-    var track: Track
+    @Published var track: Track
+    @Published var loading = false
     @Published var trackpoints: [Trackpoint]? = nil
     let maxHueDegree: Double
     let maxHue: Double
+    
+    var afterLocation: ((TrackViewModel)->Void)?
+    
+    var trackLoadingUpdates: AnyCancellable? = nil
     
     init (track: Track) {
         self.track = track
         maxHueDegree = 238.0
         maxHue = maxHueDegree / 360.0
+        self.trackLoadingUpdates = self.$track.sink(receiveValue: setLoading(track:))
+    }
+    
+    func setLoading(track: Track) {
+        loading = !(
+            track.end_time != nil
+            &&
+            track.max_upwind_vmg != nil
+            &&
+            track.max_downwind_vmg != nil
+            &&
+            track.city != nil
+            &&
+            track.state != nil
+            &&
+            track.preview_url != nil
+        )
+        if !loading {
+            trackLoadingUpdates?.cancel()
+        }
     }
     
     func calculateMetrics(new_trackpoints: [Trackpoint]) {

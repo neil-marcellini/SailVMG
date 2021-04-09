@@ -12,13 +12,21 @@ struct TrackListItem: View {
     @StateObject var mapVM: MapViewModel
     var body: some View {
         ZStack {
-            TrackView()
-                .environmentObject(trackVM)
-                .environmentObject(mapVM)
-            NavigationLink(destination: PlaybackView().environmentObject(trackVM)
-                            .environmentObject(mapVM)){
-                EmptyView()
-            }.buttonStyle(PlainButtonStyle())
+            if trackVM.loading {
+                HStack {
+                    ProgressView()
+                    Spacer()
+                }
+            } else {
+                TrackView()
+                    .environmentObject(trackVM)
+                    .environmentObject(mapVM)
+                NavigationLink(destination: PlaybackView().environmentObject(trackVM)
+                                .environmentObject(mapVM)){
+                    EmptyView()
+                }.buttonStyle(PlainButtonStyle())
+            }
+            
         }
     }
 }

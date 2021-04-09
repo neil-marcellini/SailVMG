@@ -9,8 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-
-
+import Combine
 
 class TrackRespository: ObservableObject {
     let db = Firestore.firestore()
@@ -21,6 +20,7 @@ class TrackRespository: ObservableObject {
     var launchCount = UserDefaults.standard.integer(forKey: "launchCount")
     //callback
     var afterTracks: (([Track]) -> Void)? = nil
+    var trackUpdates: AnyCancellable?
     
     init() {
 //        if launchCount != 1 {
@@ -102,35 +102,14 @@ class TrackRespository: ObservableObject {
         trackVMs.insert(trackVM, at: 0)
     }
     
-    func setEndTime(track: Track, completion: @escaping ((Bool) -> Void)) {
-        guard let track_id = track.id else {
-            print("Error track has no id")
-            return
-        }
-        
-        db.collection("Tracks").document(track_id).updateData([
-            "end_time": track.end_time
-        ]){ err in
-            if let err = err {
-                print("Error setting end time: \(err)")
-                completion(false)
-            } else {
-                completion(true)
-            }
-        }
-        
-    }
     
     func addTrackVM(track: Track, trackpoints: [Trackpoint]) {
-        print("addTrackVM track userID = \(track.userId)")
         let newTrackVM = TrackViewModel(track: track)
+        trackUpdates = newTrackVM.$track.sink(receiveValue: updateTrack)
         newTrackVM.calculateMetrics(new_trackpoints: trackpoints)
-        let updatedTrack = newTrackVM.track
-        print("updatedTrack userID = \(updatedTrack.userId)")
-        updateTrack(newTrack: updatedTrack)
-        trackVMs.insert(newTrackVM, at: 0)
+        newTrackVM.loading = true
+        trackVMs.insert(newTrackVM, at: 0)   
     }
-    
     
     func updateTrack(newTrack: Track) {
         guard let track_id = newTrack.id else {
