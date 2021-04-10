@@ -51,7 +51,6 @@ struct TrackListItem: View {
 
 extension TrackListItem {
     func makeTrackPreviews(trackpoints: [Trackpoint]) {
-        print("Making track previews")
         mapVM.getPreview(trackpoints: trackpoints, trackVM: trackVM, afterPreviews: { newTrackVM in
             self.trackVM.dark_preview = newTrackVM.dark_preview
             self.trackVM.light_preview = newTrackVM.light_preview

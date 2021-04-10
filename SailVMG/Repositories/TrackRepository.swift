@@ -102,7 +102,6 @@ class TrackRespository: ObservableObject {
             print("Error track has no id")
             return
         }
-        print("Updating track")
         do {
             try db.collection("Tracks").document(track_id).setData(from: newTrack, merge: true)
         } catch {

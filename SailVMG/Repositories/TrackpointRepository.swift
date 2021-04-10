@@ -75,8 +75,14 @@ class TrackpointRespository: ObservableObject {
     
     // return the time of the last trackpoint
     func getEndTime(track: Track)->Date? {
-        guard let all_trackpoints = trackpoints[track.id] else { return nil}
-        guard let last_trackpoint = all_trackpoints.last else {return nil}
+        guard let all_trackpoints = trackpoints[track.id] else {
+            print("Error, getEndTime all_trackpoints")
+            return nil
+        }
+        guard let last_trackpoint = all_trackpoints.last else {
+            print("Error, getEndTime last_trackpoint")
+            return nil
+        }
         return last_trackpoint.time
     }
     

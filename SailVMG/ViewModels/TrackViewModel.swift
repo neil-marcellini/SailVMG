@@ -32,9 +32,9 @@ class TrackViewModel: ObservableObject {
         loading = !(
             track.end_time != nil
             &&
-            track.max_upwind_vmg != nil
-            &&
-            track.max_downwind_vmg != nil
+            (track.max_upwind_vmg != nil
+            ||
+            track.max_downwind_vmg != nil)
             &&
             track.city != nil
             &&
@@ -44,13 +44,11 @@ class TrackViewModel: ObservableObject {
             &&
             track.dark_preview_url != nil
         )
-        if !loading {
-            trackLoadingUpdates?.cancel()
-        }
     }
     
     func calculateMetrics(new_trackpoints: [Trackpoint]) {
         trackpoints = new_trackpoints
+        track.end_time = new_trackpoints.last?.time
         getLocation(completionHandler: formatLocation)
         getMaxVMG()
     }
@@ -135,10 +133,14 @@ class TrackViewModel: ObservableObject {
     
     func displayMaxVMG() -> String {
         var maxVMG = "-- / -- kts"
-        guard let max_downwind = track.max_downwind_vmg else {return maxVMG}
-        guard let max_upwind = track.max_upwind_vmg else {return maxVMG}
-        let downwind_display = String(format: "%.2f", max_downwind)
-        let upwind_display = String(format: "%.2f", max_upwind)
+        var downwind_display = "--"
+        var upwind_display = "--"
+        if let max_downwind = track.max_downwind_vmg {
+            downwind_display = String(format: "%.2f", max_downwind)
+        }
+        if let max_upwind = track.max_upwind_vmg {
+            upwind_display = String(format: "%.2f", max_upwind)
+        }
         maxVMG = "\(downwind_display) / \(upwind_display) kts"
         return maxVMG
     }
@@ -147,7 +149,9 @@ class TrackViewModel: ObservableObject {
         guard let curr_trackpoints = trackpoints else {return}
         let max_upwind = curr_trackpoints.max { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
         if let max_upwind_vmg = max_upwind?.vmg {
-            track.max_upwind_vmg = max_upwind_vmg
+            if max_upwind_vmg > 0 {
+                track.max_upwind_vmg = max_upwind_vmg
+            }
         }
         let max_downwind = curr_trackpoints.min { a, b in a.vmg ?? 0 < b.vmg ?? 0 }
         if let max_downwind_vmg = max_downwind?.vmg {

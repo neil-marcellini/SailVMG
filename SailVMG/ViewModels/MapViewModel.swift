@@ -28,6 +28,7 @@ class MapViewModel: ObservableObject {
     }
     
     func getPreview(trackpoints: [Trackpoint], trackVM: TrackViewModel, afterPreviews: @escaping ((TrackViewModel)->Void)) {
+        print("Making track previews")
         previews = [:]
         previewURLs = [:]
         addTrack(trackpoints: trackpoints)
