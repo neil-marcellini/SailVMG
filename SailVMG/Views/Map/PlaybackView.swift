@@ -41,6 +41,7 @@ struct PlaybackView: View {
                 trackVM.trackpoints = trackpointRepo.trackpoints[trackVM.track.id]
                 mapVM.addTrack(trackpoints: trackpointRepo.trackpoints[trackVM.track.id]!)
             }
+            .environmentObject(mapVM)
         } else {
             MapLoadingView()
         }

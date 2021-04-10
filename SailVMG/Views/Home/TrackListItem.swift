@@ -9,22 +9,56 @@ import SwiftUI
 
 struct TrackListItem: View {
     @StateObject var trackVM: TrackViewModel
+    @StateObject var mapVM = MapViewModel()
+    @EnvironmentObject var trackpointRepo: TrackpointRespository
+    @EnvironmentObject var trackRepo: TrackRespository
     var body: some View {
         ZStack {
             if trackVM.loading {
                 HStack {
                     ProgressView()
                     Spacer()
+                }.onAppear {
+                    if let trackpoints = trackpointRepo.trackpoints[trackVM.track.id] {
+                        makeTrackPreviews(trackpoints: trackpoints)
+                    } else {
+                        print("Waiting for trackpoints")
+                        trackpointRepo.$trackpoints.sink { newTrackpoints in
+                            print("trackVM track id = \(trackVM.track.id)")
+                            print("keys = \(newTrackpoints.keys)")
+                            if let trackpoints = newTrackpoints[trackVM.track.id] {
+                                print("New trackpoints")
+                                makeTrackPreviews(trackpoints: trackpoints)
+                            }
+                        }
+                        .store(in: &trackRepo.trackpointUpdates)
+                    }
                 }
             } else {
                 TrackView()
                     .environmentObject(trackVM)
-                NavigationLink(destination: PlaybackView().environmentObject(trackVM)){
+                NavigationLink(destination: PlaybackView()
+                                .environmentObject(trackVM)
+                                .environmentObject(mapVM)
+                ){
                     EmptyView()
                 }.buttonStyle(PlainButtonStyle())
             }
             
         }
+    }
+}
+
+extension TrackListItem {
+    func makeTrackPreviews(trackpoints: [Trackpoint]) {
+        print("Making track previews")
+        mapVM.getPreview(trackpoints: trackpoints, trackVM: trackVM, afterPreviews: { newTrackVM in
+            self.trackVM.dark_preview = newTrackVM.dark_preview
+            self.trackVM.light_preview = newTrackVM.light_preview
+            self.trackVM.track.light_preview_url = newTrackVM.track.light_preview_url
+            self.trackVM.track.dark_preview_url = newTrackVM.track.dark_preview_url
+        })
+        trackRepo.processTrackVM(trackVM: trackVM, trackpoints: trackpoints)
     }
 }
 

@@ -19,10 +19,8 @@ class TrackRespository: ObservableObject {
     @Published var showDeleteConfirmation = false
     //callback
     var afterTracks: (([Track]) -> Void)? = nil
-    var trackUpdates: AnyCancellable?
-    
-    var newTrackVM: TrackViewModel? = nil
-    
+    private var trackUpdates = Set<AnyCancellable>()
+    var trackpointUpdates = Set<AnyCancellable>()
     init() {
         getTracks()
     }
@@ -84,42 +82,20 @@ class TrackRespository: ObservableObject {
         }
     }
     
+    // add metrics and save updates to database
+    func processTrackVM(trackVM: TrackViewModel, trackpoints: [Trackpoint]) {
+        trackVM.$track.sink(receiveValue: updateTrack)
+            .store(in: &trackUpdates)
+        trackVM.calculateMetrics(new_trackpoints: trackpoints)
+        trackVM.loading = true
+    }
+    
     
     func addTrackVM(track: Track, trackpoints: [Trackpoint]) {
-        newTrackVM = TrackViewModel(track: track)
-        trackUpdates = newTrackVM!.$track.sink(receiveValue: updateTrack)
-        newTrackVM!.calculateMetrics(new_trackpoints: trackpoints)
-        newTrackVM!.loading = true
-        trackVMs.insert(newTrackVM!, at: 0)   
+        let newTrackVM = TrackViewModel(track: track)
+        trackVMs.insert(newTrackVM, at: 0)
     }
     
-    func afterPreviewURLs(previewURLs: [String:URL]) {
-        guard let trackVM = newTrackVM else {
-            print("Error, no trackVM afterMap")
-            return
-        }
-        for (mode, url) in previewURLs {
-            if mode == "light" {
-                trackVM.track.light_preview_url = url
-            } else if mode == "dark" {
-                trackVM.track.dark_preview_url = url
-            }
-        }
-    }
-    
-    func afterPreviewImages(previews: [String:UIImage]) {
-        guard let trackVM = newTrackVM else {
-            print("Error, no trackVM afterPreviewImage")
-            return
-        }
-        for (mode, preview) in previews {
-            if mode == "light" {
-                trackVM.light_preview = preview
-            } else if mode == "dark" {
-                trackVM.dark_preview = preview
-            }
-        }
-    }
     
     func updateTrack(newTrack: Track) {
         guard let track_id = newTrack.id else {

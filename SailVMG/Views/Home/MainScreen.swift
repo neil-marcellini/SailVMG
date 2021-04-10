@@ -14,7 +14,6 @@ struct MainScreen: View {
     @StateObject var trackpointRepository = TrackpointRespository()
     @StateObject var nav = NavigationControl()
     @StateObject var audioSettings = AudioSettings()
-    @StateObject var mapVM = MapViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -48,7 +47,6 @@ struct MainScreen: View {
             .environmentObject(trackRepository)
             .environmentObject(trackpointRepository)
             .environmentObject(audioSettings)
-            .environmentObject(mapVM)
         }
         .onAppear {
             trackRepository.afterTracks = trackpointRepository.getAllTrackpoints

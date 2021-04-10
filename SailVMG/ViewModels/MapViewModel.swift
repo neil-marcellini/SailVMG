@@ -27,26 +27,50 @@ class MapViewModel: ObservableObject {
         self.storageRef = storage.reference()
     }
     
-    func getPreview(trackpoints: [Trackpoint], afterURLs: @escaping (([String:URL])->Void), afterImages: @escaping (([String: UIImage])->Void)) {
+    func getPreview(trackpoints: [Trackpoint], trackVM: TrackViewModel, afterPreviews: @escaping ((TrackViewModel)->Void)) {
         previews = [:]
         previewURLs = [:]
         addTrack(trackpoints: trackpoints)
         makePreviews()
         previewUpdates = self.$previews.sink { previewDict in
             if previewDict.count == ColorScheme.allCases.count {
-                afterImages(previewDict)
+                let newTrackVM = self.afterPreviewImages(previews: previewDict, trackVM: trackVM)
+                afterPreviews(newTrackVM)
                 self.previewUpdates?.cancel()
             }
         }
         urlUpdates = self.$previewURLs.sink { urlsDict in
             if urlsDict.count == ColorScheme.allCases.count {
-                afterURLs(urlsDict)
+                let newTrackVM = self.afterPreviewURLs(previewURLs: urlsDict, trackVM: trackVM)
+                afterPreviews(newTrackVM)
                 self.urlUpdates?.cancel()
             }
         }
     }
     
+    func afterPreviewImages(previews: [String:UIImage], trackVM: TrackViewModel) -> TrackViewModel {
+        let newTrackVM = trackVM
+        for (mode, preview) in previews {
+            if mode == "light" {
+                newTrackVM.light_preview = preview
+            } else if mode == "dark" {
+                newTrackVM.dark_preview = preview
+            }
+        }
+        return newTrackVM
+    }
     
+    func afterPreviewURLs(previewURLs: [String:URL], trackVM: TrackViewModel) -> TrackViewModel {
+        let newTrackVM = trackVM
+        for (mode, url) in previewURLs {
+            if mode == "light" {
+                newTrackVM.track.light_preview_url = url
+            } else if mode == "dark" {
+                newTrackVM.track.dark_preview_url = url
+            }
+        }
+        return newTrackVM
+    }
     
     func getCoordinates(trackpoints: [Trackpoint]) {
         self.coordinates = trackpoints.compactMap { trackpoint in
