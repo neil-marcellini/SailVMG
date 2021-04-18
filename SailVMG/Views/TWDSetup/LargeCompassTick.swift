@@ -16,7 +16,7 @@ struct LargeCompassTick: View {
             Capsule()
                 .frame(width: 2, height: 30)
         }
-        .offset(x: 0, y: -(circle_size + 15))
+        .offset(x: 0, y: -(circle_size + 25))
         .rotationEffect(Angle(degrees: Double(degree)))
     }
 }

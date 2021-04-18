@@ -9,12 +9,18 @@ import SwiftUI
 
 struct RecordingCompass: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    let size: CGFloat = 150
+    let size: CGFloat = 130
     var body: some View {
         let sogArrowLen = locationViewModel.arrowLen(metric: locationViewModel.speed, compass_size: size)
         ZStack {
             ForEach(0..<360) { degree in
-                if degree % 90 == 0 {
+                if degree == locationViewModel.twd {
+                    Capsule()
+                        .frame(width: 2, height: 30)
+                        .offset(x: 0, y: -(size + 15))
+                        .rotationEffect(Angle(degrees: Double(degree)))
+                        .foregroundColor(.red)
+                } else if degree % 90 == 0 {
                     LargeCompassTick(circle_size: size, degree: degree)
                 } else {
                     CompassTick(circle_size: size, degree: degree)
@@ -22,19 +28,12 @@ struct RecordingCompass: View {
             }
                 .rotationEffect(Angle(degrees: -locationViewModel.course))
             ForEach(0..<360) { degree in
-                if degree == Int(locationViewModel.twd) {
-                    TWDArrow(circle_size: size, degree: degree)
-                }
+                
             }
                 .rotationEffect(Angle(degrees: -locationViewModel.course))
-            TWASlice()
-                .frame(width: size * 2, height: size * 2)
-                .foregroundColor(.gray)
-                .opacity(0.7)
-                .rotationEffect(Angle(degrees: -90.0))
             Capsule()
-                .frame(width: 3, height: 40)
-                .offset(x: 0, y: -size)
+                .frame(width: 3, height: 30)
+                .offset(x: 0, y: -(size + 15))
                 .foregroundColor(.blue)
             Arrow()
                 .frame(width: 10, height: sogArrowLen)
@@ -50,6 +49,8 @@ struct RecordingCompass: View {
         }.padding()
     }
 }
+
+
 
 struct RecordingCompass_Previews: PreviewProvider {
     static var previews: some View {
