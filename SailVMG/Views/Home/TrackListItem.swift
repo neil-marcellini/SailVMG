@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TrackListItem: View {
     @StateObject var trackVM: TrackViewModel
@@ -23,16 +24,18 @@ struct TrackListItem: View {
                         makeTrackPreviews(trackpoints: trackpoints)
                     } else {
                         print("Waiting for trackpoints")
-                        trackpointRepo.$trackpoints.sink { newTrackpoints in
-                            print("trackVM track id = \(trackVM.track.id)")
+                        trackpointRepo.trackpointListItemUpdates = trackpointRepo.$trackpoints.sink { newTrackpoints in
+                            print("trackVM track id = \(String(describing: trackVM.track.id))")
                             print("keys = \(newTrackpoints.keys)")
                             if let trackpoints = newTrackpoints[trackVM.track.id] {
                                 print("New trackpoints")
                                 makeTrackPreviews(trackpoints: trackpoints)
                             }
                         }
-                        .store(in: &trackRepo.trackpointUpdates)
                     }
+                }
+                .onDisappear {
+                    trackpointRepo.trackpointListItemUpdates?.cancel()
                 }
             } else {
                 TrackView()

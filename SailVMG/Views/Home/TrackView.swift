@@ -24,7 +24,6 @@ struct TrackView: View {
                 }
                 Text("Max VMG:")
                 Text(trackVM.displayMaxVMG())
-                Spacer()
             }
             Spacer()
             VStack {

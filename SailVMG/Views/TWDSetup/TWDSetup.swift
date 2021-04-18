@@ -22,7 +22,7 @@ struct TWDSetup: View {
             Compass()
             Spacer()
             Button(action: {
-                locationViewModel.twd = locationViewModel.heading
+                locationViewModel.twd = Int(locationViewModel.heading)
                 guard let track = trackRepository.createTrack() else {
                     nav.selection = nil
                     return
@@ -35,6 +35,12 @@ struct TWDSetup: View {
             }
             
         }.navigationTitle("TWD Setup")
+        .onAppear {
+            locationViewModel.locationManager.startUpdatingHeading()
+        }
+        .onDisappear {
+            locationViewModel.locationManager.stopUpdatingHeading()
+        }
     }
 }
 

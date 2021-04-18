@@ -18,5 +18,5 @@ struct Trackpoint: Codable, Identifiable {
     let course: Double
     let vmg: Double?
     let vmg_delta: Double?
-    let twd: Double?
+    let twd: Int?
 }

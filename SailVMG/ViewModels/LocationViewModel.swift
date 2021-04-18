@@ -19,7 +19,7 @@ class LocationViewModel: NSObject, ObservableObject {
     @Published var prev_vmg: Double = 0
     @Published var vmg_delta: Double = 0
     @Published var twa: Int = 0
-    @Published var twd: Double = 180
+    @Published var twd: Int = 180
     @Published var isPaused = false
     @Published var trackpoint: Trackpoint? = nil
     
@@ -56,15 +56,28 @@ class LocationViewModel: NSObject, ObservableObject {
         resume()
     }
     
+    // this function does an actual modulus, as opposed to
+    // % which does not work for negative values!
+    func mod(_ a: Int, _ n: Int) -> Int {
+        precondition(n > 0, "modulus must be positive")
+        let r = a % n
+        return r >= 0 ? r : r + n
+    }
+    
     func plusTwd(){
-        twd += 1
+        twd = mod(twd + 1, 360)
     }
     func minusTwd() {
-        twd -= 1
+        twd = mod(twd - 1, 360)
     }
     
     func speedDisplay() ->  String {
         return String(format: "%.2f kts", speed)
+    }
+    
+    func roundMetric(metric: Double) -> Int {
+        let rounded = metric.rounded()
+        return Int(rounded)
     }
     
     func courseDisplay() ->  String {
@@ -72,7 +85,7 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     
     func twdDisplay() ->  String {
-        return String(format: "%03.0f°", twd)
+        return String(format: "%03d°", twd)
     }
     func twaDisplay() ->  String {
         return String(format: "%03d°", twa)
@@ -96,7 +109,7 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     
     func boatRotation()->Double {
-        let delta = directionSubtract(Int(round(twd)), Int(round(course)))
+        let delta = directionSubtract(twd, Int(round(course)))
         return Double(delta) * .pi / 180.0
     }
     
@@ -107,16 +120,16 @@ class LocationViewModel: NSObject, ObservableObject {
         return min(delta1, delta2)
     }
     
-    func calculateTwa(twd: Double, course: Double)->Int {
+    
+    func calculateTwa(twd: Int, course: Double)->Int {
         // return the minimum difference bewteen
         // true wind direction and course
-        let twd_rounded = Int(round(twd))
         let course_rounded = Int(round(course))
-        return direction_diff(twd_rounded, course_rounded)
+        return direction_diff(twd, course_rounded)
         
     }
     
-    func calculateVMG(speed: Double, course: Double, twd: Double) -> Double {
+    func calculateVMG(speed: Double, course: Double, twd: Int) -> Double {
         // Return the component of speed towards true wind angle.
         twa = calculateTwa(twd: twd, course: course)
         let vmg = speed * cos(Double(twa) * .pi / 180)
@@ -141,7 +154,20 @@ class LocationViewModel: NSObject, ObservableObject {
         
     }
     
-    
+    func arrowLen(metric: Double, compass_size: CGFloat) -> CGFloat {
+        if metric == 0 {
+            return CGFloat(metric)
+        }
+        let max_vmg = 40.0
+        var ratio = metric / max_vmg
+        print("ratio = \(ratio)")
+        if abs(ratio) > 1 {
+            ratio = 1
+        }
+        let arrow_len = CGFloat(CGFloat(ratio) * compass_size)
+        print("arrow_len = \(arrow_len)")
+        return arrow_len
+    }
     
     
 }

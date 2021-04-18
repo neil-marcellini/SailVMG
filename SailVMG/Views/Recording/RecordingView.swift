@@ -16,44 +16,47 @@ struct RecordingView: View {
     @EnvironmentObject var audioSettings: AudioSettings
     @StateObject var mapVM = MapViewModel()
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             TWDControl()
-            VStack {
-                Text("TWA")
-                    .font(.title)
-                Text(locationViewModel.twaDisplay())
-            }
-            Spacer()
-            Image(systemName: "location.north.fill")
-                .font(.system(size: 150))
-                .foregroundColor(.blue)
-                .rotationEffect(.radians(locationViewModel.boatRotation()))
-            Spacer()
-            VStack {
-                Text("VMG")
-                    .font(.title)
-                    .foregroundColor(.blue)
-                Text(locationViewModel.vmgDisplay())
-            }.padding()
-            
             HStack {
+                VStack {
+                    Text("TWA")
+                    Text(locationViewModel.twaDisplay())
+                        .font(.title)
+                }
+                .foregroundColor(.gray)
                 Spacer()
                 VStack {
                     Text("SOG")
-                        .font(.title)
-                        .foregroundColor(.red)
                     Text(locationViewModel.speedDisplay())
+                        .font(.title)
                 }
+                .foregroundColor(.blue)
                 Spacer()
                 VStack {
-                    Text("COG")
+                    Text("TWD")
+                    Text(locationViewModel.twdDisplay())
                         .font(.title)
-                        .foregroundColor(.red)
-                    Text(locationViewModel.courseDisplay())
                 }
-                Spacer()
+                .foregroundColor(.red)
             }
+            VStack {
+                Text("COG")
+                Text(locationViewModel.courseDisplay())
+                    .font(.title)
+            }.foregroundColor(.blue)
             Spacer()
+            
+            RecordingCompass()
+                .frame(width: 100, height: 100)
+            
+            Spacer()
+            VStack {
+                Text("VMG")
+                Text(locationViewModel.vmgDisplay())
+                    .font(.title)
+            }
+            .foregroundColor(.green)
             Button(action: {
                 locationViewModel.pause()
                 audioSettings.soundControl.stop()
@@ -90,7 +93,9 @@ struct RecordingView: View {
             })
             NavigationLink(destination: SettingsView(), isActive: $audioSettings.showSettings) { EmptyView() }
         }
+        .padding()
         .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {audioSettings.audioFeedback.toggle()}) {
@@ -116,8 +121,8 @@ struct RecordingView: View {
                 print("newTrackpoint = \(trackpoint)")
                 self.trackpointRepository.addTrackpoint(to: track, trackpoint: trackpoint)
             }
+        }
     }
-}
 }
 struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {

@@ -14,6 +14,7 @@ target 'SailVMG' do
   pod 'FirebaseFirestoreSwift'
   pod 'CoreGPX'
   pod 'URLImage'
+  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '6.34.0'
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
 

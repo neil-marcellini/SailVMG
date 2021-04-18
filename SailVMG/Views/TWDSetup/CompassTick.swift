@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct CompassTick: View {
-    let circle_size: Int
+    let circle_size: CGFloat
     let degree: Int
     var body: some View {
         Capsule()
             .frame(width: 1, height: 20)
-            .offset(x: 0, y: -CGFloat(circle_size))
+            .offset(x: 0, y: -circle_size)
             .rotationEffect(Angle(degrees: Double(degree)))
     }
 }
