@@ -19,7 +19,13 @@ struct TWDSetup: View {
             Text(locationViewModel.headingDisplay())
                 .font(.largeTitle)
             Spacer()
-            Compass()
+            GeometryReader { geo in
+                VStack {
+                    Compass(size: geo.size.width / 2)
+                }.frame(width: geo.size.width,
+                        height: geo.size.height,
+                        alignment: .center)
+            }.padding(60)
             Spacer()
             Button(action: {
                 locationViewModel.twd = Int(locationViewModel.heading)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Compass: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    let size: CGFloat = 150
+    let size: CGFloat
     var body: some View {
             ZStack {
                 ForEach(0..<360) { degree in
@@ -33,6 +33,6 @@ struct Compass: View {
 
 struct Compass_Previews: PreviewProvider {
     static var previews: some View {
-        Compass()
+        Compass(size: 150.0)
     }
 }
