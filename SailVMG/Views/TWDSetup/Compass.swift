@@ -12,7 +12,7 @@ struct Compass: View {
     let size: CGFloat
     var body: some View {
             ZStack {
-                ForEach(0..<360) { degree in
+                ForEach(Array(stride(from: 0, to: 360, by: 2)), id: \.self) { degree in
                     if degree % 90 == 0 {
                         LargeCompassTick(circle_size: size, degree: degree)
                     } else {

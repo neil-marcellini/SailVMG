@@ -128,6 +128,9 @@ class LocationViewModel: NSObject, ObservableObject {
     func calculateTwa(twd: Int, course: Double)->Int {
         // return the minimum difference bewteen
         // true wind direction and course
+        if course == -1 {
+            return 0
+        }
         let course_rounded = Int(round(course))
         return direction_diff(twd, course_rounded)
         

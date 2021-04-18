@@ -9,11 +9,11 @@ import SwiftUI
 
 struct RecordingCompass: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    let size: CGFloat = 130
+    let size: CGFloat
     var body: some View {
         let sogArrowLen = locationViewModel.arrowLen(metric: locationViewModel.speed, compass_size: size)
         ZStack {
-            ForEach(0..<360) { degree in
+            ForEach(Array(stride(from: 0, to: 360, by: 2)), id: \.self) { degree in
                 if degree == locationViewModel.twd {
                     Capsule()
                         .frame(width: 2, height: 30)
@@ -26,11 +26,7 @@ struct RecordingCompass: View {
                     CompassTick(circle_size: size, degree: degree)
                 }
             }
-                .rotationEffect(Angle(degrees: -locationViewModel.course))
-            ForEach(0..<360) { degree in
-                
-            }
-                .rotationEffect(Angle(degrees: -locationViewModel.course))
+            .rotationEffect(Angle(degrees: -locationViewModel.course))
             Capsule()
                 .frame(width: 3, height: 30)
                 .offset(x: 0, y: -(size + 15))
@@ -44,8 +40,6 @@ struct RecordingCompass: View {
             Circle()
                 .frame(width: 8, height: 8)
                 .foregroundColor(Color(.label))
-            
-            
         }.padding()
     }
 }
@@ -54,6 +48,6 @@ struct RecordingCompass: View {
 
 struct RecordingCompass_Previews: PreviewProvider {
     static var previews: some View {
-        RecordingCompass()
+        RecordingCompass(size: 130)
     }
 }

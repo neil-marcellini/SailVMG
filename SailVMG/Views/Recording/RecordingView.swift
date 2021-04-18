@@ -17,7 +17,6 @@ struct RecordingView: View {
     @StateObject var mapVM = MapViewModel()
     var body: some View {
         VStack(spacing: 10) {
-            TWDControl()
             HStack {
                 VStack {
                     Text("TWA")
@@ -46,10 +45,13 @@ struct RecordingView: View {
                     .font(.title)
             }.foregroundColor(.blue)
             Spacer()
-            
-            RecordingCompass()
-                .frame(width: 100, height: 100)
-            
+            GeometryReader { geo in
+                VStack {
+                    RecordingCompass(size: min(geo.size.width / 2, geo.size.height / 2))
+                }.frame(width: geo.size.width,
+                        height: geo.size.height,
+                        alignment: .center)
+            }.padding(40)
             Spacer()
             VStack {
                 Text("VMG")
@@ -61,7 +63,7 @@ struct RecordingView: View {
                 locationViewModel.pause()
                 audioSettings.soundControl.stop()
             }){
-                Image(systemName: locationViewModel.isPaused ? "play.circle" : "pause.circle").font(.system(size: 100))
+                Image(systemName: locationViewModel.isPaused ? "play.circle" : "pause.circle").font(.custom("BButton", size: 80, relativeTo: .body))
             }.actionSheet(isPresented: $locationViewModel.isPaused, content: {
                 ActionSheet(title: Text("Tracking Paused"), message: nil, buttons: [
                     .default(Text("Save Track")){
@@ -93,7 +95,8 @@ struct RecordingView: View {
             })
             NavigationLink(destination: SettingsView(), isActive: $audioSettings.showSettings) { EmptyView() }
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.top)
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -103,6 +106,16 @@ struct RecordingView: View {
                         .font(.largeTitle)
                 }
             }
+            ToolbarItem(placement: .principal) {
+                Button(action: {
+                    nav.selection = "TWDSetup"
+                }){
+                    Text("Set TWD")
+                        .foregroundColor(.red)
+                }
+            }
+            
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {audioSettings.showSettings = true}) {
                     Image(systemName: "gear")

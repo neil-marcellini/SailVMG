@@ -28,7 +28,8 @@ struct MainScreen: View {
                     Button(action: {
                         nav.selection = "TWDSetup"
                     }){
-                        Image(systemName: "play.circle").font(.system(size: 100))
+                        Image(systemName: "play.circle")
+                            .font(.custom("BButton", size: 80, relativeTo: .body))
                     }
                     NavigationLink(destination: TWDSetup(),
                                    tag: "TWDSetup",

@@ -37,7 +37,7 @@ struct TWDSetup: View {
                 nav.selection = "RecordingView"
                 
             }){
-                Image(systemName: "checkmark.circle").font(.system(size: 100))
+                Image(systemName: "checkmark.circle").font(.custom("BButton", size: 80, relativeTo: .body))
             }
             
         }.navigationTitle("TWD Setup")

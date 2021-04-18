@@ -15,18 +15,12 @@ struct TWDControl: View {
         HStack {
             Button(action: { locationViewModel.minusTwd() }){
                 Image(systemName: "minus.square.fill")
-                    .font(.system(size: 50))
+                    .font(.custom("BButton", size: 80, relativeTo: .body))
                     .foregroundColor(labelColor)
-            }
-            Button(action: {
-                nav.selection = "TWDSetup"
-            }){
-                Text("Set TWD")
-                    .foregroundColor(.red)
             }
             Button(action: { locationViewModel.plusTwd() }){
                 Image(systemName: "plus.app.fill")
-                    .font(.system(size: 50))
+                    .font(.custom("BButton", size: 80, relativeTo: .body))
                     .foregroundColor(labelColor)
             }
         }
