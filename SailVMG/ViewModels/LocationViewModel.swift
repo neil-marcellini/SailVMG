@@ -81,7 +81,11 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     
     func courseDisplay() ->  String {
-        return String(format: "%.0f°", course)
+        if course == -1.0 {
+            return "000°"
+        }
+        let cog = roundMetric(metric: course)
+        return String(format: "%03d°", cog)
     }
     
     func twdDisplay() ->  String {
@@ -155,16 +159,17 @@ class LocationViewModel: NSObject, ObservableObject {
     }
     
     func arrowLen(metric: Double, compass_size: CGFloat) -> CGFloat {
+        let min_size: CGFloat = 10
         if metric == 0 {
-            return CGFloat(metric)
+            return min_size
         }
         let max_vmg = 40.0
-        var ratio = metric / max_vmg
+        var ratio = abs(metric / max_vmg)
         print("ratio = \(ratio)")
-        if abs(ratio) > 1 {
+        if ratio > 1 {
             ratio = 1
         }
-        let arrow_len = CGFloat(CGFloat(ratio) * compass_size)
+        let arrow_len = CGFloat(CGFloat(ratio) * (1 - (min_size / compass_size)) * compass_size) + min_size
         print("arrow_len = \(arrow_len)")
         return arrow_len
     }
