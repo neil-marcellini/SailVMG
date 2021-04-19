@@ -29,7 +29,7 @@ struct TWDSetup: View {
             }.padding(60)
             Spacer()
             Button(action: {
-                locationViewModel.twd = Int(locationViewModel.heading)
+                locationViewModel.twd = locationViewModel.roundMetric(metric: locationViewModel.heading)
                 if isReset {
                     nav.showTWDReset = false
                     return

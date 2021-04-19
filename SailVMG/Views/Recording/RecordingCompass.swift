@@ -13,7 +13,7 @@ struct RecordingCompass: View {
     var body: some View {
         let sogArrowLen = locationViewModel.arrowLen(metric: locationViewModel.speed, compass_size: size)
         ZStack {
-            ForEach(Array(stride(from: 0, to: 360, by: 2)), id: \.self) { degree in
+            ForEach(0..<360) { degree in
                 if degree == locationViewModel.twd {
                     Capsule()
                         .frame(width: 2, height: 30)
@@ -22,7 +22,7 @@ struct RecordingCompass: View {
                         .foregroundColor(.red)
                 } else if degree % 90 == 0 {
                     LargeCompassTick(circle_size: size, degree: degree)
-                } else {
+                } else if degree % 2 == 0 {
                     CompassTick(circle_size: size, degree: degree)
                 }
             }
