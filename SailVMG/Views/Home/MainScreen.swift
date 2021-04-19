@@ -31,7 +31,7 @@ struct MainScreen: View {
                         Image(systemName: "play.circle")
                             .font(.custom("BButton", size: 80, relativeTo: .body))
                     }
-                    NavigationLink(destination: TWDSetup(),
+                    NavigationLink(destination: TWDSetup(isReset: false),
                                    tag: "TWDSetup",
                                    selection: $nav.selection){
                         EmptyView()

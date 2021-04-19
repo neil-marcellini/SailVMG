@@ -94,6 +94,7 @@ struct RecordingView: View {
                 ])
             })
             NavigationLink(destination: SettingsView(), isActive: $audioSettings.showSettings) { EmptyView() }
+            NavigationLink(destination: TWDSetup(isReset: true), isActive: $nav.showTWDReset) { EmptyView() }
         }
         .padding(.horizontal)
         .padding(.top)
@@ -108,11 +109,13 @@ struct RecordingView: View {
             }
             ToolbarItem(placement: .principal) {
                 Button(action: {
-                    nav.selection = "TWDSetup"
+                    nav.showTWDReset = true
                 }){
-                    Text("Set TWD")
-                        .foregroundColor(.red)
-                }
+                    Text("Reset TWD")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .padding(5)
+                }.background(RoundedRectangle(cornerRadius: 8).fill(Color(.red)))
             }
             
             

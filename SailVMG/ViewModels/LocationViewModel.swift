@@ -38,7 +38,8 @@ class LocationViewModel: NSObject, ObservableObject {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         self.locationManager.allowsBackgroundLocationUpdates = true
-        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.showsBackgroundLocationIndicator = true
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
     

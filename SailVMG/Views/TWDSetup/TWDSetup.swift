@@ -11,6 +11,7 @@ struct TWDSetup: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var trackRepository: TrackRespository
     @EnvironmentObject var nav: NavigationControl
+    let isReset: Bool
     var body: some View {
         VStack {
             Spacer()
@@ -29,6 +30,10 @@ struct TWDSetup: View {
             Spacer()
             Button(action: {
                 locationViewModel.twd = Int(locationViewModel.heading)
+                if isReset {
+                    nav.showTWDReset = false
+                    return
+                }
                 guard let track = trackRepository.createTrack() else {
                     nav.selection = nil
                     return
@@ -52,6 +57,6 @@ struct TWDSetup: View {
 
 struct TWDSetup_Previews: PreviewProvider {
     static var previews: some View {
-        TWDSetup()
+        TWDSetup(isReset: false)
     }
 }

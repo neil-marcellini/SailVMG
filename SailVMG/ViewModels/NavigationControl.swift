@@ -8,4 +8,5 @@
 import Foundation
 class NavigationControl: ObservableObject {
     @Published var selection: String? = nil
+    @Published var showTWDReset: Bool = false
 }
