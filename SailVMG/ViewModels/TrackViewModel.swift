@@ -20,6 +20,7 @@ class TrackViewModel: ObservableObject {
     let maxHueDegree: Double
     let maxHue: Double
     var trackLoadingUpdates: AnyCancellable? = nil
+    var trackpointLoadingSub: AnyCancellable? = nil
     
     init (track: Track) {
         self.track = track

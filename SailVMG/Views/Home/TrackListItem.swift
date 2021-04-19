@@ -24,18 +24,16 @@ struct TrackListItem: View {
                         makeTrackPreviews(trackpoints: trackpoints)
                     } else {
                         print("Waiting for trackpoints")
-                        trackpointRepo.trackpointListItemUpdates = trackpointRepo.$trackpoints.sink { newTrackpoints in
+                        trackVM.trackpointLoadingSub = trackpointRepo.$trackpoints.sink { newTrackpoints in
                             print("trackVM track id = \(String(describing: trackVM.track.id))")
                             print("keys = \(newTrackpoints.keys)")
                             if let trackpoints = newTrackpoints[trackVM.track.id] {
                                 print("New trackpoints")
+                                trackVM.trackpointLoadingSub?.cancel()
                                 makeTrackPreviews(trackpoints: trackpoints)
                             }
                         }
                     }
-                }
-                .onDisappear {
-                    trackpointRepo.trackpointListItemUpdates?.cancel()
                 }
             } else {
                 TrackView()

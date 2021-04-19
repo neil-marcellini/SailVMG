@@ -20,7 +20,6 @@ class TrackRespository: ObservableObject {
     //callback
     var afterTracks: (([Track]) -> Void)? = nil
     private var trackUpdates = Set<AnyCancellable>()
-    var trackpointUpdates = Set<AnyCancellable>()
     init() {
         getTracks()
     }

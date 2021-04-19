@@ -14,7 +14,6 @@ import Combine
 class TrackpointRespository: ObservableObject {
     let db = Firestore.firestore()
     var trackpointUpdates: AnyCancellable? = nil
-    var trackpointListItemUpdates: AnyCancellable? = nil
     @Published var trackpoints: [Track.ID: [Trackpoint]] = [:]
     
     func getAllTrackpoints(trackList: [Track]) {

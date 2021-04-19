@@ -41,7 +41,7 @@ struct MainScreen: View {
                                    selection: $nav.selection) { EmptyView()}
                     
                 }.navigationTitle("SailVMG")
-                .navigationViewStyle(StackNavigationViewStyle())
+                
             }
             .environmentObject(nav)
             .environmentObject(locationViewModel)

@@ -35,12 +35,12 @@ struct TrackList: View {
                 }.onDelete { offset in
                     offset.forEach { index in
                         let trackVM = trackRepository.trackVMs[index]
+                        trackpointRepo.trackpoints[trackVM.track.id] = nil
                         trackRepository.discardTrack(trackVM.track)
                         trackRepository.removeTrackVM(index: index)
-                        trackpointRepo.trackpoints[trackVM.track.id] = nil
                     }
                 }
-            }
+            }.id(UUID()) // id prevents crash when deleting last item
         }
     }
 }
