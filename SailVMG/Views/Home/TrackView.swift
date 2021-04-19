@@ -22,8 +22,14 @@ struct TrackView: View {
                     Image(systemName: "clock")
                     Text(trackVM.getDuration())
                 }
-                Text("Max VMG:")
-                Text(trackVM.displayMaxVMG())
+                Text("Max VMG (kts):")
+                HStack(alignment: .bottom) {
+                    Image(systemName: "arrow.down")
+                    Text(trackVM.downwindMaxVMG())
+                    Image(systemName: "arrow.up")
+                    Text(trackVM.upwindMaxVMG())
+                }.lineLimit(1)
+               
             }
             Spacer()
             VStack {

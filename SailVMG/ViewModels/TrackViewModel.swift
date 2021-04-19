@@ -132,18 +132,20 @@ class TrackViewModel: ObservableObject {
     }
     
     
-    func displayMaxVMG() -> String {
-        var maxVMG = "-- / -- kts"
+    func downwindMaxVMG() -> String {
         var downwind_display = "--"
-        var upwind_display = "--"
         if let max_downwind = track.max_downwind_vmg {
             downwind_display = String(format: "%.2f", max_downwind)
         }
+        return downwind_display
+    }
+    
+    func upwindMaxVMG() -> String {
+        var upwind_display = "--"
         if let max_upwind = track.max_upwind_vmg {
             upwind_display = String(format: "%.2f", max_upwind)
         }
-        maxVMG = "\(downwind_display) / \(upwind_display) kts"
-        return maxVMG
+        return upwind_display
     }
     
     func getMaxVMG() {

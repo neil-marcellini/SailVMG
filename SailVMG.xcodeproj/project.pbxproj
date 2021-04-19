@@ -32,7 +32,6 @@
 		318ABBF4255F400800EFF7E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 318ABBF3255F400800EFF7E2 /* Preview Assets.xcassets */; };
 		318ABC04255F400900EFF7E2 /* SailVMGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC03255F400900EFF7E2 /* SailVMGTests.swift */; };
 		318ABC0F255F400900EFF7E2 /* SailVMGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */; };
-		318D97DA25FC789B0016E302 /* TWDControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318D97D925FC789B0016E302 /* TWDControl.swift */; };
 		3194C30B2626A32A009320B7 /* VMGArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3194C30A2626A32A009320B7 /* VMGArrow.swift */; };
 		31A6D842260ACDD8003E28F9 /* bing1s.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 31A6D841260ACDD8003E28F9 /* bing1s.mp3 */; };
 		31ACC9D5256DD88B009BC3AD /* TrackpointRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ACC9D4256DD88B009BC3AD /* TrackpointRepository.swift */; };
@@ -110,7 +109,6 @@
 		318ABC0A255F400900EFF7E2 /* SailVMGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SailVMGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		318ABC0E255F400900EFF7E2 /* SailVMGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailVMGUITests.swift; sourceTree = "<group>"; };
 		318ABC10255F400900EFF7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		318D97D925FC789B0016E302 /* TWDControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWDControl.swift; sourceTree = "<group>"; };
 		3194C30A2626A32A009320B7 /* VMGArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMGArrow.swift; sourceTree = "<group>"; };
 		31A6D841260ACDD8003E28F9 /* bing1s.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bing1s.mp3; sourceTree = "<group>"; };
 		31ACC9D4256DD88B009BC3AD /* TrackpointRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackpointRepository.swift; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 				31821CB826262597002F4955 /* Arrow.swift */,
 				31821CA026261623002F4955 /* RecordingCompass.swift */,
 				31C7475C2568ABC400A454B7 /* RecordingView.swift */,
-				318D97D925FC789B0016E302 /* TWDControl.swift */,
 				3194C30A2626A32A009320B7 /* VMGArrow.swift */,
 			);
 			path = Recording;
@@ -671,7 +668,6 @@
 				3155A05F2571D42500E885BC /* PlaybackView.swift in Sources */,
 				31D3E4762613DBAD00BB6D28 /* SettingsView.swift in Sources */,
 				31D3E45C2613AA2600BB6D28 /* LargeCompassTick.swift in Sources */,
-				318D97DA25FC789B0016E302 /* TWDControl.swift in Sources */,
 				31D35FD325E8593100A96EE0 /* VMGChartView.swift in Sources */,
 				3111AED32568D49E00DAEF90 /* Track.swift in Sources */,
 				3111AED82568D5D400DAEF90 /* Trackpoint.swift in Sources */,
@@ -845,7 +841,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.neilmarcellini.SailVMG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -868,7 +864,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.neilmarcellini.SailVMG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
