@@ -20,6 +20,7 @@ class TrackRespository: ObservableObject {
     //callback
     var afterTracks: (([Track]) -> Void)? = nil
     private var trackUpdates = Set<AnyCancellable>()
+    let storage = Storage.storage()
     init() {
         getTracks()
     }
@@ -129,6 +130,27 @@ class TrackRespository: ObservableObject {
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
+            }
+        }
+        deletePreviews(track)
+    }
+    
+    // delete light and dark previews from storage
+    func deletePreviews(_ track: Track) {
+        if let lightPreview = track.light_preview_url {
+            deletePreview(previewURL: lightPreview)
+        }
+        if let darkPreview = track.dark_preview_url {
+            deletePreview(previewURL: darkPreview)
+        }
+    }
+    
+    func deletePreview(previewURL: URL) {
+        let previewRef = storage.reference(forURL: previewURL.absoluteString)
+        previewRef.delete { error in
+            if let error = error {
+                print("Error, deleting preview from storage.")
+                print(error)
             }
         }
     }
