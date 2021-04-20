@@ -26,10 +26,22 @@ struct MainScreen: View {
                         TrackList()
                     }
                     Button(action: {
-                        nav.selection = "TWDSetup"
+                        if locationViewModel.locationManager.authorizationStatus == .denied {
+                            locationViewModel.promptLocation = true
+                        } else {
+                            nav.selection = "TWDSetup"
+                        }
+                        
                     }){
                         Image(systemName: "play.circle")
                             .font(.custom("BButton", size: 80, relativeTo: .body))
+                    }.alert(isPresented: $locationViewModel.promptLocation) {
+                        Alert(title: Text("Location is Required to Record Tracks"), message: Text("Please enable location while using the app."), primaryButton: .default(Text("Settings"), action: {
+                            locationViewModel.promptLocation = false
+                            // open the app permission in Settings app
+                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                            
+                        }), secondaryButton: .cancel())
                     }
                     NavigationLink(destination: TWDSetup(isReset: false),
                                    tag: "TWDSetup",

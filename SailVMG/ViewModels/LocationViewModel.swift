@@ -28,7 +28,7 @@ class LocationViewModel: NSObject, ObservableObject {
     var track: Track? = nil
     
     let locationManager = CLLocationManager()
-    
+    @Published var promptLocation = false
     
     // callback to send out updated trackpoints
     var updateHook: ((Trackpoint) -> Void)? = nil
