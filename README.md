@@ -29,7 +29,7 @@ There were many features that I did not have time to implement. I have listed th
 - Delete trackpoints from Firestore when their associated tracks are deleted. This requires setting up a Firebase cloud function to do so.
 - Fix a bug where tracks in the list are out of chronological order.
 - Switch previews between light mode and dark mode when color scheme changes after a preview has been downloaded.
-- Train a ML model to predict the current true wind direction given the last few minutes of a GPS track. Use the predictions to continuously update the TWD. Here is a dataset of [kitefoiling tracks with wind data](https://www.kaggle.com/antgoldbloom/kitefoil-tracks) that is perfect for this.
+- Train a ML model to predict the current true wind direction given the last few minutes of a GPS track. Use the predictions to continuously update the TWD. Recently I discovered data from the [34th](https://www.sailyachtresearch.org/resources/34th-americas-cup-liveline/) and [35th](https://sites.google.com/a/acracemgt.com/noticeboard/home/race-data/race-data-csv-files) America's Cup. I extracted the relevant data and uploaded it [here](https://drive.google.com/drive/folders/1sZnhKALoz09RbuvdNJIM0S66InyvjTX_?usp=sharing).
 - Add all trackpoint attributes as gpx extensions. Currently VMG and some other trackpoint data is not included in the GPX file. 
 
 ## Development Setup
